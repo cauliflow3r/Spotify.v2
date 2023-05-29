@@ -10,9 +10,17 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useContext, useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
+import { useDownLoad } from "../context/DownloadContexProvider";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
+  // ! downloads
+  const { getDownload, AddDownload } = useDownLoad();
+  // console.log(getDownload);
+  useEffect(() => {
+    getDownload();
+  }, []);
+  // !downloads
   // !----------------
   const {
     getSongs,
@@ -79,6 +87,7 @@ const PlayList = () => {
               </div>
             </div>
             {trackList.map((elem, index) => {
+              console.log(elem.id);
               return (
                 <div className={classes.track_line}>
                   <div>
@@ -95,7 +104,12 @@ const PlayList = () => {
                   <div className={classes.album}>{elem.album}</div>
                   <div className={classes.dateAdd}>1 day ago</div>
                   <div className={classes.time}>3:22</div>
-                  <div className={classes.time}>
+                  <div
+                    className={classes.time}
+                    onClick={() => {
+                      AddDownload(elem);
+                    }}
+                  >
                     <img src={download} alt="" />
                   </div>
                   <div className={classes.favorites}>
