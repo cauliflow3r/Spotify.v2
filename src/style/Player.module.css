@@ -72,3 +72,23 @@
   width: 1.5em;
   margin: 1em;
 }
+@media ((max-width: 1030px)) {
+  .linetime {
+    width: 380px;
+  }
+}
+@media ((max-width: 770px)) {
+  .linetime {
+    width: 200px;
+  }
+}
+@media ((max-width: 430px)) {
+  .musicCover {
+    display: none;
+  }
+  .component {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}

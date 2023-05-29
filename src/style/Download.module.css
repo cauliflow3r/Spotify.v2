@@ -113,33 +113,44 @@ h4 {
 
 /* ! блок грид  */
 .container_grid {
+  column-gap: 40px;
   width: 96%;
   align-items: center;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 300px repeat(4, 1fr);
   margin: 30px auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.558);
   font-family: "Open Sans", sans-serif;
 }
 .container_grid div {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   margin-bottom: 10px;
 }
+.container_grid :first-child {
+  margin-left: 20px;
+}
+.track_line div {
+  margin-left: 20px;
+}
+.number {
+  margin-left: 20px;
+}
 .track_line {
+  column-gap: 40px;
   height: 70px;
   width: 96%;
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr 300px repeat(4, 1fr);
   margin: 30px auto;
   font-family: "Open Sans", sans-serif;
 }
 
 .track_line div {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 .track_line_section {
