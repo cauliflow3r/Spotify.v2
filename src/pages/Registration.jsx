@@ -31,7 +31,7 @@ const Registration = () => {
       formData.append("phone", number); // Обновленное имя переменной
       formData.append("password", password);
       formData.append("password_confirm", passwordConfirm);
-      handleRegister(formData);
+      handleRegister(formData, email);
     }
   }
 

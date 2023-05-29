@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "../style/Download.module.css";
 import play from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";

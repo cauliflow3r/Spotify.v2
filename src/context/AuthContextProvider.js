@@ -20,10 +20,12 @@ const AuthContextProvider = ({children}) => {
 
   const navigate = useNavigate()
 
-  async function handleRegister(formData) {
+  async function handleRegister(formData,email,phone) {
     try {
       setLoading(true);
-      await axios.post(`${API}/accounts/register/`, formData);
+      const res = await axios.post(`${API}/accounts/register/`, formData);
+      localStorage.setItem("tokens", JSON.stringify(res.data));
+      localStorage.setItem("email", email);
       navigate("/");
     } catch (error) {
       setError(Object.values(error.response.data));
@@ -55,7 +57,6 @@ const AuthContextProvider = ({children}) => {
       const res = await axios.post(`${API}/accounts/logout/`, {
         refresh_token: tokens.refresh,
         title: "Refresh token",
-        minLength: 1,
       });
       localStorage.setItem(
         "tokens",
@@ -107,10 +108,8 @@ const AuthContextProvider = ({children}) => {
 
     } catch (error) {
       console.log(error);
-     
     }
   }
-  
 
   const values = {
     handleRegister,

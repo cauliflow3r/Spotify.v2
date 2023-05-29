@@ -117,7 +117,50 @@ const Search = () => {
                 Login
               </button>{" "}
             </>
-          ) : null}
+          ) : (
+            <>
+              {/* <div className={navbar.line_arrow_left}>
+                <img src={users} alt="" />
+              </div>
+              <div className={navbar.line_arrow_left} onClick={handleIconClick}>
+                <img src={login_user} alt="" />
+              </div>
+              <Modal
+                isOpen={isModalOpen}
+                onRequestClose={closeModal}
+                overlayClassName="custom-overlay"
+                className="custom-modal"
+              >
+                <div className={navbar.modal_window}>
+                  <div className={navbar.textBlock}>
+                    <button
+                      onClick={() => {
+                        navigate("/account");
+                      }}
+                    >
+                      Account
+                    </button>
+                  </div>
+                  <div className={navbar.textBlock}>
+                    <button
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
+                      profile
+                    </button>
+                  </div>
+                  <div className={navbar.textBlock}>
+                    <button>Settings</button>
+                  </div>
+                  <hr></hr>
+                  <div className={navbar.textBlock}>
+                    <button onClick={handleLogout}>Log out</button>
+                  </div>
+                </div>
+              </Modal> */}
+            </>
+          )}
           {currentUser ? (
             <>
               <div className={navbar.line_arrow_left}>
@@ -134,10 +177,22 @@ const Search = () => {
               >
                 <div className={navbar.modal_window}>
                   <div className={navbar.textBlock}>
-                    <button>Account</button>
+                    <button
+                      onClick={() => {
+                        navigate("/account");
+                      }}
+                    >
+                      Account
+                    </button>
                   </div>
                   <div className={navbar.textBlock}>
-                    <button>Profule</button>
+                    <button
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
+                      profile
+                    </button>
                   </div>
                   <div className={navbar.textBlock}>
                     <button>Settings</button>
