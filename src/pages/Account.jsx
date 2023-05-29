@@ -11,6 +11,9 @@ const Account = () => {
     setCurrentPassword,
     setNewPassword,
     setConfirmPassword,
+    currentPassword,
+    newPassword,
+    confirmPassword,
   } = useAuth();
 
   const navigate = useNavigate();
@@ -32,16 +35,19 @@ const Account = () => {
               <input
                 type="text"
                 placeholder="current "
+                value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="new"
+                value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="confirm "
+                value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <button onClick={changePassword}>change</button>

@@ -1,14 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const AddArtist = () => {
+  return <div>AddArtist</div>;
+};
 
-const []
-
-  return (
-    <div>AddArtist</div>
-  )
-}
-
-export default AddArtist
-
-
+export default AddArtist;
