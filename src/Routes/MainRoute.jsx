@@ -5,6 +5,8 @@ import ArtistPage from "../pages/ArtistPage";
 import Homepage from "../pages/Homepage";
 import Login from "../pages/Login";
 import Registration from "../pages/Registration";
+import PlayList from "../pages/PlayList";
+import Download from "../pages/Downloand";
 
 const MainRoute = () => {
   return (
@@ -13,6 +15,8 @@ const MainRoute = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="album-page" element={<AlbumPage />} />
         <Route path="artist-page" element={<ArtistPage />} />
+        <Route path="playlist" element={<PlayList />} />
+        <Route path="download" element={<Download />} />
         <Route path="registration" element={<Registration />} />
         <Route path="login" element={<Login />} />
       </Routes>
