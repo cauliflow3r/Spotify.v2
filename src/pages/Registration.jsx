@@ -86,7 +86,7 @@ const Registration = () => {
                 </label>
               </div>
               <input
-                type="number"
+                type="tel"
                 placeholder="Enter your phone."
                 className="input"
                 value={number}
