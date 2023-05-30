@@ -7,7 +7,8 @@ import { useProducts } from "../context/ProductContextProvider";
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { getArtist, artist, setArtist } = useProducts([]);
+  const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
+    useProducts([]);
 
   const [greeting, setGreeting] = useState("");
 
@@ -26,9 +27,12 @@ const Homepage = () => {
 
   useEffect(() => {
     getArtist();
+    getAlbums();
   }, []);
 
-  console.log(artist.albums);
+  // console.log(albums);
+
+  // console.log(artist);
 
   return (
     <MainLayout>
@@ -53,30 +57,29 @@ const Homepage = () => {
               </div>
             ))}
           </div>
+          <h2>Made for you</h2>
           <div
             className={classes.playlistBox}
             onClick={() => navigate("/album-page")}
           >
-            <div className={classes.playlist}>
-              <h2>Made for you</h2>
-              <div className={classes.card}>
-                <div className={classes.mg_holder}>
-                  <img
-                    src="https://static01.nyt.com/images/2022/06/28/arts/28CONAN-GRAY1/28CONAN-GRAY1-superJumbo.jpg"
-                    alt="image"
-                  />
-                </div>
-                <div className={classes.text}>
-                  <h2>teen beats</h2>
-                  <p>Conan Gray has entered the upside down</p>
-                </div>
-                <div className={classes.play_icon}>
-                  <div className={classes.circle}>
-                    <div className={classes.triangle}></div>
+            {albums.map((item) => (
+              <div className={classes.playlist} key={item.id}>
+                <div className={classes.card}>
+                  <div className={classes.mg_holder}>
+                    <img src={item.cover_photo} alt="image" />
+                  </div>
+                  <div className={classes.text}>
+                    <h2>{item.title}</h2>
+                    <p>{item.id}</p>
+                  </div>
+                  <div className={classes.play_icon}>
+                    <div className={classes.circle}>
+                      <div className={classes.triangle}></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
