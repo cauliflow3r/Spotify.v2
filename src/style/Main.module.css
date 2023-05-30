@@ -31,7 +31,7 @@ p {
 }
 
 .container {
-  padding-top: 60px;
+  padding-top: 100px;
   width: 100%;
   background: linear-gradient(
     0deg,
@@ -41,7 +41,7 @@ p {
   );
   height: 1300px;
   color: #fff;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .contentWrapper {
