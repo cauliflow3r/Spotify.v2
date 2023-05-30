@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
 import heart from "../assets/Vector.svg";
@@ -25,8 +25,6 @@ const AlbumPage = () => {
     checkTracksDown,
   } = useDownLoad();
 
-  console.log(checkTracksDown());
-
   useEffect(() => {
     getFavorites();
   }, []);
@@ -43,11 +41,19 @@ const AlbumPage = () => {
     setTrack,
     trackList,
     setTrackList,
+    getALbumTrack,
+    AlbumBlock,
   } = useContext(songsContext);
   useEffect(() => {
     getSongs();
   }, []);
-
+  // todo -------------------
+  const { id } = useParams();
+  console.log("Это будет айди ", id);
+  useEffect(() => {
+    getALbumTrack(id);
+  }, []);
+  // todo -------------------
   return (
     <MainLayout>
       <div className={album.container}>
@@ -102,8 +108,7 @@ const AlbumPage = () => {
                     <img src={like_song} alt="" />
                   </div>
                 </div>
-                {trackList.map((elem, index) => {
-                  console.log(elem.id);
+                {AlbumBlock.map((elem, index) => {
                   return (
                     <div className={album.track_line}>
                       <div>

@@ -58,12 +58,13 @@ const Homepage = () => {
             ))}
           </div>
           <h2>Made for you</h2>
-          <div
-            className={classes.playlistBox}
-            onClick={() => navigate("/album-page")}
-          >
+          <div className={classes.playlistBox}>
             {albums.map((item) => (
-              <div className={classes.playlist} key={item.id}>
+              <div
+                className={classes.playlist}
+                key={item.id}
+                onClick={() => navigate(`/album-page/${item.id}`)}
+              >
                 <div className={classes.card}>
                   <div className={classes.mg_holder}>
                     <img src={item.cover_photo} alt="image" />
