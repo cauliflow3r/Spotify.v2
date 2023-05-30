@@ -30,7 +30,7 @@ const Homepage = () => {
     getAlbums();
   }, []);
 
-  console.log(artist);
+  // console.log(artist);
 
   // console.log(artist);
 

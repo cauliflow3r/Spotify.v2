@@ -16,8 +16,8 @@ const MainRoute = () => {
     <div>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="album-page" element={<AlbumPage />} />
-        <Route path="artist-page" element={<ArtistPage />} />
+        <Route path="album-page/:id" element={<AlbumPage />} />
+        <Route path="artist-page/:id" element={<ArtistPage />} />
         <Route path="playlist" element={<PlayList />} />
         <Route path="download" element={<Download />} />
         <Route path="registration" element={<Registration />} />

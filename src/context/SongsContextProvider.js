@@ -12,7 +12,7 @@ const SongContextProvider = ({ children }) => {
   async function getSongs() {
     try {
       const res = await axios.get(API_SONGS);
-      console.log(res.data.results);
+      // console.log(res.data.results);
       setTrackList(res.data.results);
       setTrack(res.data.results[Counter].audio_file);
     } catch (error) {

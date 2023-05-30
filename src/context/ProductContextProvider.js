@@ -15,8 +15,9 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      const id = res.data.id; 
-      getAlbumById(id);
+      // const id = res.data.id; 
+      // console.log(res);
+      // getAlbumById(id);
       // console.log(res.data.results);
     } catch (error) {
       console.log(error);
@@ -26,26 +27,27 @@ const ProductContextProvider = ({ children }) => {
   async function getAlbums() {
     try {
       const res = await axios.get(`${API_ALBUMS}/albums/`);
-      const albumIds = res.data.results.map(album => album.id);
+      // const albumIds = res.data.results.map(album => album.id);
       setAlbums(res.data.results)
-      for (const id of albumIds) {
-        await getAlbumById(id);
-      }
+      console.log(res);
+      // for (const id of albumIds) {
+      //   await getAlbumById(id);
+      // }
     } catch (error) {
       console.log(error);
     }
   }
   
-  async function getAlbumById(id) {
-    try {
-      const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // async function getAlbumById(id) {
+  //   try {
+  //     const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
   
-  getAlbums();
+  // getAlbums();
   
 
 
