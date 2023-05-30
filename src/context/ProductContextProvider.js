@@ -15,8 +15,8 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      const id = res.data.id;
-      getAlbumById(id);
+      // const id = res.data.id;
+      // getAlbumById(id);
       // console.log(res.data.results);
     } catch (error) {
       console.log(error);
@@ -45,7 +45,7 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  getAlbums();
+  // getAlbums();
 
   const values = {
     getArtist,

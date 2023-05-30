@@ -113,6 +113,7 @@ const DownloadContextProvider = ({ children }) => {
     favorites.tracks = favorites.tracks.filter((elem) => elem.id !== id);
     localStorage.setItem("favorites", JSON.stringify(favorites));
     setDownloads(favorites);
+    getFavorites();
   };
 
   //   todo ------ Favorites-----BLock----------------

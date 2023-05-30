@@ -33,7 +33,7 @@ const AlbumPage = () => {
   }, []);
   // !downloads
   // !----------------
-  const { getALbumTrack, AlbumBlock } = useContext(songsContext);
+  const { getALbumTrack, AlbumBlock, AlbumInfo } = useContext(songsContext);
 
   // todo -------------------
   const { id } = useParams();
@@ -52,12 +52,12 @@ const AlbumPage = () => {
           <div>
             <div className={album.TopInfo}>
               <div className={album.TopInfo_Left}>
-                <img src={heart} alt="" />
+                <img src={AlbumInfo.cover_photo} width={250} alt="" />
               </div>
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
-                <h2>Какой-то плейлист </h2>
-                {/* <h5>User : {trackList.length}</h5> */}
+                <h2>{AlbumInfo.title} </h2>
+                <h5>User : Quantity : {AlbumBlock.length}</h5>
               </div>
             </div>
             <div className={album.track_block}>
@@ -98,7 +98,7 @@ const AlbumPage = () => {
                 </div>
                 {AlbumBlock.map((elem, index) => {
                   return (
-                    <div className={album.track_line}>
+                    <div className={album.track_line} key={elem.id}>
                       <div>
                         {" "}
                         <img src={play_btn} alt="" />

@@ -85,7 +85,7 @@ const PlayList = () => {
             {favorites.tracks.map((elem, index) => {
               console.log(elem.id);
               return (
-                <div className={classes.track_line}>
+                <div className={classes.track_line} key={elem.id}>
                   <div>
                     {" "}
                     <img src={play_btn} alt="" />
