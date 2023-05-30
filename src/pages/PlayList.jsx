@@ -2,6 +2,7 @@ import heart from "../assets/Vector.svg";
 import classes from "../style/MuPlayList.module.css";
 import play_btn from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
+import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
@@ -15,28 +16,17 @@ import { useDownLoad } from "../context/DownloadContexProvider";
 
 const PlayList = () => {
   // ! downloads
-  const { getDownload, AddDownload } = useDownLoad();
-  // console.log(getDownload);
+  const { getDownload, AddDownload, getFavorites, favorites, checkTracksDown } =
+    useDownLoad();
+  console.log(favorites);
+  useEffect(() => {
+    getFavorites();
+  }, []);
   useEffect(() => {
     getDownload();
   }, []);
   // !downloads
-  // !----------------
-  const {
-    getSongs,
-    Counter,
-    setCounter,
-    track,
-    setTrack,
-    trackList,
-    setTrackList,
-  } = useContext(songsContext);
-  useEffect(() => {
-    getSongs();
-  }, []);
-  console.log(track);
-  console.log(trackList);
-  // ! ===============
+
   return (
     <MainLayout>
       <div>
@@ -47,7 +37,7 @@ const PlayList = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Любимые треки</h2>
-            <h5>User : {trackList.length}</h5>
+            <h5>User : Кол-во треков {favorites.tracks.length}</h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -86,7 +76,7 @@ const PlayList = () => {
                 <img src={like_song} alt="" />
               </div>
             </div>
-            {trackList.map((elem, index) => {
+            {favorites.tracks.map((elem, index) => {
               console.log(elem.id);
               return (
                 <div className={classes.track_line}>
@@ -110,7 +100,11 @@ const PlayList = () => {
                       AddDownload(elem);
                     }}
                   >
-                    <img src={download} alt="" />
+                    {checkTracksDown(elem.id) ? (
+                      <img src={undownload} alt="" />
+                    ) : (
+                      <img src={download} alt="" />
+                    )}
                   </div>
                   <div className={classes.favorites}>
                     <img src={like_song} alt="" />

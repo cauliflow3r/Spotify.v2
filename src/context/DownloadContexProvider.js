@@ -7,6 +7,9 @@ const DownloadContextProvider = ({ children }) => {
   const [downloads, setDownloads] = useState(
     JSON.parse(localStorage.getItem("downloads"))
   );
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites"))
+  );
   //   !===========================
   function getDownload() {
     let downloads = JSON.parse(localStorage.getItem("downloads"));
@@ -23,6 +26,15 @@ const DownloadContextProvider = ({ children }) => {
     }
     setDownloads(downloads);
   }
+  const checkTracksDown = (id) => {
+    let downloads = JSON.parse(localStorage.getItem("downloads"));
+    console.log(downloads);
+
+    if (downloads) {
+      let down = downloads.tracks.filter((elem) => elem.id == id);
+      return down.length > 0 ? true : false;
+    }
+  };
 
   //   !========================
   function AddDownload(track) {
@@ -52,7 +64,63 @@ const DownloadContextProvider = ({ children }) => {
     setDownloads(downloads);
   };
 
-  const values = { getDownload, AddDownload, downloads, deleteTrack };
+  //   todo ------ Favorites-----BLock----------------
+  function getFavorites() {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+    if (!favorites) {
+      localStorage.setItem(
+        "favorites",
+        JSON.stringify({
+          tracks: [],
+        })
+      );
+      favorites = {
+        tracks: [],
+      };
+    }
+    setFavorites(favorites);
+  }
+
+  function AddFavorites(track) {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+    if (!favorites) {
+      favorites = { tracks: [] };
+    }
+    console.log(track);
+    let newTrack = track;
+    let productToFind = favorites.tracks.filter((elem) => elem.id === track.id);
+    console.log(productToFind);
+    if (productToFind.length === 0) {
+      favorites.tracks.push(newTrack);
+    } else {
+      favorites.tracks = favorites.tracks.filter((elem) => elem.id != track.id);
+    }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    setFavorites(favorites);
+  }
+
+  const checkTracks = (id) => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+
+    if (favorites) {
+      let Track = favorites.tracks.filter((elem) => elem.id == id);
+      return Track.length > 0 ? true : false;
+    }
+  };
+
+  //   todo ------ Favorites-----BLock----------------
+
+  const values = {
+    getDownload,
+    AddDownload,
+    downloads,
+    deleteTrack,
+    getFavorites,
+    AddFavorites,
+    favorites,
+    checkTracks,
+    checkTracksDown,
+  };
   return (
     <downloadContext.Provider value={values}>
       {children}
