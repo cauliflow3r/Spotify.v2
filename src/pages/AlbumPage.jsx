@@ -33,20 +33,8 @@ const AlbumPage = () => {
   }, []);
   // !downloads
   // !----------------
-  const {
-    getSongs,
-    Counter,
-    setCounter,
-    track,
-    setTrack,
-    trackList,
-    setTrackList,
-    getALbumTrack,
-    AlbumBlock,
-  } = useContext(songsContext);
-  useEffect(() => {
-    getSongs();
-  }, []);
+  const { getALbumTrack, AlbumBlock } = useContext(songsContext);
+
   // todo -------------------
   const { id } = useParams();
   console.log("Это будет айди ", id);

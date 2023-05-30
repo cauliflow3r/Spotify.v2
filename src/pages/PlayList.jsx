@@ -6,6 +6,7 @@ import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
+import deleteBtn from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
@@ -15,8 +16,14 @@ import { useDownLoad } from "../context/DownloadContexProvider";
 
 const PlayList = () => {
   // ! downloads
-  const { getDownload, AddDownload, getFavorites, favorites, checkTracksDown } =
-    useDownLoad();
+  const {
+    getDownload,
+    AddDownload,
+    getFavorites,
+    favorites,
+    checkTracksDown,
+    deleteLikedTrack,
+  } = useDownLoad();
   console.log(favorites);
   useEffect(() => {
     getFavorites();
@@ -105,8 +112,13 @@ const PlayList = () => {
                       <img src={download} alt="" />
                     )}
                   </div>
-                  <div className={classes.favorites}>
-                    <img src={like_song} alt="" />
+                  <div
+                    className={classes.favorites}
+                    onClick={() => {
+                      deleteLikedTrack(elem.id);
+                    }}
+                  >
+                    <img src={deleteBtn} alt="" />
                   </div>
                 </div>
               );
