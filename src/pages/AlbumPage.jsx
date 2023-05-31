@@ -15,7 +15,7 @@ import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 
 const AlbumPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     getFavorites,
     AddFavorites,

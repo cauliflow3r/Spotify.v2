@@ -2,7 +2,7 @@ import axios from "axios";
 import { async } from "q";
 import React, { createContext, useContext, useState } from "react";
 import { API } from "./AuthContextProvider";
-import { API_ALBUMS } from "./ProductContextProvider";
+export const API_ALBUMS = "http://34.125.87.211";
 
 export const songsContext = createContext();
 export const useSong = () => useContext(songsContext);
@@ -15,21 +15,45 @@ const SongContextProvider = ({ children }) => {
   const [AlbumBlock, setAlbumBlock] = useState([]);
   const [AlbumInfo, setAlbumInfo] = useState({});
 
+  const [artistSongs, setArtistSongs] = useState([]);
+
+  // async function getSongs() {
+  //   try {
+  //     const res = await axios.get(API_SONGS);
+  //     setTrackList(res.data.results);
+  //     setTrack(res.data.results[Counter].audio_file);
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
+
   // todo - получение данных по id
   async function getALbumTrack(id) {
-    let res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
-    console.log(res.data);
-    setAlbumBlock(res.data.songs);
-    setTrackList(res.data.songs);
-    setAlbumInfo(res.data);
-    setTrackInfo(res.data);
-
     try {
+      let res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
+      console.log(res.data);
+      setAlbumBlock(res.data.songs);
+      setTrackList(res.data.songs);
+      setAlbumInfo(res.data);
+      setTrackInfo(res.data);
     } catch (error) {
       console.log(error);
     }
   }
   const [currentTrack, setCurrentTrack] = useState(0);
+
+  // todo - получение данных по id
+  async function getArtistSongs(id) {
+    try {
+      let res = await axios.get(`${API}/artists/${id}/`);
+      setArtistSongs(res.data.songs);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  getArtistSongs();
+
   // todo - получение данных по id
   const values = {
     Counter,
@@ -42,6 +66,8 @@ const SongContextProvider = ({ children }) => {
     AlbumInfo,
     currentTrack,
     setCurrentTrack,
+    artistSongs,
+    getArtistSongs,
   };
   return (
     <songsContext.Provider value={values}>{children}</songsContext.Provider>
