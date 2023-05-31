@@ -33,7 +33,13 @@ const AlbumPage = () => {
   }, []);
   // !downloads
   // !----------------
-  const { getALbumTrack, AlbumBlock, AlbumInfo } = useContext(songsContext);
+  const {
+    getALbumTrack,
+    AlbumBlock,
+    AlbumInfo,
+    currentTrack,
+    setCurrentTrack,
+  } = useContext(songsContext);
 
   // todo -------------------
   const { id } = useParams();
@@ -99,7 +105,11 @@ const AlbumPage = () => {
                 {AlbumBlock.map((elem, index) => {
                   return (
                     <div className={album.track_line} key={elem.id}>
-                      <div>
+                      <div
+                        onClick={() => {
+                          setCurrentTrack(index);
+                        }}
+                      >
                         {" "}
                         <img src={play_btn} alt="" />
                       </div>
@@ -110,7 +120,7 @@ const AlbumPage = () => {
                           <h5> {elem.artist[1]} </h5>
                         </div>
                       </div>
-                      <div className={album.album}>{elem.album}</div>
+                      <div className={album.album}>{AlbumInfo.title}</div>
                       <div className={album.dateAdd}>1 day ago</div>
                       <div className={album.time}>3:22</div>
                       <div
