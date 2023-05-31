@@ -79,12 +79,12 @@
     width: 100%;
     background: linear-gradient(to top, rgb(33, 22, 67), rgba(71, 51, 139, 1));
     /* height: 00vh; */
-    border-radius: 15px;
+    border-radius: 10px;
   }
   .rightPart_1 {
     width: 100%;
     background: linear-gradient(to top, rgb(33, 22, 67), rgba(71, 51, 139, 1));
     /* height: 100vh; */
-    border-radius: 15px;
+    border-radius: 10px;
   }
 }

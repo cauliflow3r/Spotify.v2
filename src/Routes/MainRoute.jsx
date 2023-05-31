@@ -9,6 +9,9 @@ import PlayList from "../pages/PlayList";
 import Download from "../pages/Downloand";
 import AddProduct from "../components/AddProduct";
 import EditProduct from "../components/EditProduct";
+import ResetPassword from "../pages/ResetPassword";
+import Profile from "../pages/Profile";
+import Account from "../pages/Account";
 
 const MainRoute = () => {
   return (
@@ -19,9 +22,14 @@ const MainRoute = () => {
         <Route path="/editproduct/:id" element={<EditProduct />} />
         <Route path="album-page" element={<AlbumPage />} />
         <Route path="artist-page" element={<ArtistPage />} />
+        <Route path="album-page/:id" element={<AlbumPage />} />
+        <Route path="artist-page/:id" element={<ArtistPage />} />
         <Route path="playlist" element={<PlayList />} />
         <Route path="download" element={<Download />} />
         <Route path="registration" element={<Registration />} />
+        <Route path="reset" element={<ResetPassword />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="account" element={<Account />} />
         <Route path="login" element={<Login />} />
       </Routes>
     </div>

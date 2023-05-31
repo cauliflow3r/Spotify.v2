@@ -29,12 +29,13 @@ const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   const [artist, setArtist] = useState([]);
   const navigate = useNavigate();
+  const [albums, setAlbums] = useState([]);
 
   async function getArtist() {
     try {
       const res = await axios.get(`${API}/artists/`);
-      setArtist(res);
-      console.log(res.data.results);
+      setArtist(res.data.results);
+      const id = res.data.id;
     } catch (error) {
       console.log(error);
     }
@@ -66,6 +67,14 @@ const ProductContextProvider = ({ children }) => {
     await axios.delete(`${API}/${id}`);
     getProducts();
   };
+  async function getAlbums() {
+    try {
+      const res = await axios.get(`${API}/albums/`);
+      setAlbums(res.data.results);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const values = {
     getArtist,
@@ -78,6 +87,9 @@ const ProductContextProvider = ({ children }) => {
     deleteProduct,
     getProductDetails,
     saveEditedProduct,
+    getAlbums,
+    albums,
+    setAlbums,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

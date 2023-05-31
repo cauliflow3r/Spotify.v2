@@ -28,10 +28,10 @@ const Registration = () => {
     } else {
       let formData = new FormData();
       formData.append("email", email);
-      formData.append("phone", number); // Обновленное имя переменной
+      formData.append("phone", number);
       formData.append("password", password);
       formData.append("password_confirm", passwordConfirm);
-      handleRegister(formData);
+      handleRegister(formData, email);
     }
   }
 
@@ -71,6 +71,7 @@ const Registration = () => {
                 type="email"
                 placeholder="Enter your email."
                 className="input"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="user-email"
               />
@@ -88,6 +89,7 @@ const Registration = () => {
                 type="tel"
                 placeholder="Enter your phone."
                 className="input"
+                value={number}
                 onChange={(e) => setNumber(e.target.value)}
                 autoComplete="number-phone"
               />
@@ -105,6 +107,7 @@ const Registration = () => {
                 type="password"
                 placeholder="Enter your password."
                 className="input"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="new-password"
               />
@@ -125,6 +128,7 @@ const Registration = () => {
                 type="password"
                 placeholder="Enter your password."
                 className="input"
+                value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 autoComplete="confirm-password"
               />

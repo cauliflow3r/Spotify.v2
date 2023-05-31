@@ -2,33 +2,39 @@ import heart from "../assets/Vector.svg";
 import classes from "../style/MuPlayList.module.css";
 import play_btn from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
+import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
-import song from "../assets/Rectangle 236.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
+import { useDownLoad } from "../context/DownloadContexProvider";
+import deleteBtn from "../assets/Delete_icon.svg";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
-  // !----------------
+  // ! downloads
   const {
-    getSongs,
-    Counter,
-    setCounter,
-    track,
-    setTrack,
-    trackList,
-    setTrackList,
-  } = useContext(songsContext);
+    getDownload,
+    AddDownload,
+    getFavorites,
+    favorites,
+    checkTracksDown,
+    deleteLikedTrack,
+  } = useDownLoad();
+
+  // console.log(favorites);
+
   useEffect(() => {
-    getSongs();
+    getFavorites();
   }, []);
-  console.log(track);
-  console.log(trackList);
-  // ! ===============
+  useEffect(() => {
+    getDownload();
+  }, []);
+  // !downloads
+
   return (
     <MainLayout>
       <div>
@@ -39,7 +45,7 @@ const PlayList = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Любимые треки</h2>
-            <h5>User : {trackList.length}</h5>
+            <h5>User : Кол-во треков {favorites.tracks.length}</h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -78,7 +84,8 @@ const PlayList = () => {
                 <img src={like_song} alt="" />
               </div>
             </div>
-            {trackList.map((elem, index) => {
+            {favorites.tracks.map((elem, index) => {
+              console.log(elem.id);
               return (
                 <div className={classes.track_line}>
                   <div>
@@ -95,11 +102,25 @@ const PlayList = () => {
                   <div className={classes.album}>{elem.album}</div>
                   <div className={classes.dateAdd}>1 day ago</div>
                   <div className={classes.time}>3:22</div>
-                  <div className={classes.time}>
-                    <img src={download} alt="" />
+                  <div
+                    className={classes.time}
+                    onClick={() => {
+                      AddDownload(elem);
+                    }}
+                  >
+                    {checkTracksDown(elem.id) ? (
+                      <img src={undownload} alt="" />
+                    ) : (
+                      <img src={download} alt="" />
+                    )}
                   </div>
-                  <div className={classes.favorites}>
-                    <img src={like_song} alt="" />
+                  <div
+                    className={classes.favorites}
+                    onClick={() => {
+                      deleteLikedTrack(elem.id);
+                    }}
+                  >
+                    <img src={deleteBtn} alt="" />
                   </div>
                 </div>
               );
