@@ -6,12 +6,12 @@ import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
-import deleteBtn from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
+import deleteBtn from "../assets/Delete_icon.svg";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
@@ -24,7 +24,9 @@ const PlayList = () => {
     checkTracksDown,
     deleteLikedTrack,
   } = useDownLoad();
-  console.log(favorites);
+
+  // console.log(favorites);
+
   useEffect(() => {
     getFavorites();
   }, []);
@@ -85,7 +87,7 @@ const PlayList = () => {
             {favorites.tracks.map((elem, index) => {
               console.log(elem.id);
               return (
-                <div className={classes.track_line} key={elem.id}>
+                <div className={classes.track_line}>
                   <div>
                     {" "}
                     <img src={play_btn} alt="" />

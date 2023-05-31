@@ -80,7 +80,7 @@ const ArtistPage = () => {
                       </div>
 
                       <div className={downloads.track_line_section}>
-                        <img src={item.cover_photo} width={48} alt="" />
+                        <img src={song} alt="" />
                         <div className={downloads.track_line_section_name}>
                           <h4> {item.title} </h4>
                           <h5> {item.artist[1]} </h5>
