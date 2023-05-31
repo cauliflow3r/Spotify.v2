@@ -17,7 +17,9 @@ const PlayList = () => {
   // ! downloads
   const { getDownload, AddDownload, getFavorites, favorites, checkTracksDown } =
     useDownLoad();
-  console.log(favorites);
+
+  // console.log(favorites);
+
   useEffect(() => {
     getFavorites();
   }, []);

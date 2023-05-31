@@ -28,7 +28,7 @@ const Registration = () => {
     } else {
       let formData = new FormData();
       formData.append("email", email);
-      formData.append("phone", number); // Обновленное имя переменной
+      formData.append("phone", number);
       formData.append("password", password);
       formData.append("password_confirm", passwordConfirm);
       handleRegister(formData, email);
@@ -86,7 +86,7 @@ const Registration = () => {
                 </label>
               </div>
               <input
-                type="number"
+                type="tel"
                 placeholder="Enter your phone."
                 className="input"
                 value={number}

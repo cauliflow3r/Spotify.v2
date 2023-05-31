@@ -39,12 +39,13 @@ const Homepage = () => {
       <div className={classes.container}>
         <div className={classes.contentWrapper}>
           <h2>{greeting}</h2>
-          <div
-            className={classes.artistBox}
-            onClick={() => navigate("/artist-page")}
-          >
+          <div className={classes.artistBox}>
             {artist.map((item) => (
-              <div className={classes.preview} key={item.id}>
+              <div
+                className={classes.preview}
+                key={item.id}
+                onClick={() => navigate(`/artist-page/${item.id}`)}
+              >
                 <div className={classes.cardPreview}>
                   <img src={item.photo} alt="" />
                   <p>{item.full_name}</p>

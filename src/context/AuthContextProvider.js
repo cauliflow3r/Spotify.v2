@@ -20,7 +20,7 @@ const AuthContextProvider = ({children}) => {
 
   const navigate = useNavigate()
 
-  async function handleRegister(formData,email,phone) {
+  async function handleRegister(formData,email) {
     try {
       setLoading(true);
       const res = await axios.post(`${API}/accounts/register/`, formData);
