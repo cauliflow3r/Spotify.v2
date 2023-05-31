@@ -43,18 +43,17 @@ const AlbumPage = () => {
 
   // todo -------------------
   const { id } = useParams();
-  console.log("Это будет айди ", id);
+  // console.log("Это будет айди ", id);
+
   useEffect(() => {
     getALbumTrack(id);
   }, []);
   // todo -------------------
+
   return (
     <MainLayout>
       <div className={album.container}>
         <div className={album.contentWrapper}>
-          {/* <p>HOMEPAGE</p>
-          <span>kmjnbhgvcfpoopoo</span>
-          <button onClick={() => navigate("/")}>BIGBUTTON</button> */}
           <div>
             <div className={album.TopInfo}>
               <div className={album.TopInfo_Left}>
@@ -102,6 +101,7 @@ const AlbumPage = () => {
                     <img src={like_song} alt="" />
                   </div>
                 </div>
+
                 {AlbumBlock.map((elem, index) => {
                   return (
                     <div className={album.track_line} key={elem.id}>
