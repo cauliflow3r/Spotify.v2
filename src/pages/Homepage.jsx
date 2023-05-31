@@ -4,8 +4,16 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
+import { useDownLoad } from "../context/DownloadContexProvider";
 
 const Homepage = () => {
+  // const { getDownload, getFavorites } = useDownLoad();
+  // useEffect(() => {
+  //   getDownload();
+  // }, []);
+  // useEffect(() => {
+  //   getFavorites();
+  // }, []);
   const navigate = useNavigate();
   const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
     useProducts([]);
