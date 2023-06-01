@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { API_ALBUMS } from "./SongsContextProvider";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
 export const API = "http://34.125.87.211";
-
 
 const ProductContextProvider = ({ children }) => {
   const [artist, setArtist] = useState([]);
@@ -46,6 +46,13 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
+
+      const id = res.data.id; 
+
+      // const id = res.data.id;
+      // getAlbumById(id);
+      // console.log(res.data.results);
+
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +66,20 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
-  
+
+
+
+  async function getAlbumById(id) {
+    try {
+      const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // getAlbums();
+
 
   const values = {
     getArtist,

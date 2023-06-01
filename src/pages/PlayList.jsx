@@ -6,15 +6,18 @@ import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
-import deleteBtn from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
+import deleteBtn from "../assets/Delete_icon.svg";
+import { useAuth } from "../context/AuthContextProvider";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
+  const { currentUser } = useAuth();
+  const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
   const {
     getDownload,
@@ -24,13 +27,14 @@ const PlayList = () => {
     checkTracksDown,
     deleteLikedTrack,
   } = useDownLoad();
+
   console.log(favorites);
   useEffect(() => {
     getFavorites();
   }, []);
-  useEffect(() => {
-    getDownload();
-  }, []);
+  // useEffect(() => {
+  //   getDownload();
+  // }, []);
   // !downloads
 
   return (
@@ -43,7 +47,10 @@ const PlayList = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Любимые треки</h2>
-            <h5>User : Кол-во треков {favorites.tracks.length}</h5>
+            <h5>
+              User&nbsp; : &nbsp;{currentUser} : Quantity :
+              {favorites.tracks.length}
+            </h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -85,10 +92,16 @@ const PlayList = () => {
             {favorites.tracks.map((elem, index) => {
               console.log(elem.id);
               return (
-                <div className={classes.track_line} key={elem.id}>
+                <div className={classes.track_line}>
                   <div>
                     {" "}
-                    <img src={play_btn} alt="" />
+                    <img
+                      src={play_btn}
+                      alt=""
+                      onClick={() => {
+                        setCurrentTrack(index);
+                      }}
+                    />
                   </div>
                   <div className={classes.track_line_section}>
                     <img src={elem.cover_photo} width={48} alt="" />

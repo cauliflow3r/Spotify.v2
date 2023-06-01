@@ -10,14 +10,14 @@ import DownloadContextProvider from "./context/DownloadContexProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <DownloadContextProvider>
-      <SongContextProvider>
+    <SongContextProvider>
+      <DownloadContextProvider>
         <ProductContextProvider>
           <AuthContextProvider>
             <App />
           </AuthContextProvider>
         </ProductContextProvider>
-      </SongContextProvider>
-    </DownloadContextProvider>
+      </DownloadContextProvider>
+    </SongContextProvider>
   </BrowserRouter>
 );

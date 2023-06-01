@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import sidebars from "../style/SideBar.module.css";
 import home from "../assets/Line=bold, Name=home.svg";
 import search_i from "../assets/Line=bold, Name=search.svg";
@@ -8,6 +8,7 @@ import right from "../assets/Line=empty, Name=right-arrow.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import prev from "../assets/Rectangle 236.svg";
 import { useNavigate } from "react-router-dom";
+import { downloadContext } from "../context/DownloadContexProvider";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -71,9 +72,10 @@ const Sidebar = () => {
           <img src={prev} alt="" />
           <div>
             <h3>Liked Track</h3>
-            <h4>Playlist: 2 tracks</h4>
+            <h4>Playlist:</h4>
           </div>
         </div>
+
         <div
           onClick={() => {
             navigate("/download");
@@ -83,7 +85,7 @@ const Sidebar = () => {
           <img src={prev} alt="" />
           <div>
             <h3>Download</h3>
-            <h4>Downloaded: 2 tracks</h4>
+            <h4>Downloaded: </h4>
           </div>
         </div>
       </div>

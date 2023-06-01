@@ -21,7 +21,9 @@ export default function Player() {
     currentTrack,
     setCurrentTrack,
   } = useContext(songsContext);
-  console.log(trackList);
+
+  console.log(trackInfo.hasOwnProperty("tracks"));
+  console.log(trackInfo);
 
   // !------------------------------
   // const [currentTrack, setCurrentTrack] = useState(0);
@@ -32,7 +34,7 @@ export default function Player() {
   const playerRef = useRef(null);
 
   const tracks = trackList;
-  console.log(trackInfo.songs);
+  console.log(trackList);
 
   const handlePlayNext = () => {
     setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
@@ -64,7 +66,6 @@ export default function Player() {
     playerRef.current.seekTo(seconds);
   };
 
-  // Функция для форматирования времени в формат "минуты:секунды"
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);

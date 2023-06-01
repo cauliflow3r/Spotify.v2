@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "../style/Download.module.css";
 import play from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
@@ -8,8 +8,12 @@ import song from "../assets/Rectangle 236.svg";
 import delete_icon from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useDownLoad } from "../context/DownloadContexProvider";
+import { songsContext } from "../context/SongsContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Download = () => {
+  const { currentUser } = useAuth();
+  const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
   const { getDownload, downloads, deleteTrack } = useDownLoad();
   console.log(downloads);
@@ -28,7 +32,11 @@ const Download = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Download</h2>
-            <h5>User : Колво Треков в плейлисте </h5>
+            <h5>
+              {" "}
+              User&nbsp; : &nbsp;{currentUser} : Quantity :
+              {downloads.tracks.length}
+            </h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -66,12 +74,18 @@ const Download = () => {
               </div>
             </div>
             {download
-              ? downloads.tracks.map((elem) => {
+              ? downloads.tracks.map((elem, index) => {
                   return (
                     <div className={classes.track_line} key={elem.id}>
                       <div>
                         {" "}
-                        <img src={play} alt="" />
+                        <img
+                          src={play}
+                          alt=""
+                          onClick={() => {
+                            setCurrentTrack(index);
+                          }}
+                        />
                       </div>
                       <div className={classes.track_line_section}>
                         <img src={elem.cover_photo} width={48} alt="" />
