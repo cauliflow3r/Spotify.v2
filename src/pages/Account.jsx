@@ -14,9 +14,20 @@ const Account = () => {
     currentPassword,
     newPassword,
     confirmPassword,
+    refreshToken,
   } = useAuth();
 
   const navigate = useNavigate();
+
+  async function handleChangePassword() {
+    try {
+      await refreshToken(); // Обновляем токен перед сменой пароля
+      await changePassword(); // Выполняем смену пароля
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <MainLayout>
@@ -50,7 +61,7 @@ const Account = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              <button onClick={changePassword}>change</button>
+              <button onClick={handleChangePassword}>change</button>
             </div>
           </div>
         </div>

@@ -33,8 +33,9 @@ const Sidebar = () => {
             <h3>Home</h3>
           </div>
           <div
-            onClick={() => handleLinkClick("/")}
-            className={activeLink === "search" ? sidebars.activeLink : ""}
+            onClick={() => {
+              navigate("/search");
+            }}
           >
             <img src={search_i} alt="" />
             <h3>Search</h3>

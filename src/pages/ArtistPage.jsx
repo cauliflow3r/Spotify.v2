@@ -14,8 +14,10 @@ import like_song from "../assets/like_song_icon.svg";
 import unlike_song from "../assets/unlike _song_icon.svg";
 import { songsContext } from "../context/SongsContextProvider";
 import { useDownLoad } from "../context/DownloadContexProvider";
+import { useAuth } from "../context/AuthContextProvider";
 
 const ArtistPage = () => {
+  const { currentUser } = useAuth();
   const { id } = useParams();
 
   const { getArtistSongs, artistSongs, setCurrentTrack, artistInfo } =
@@ -57,7 +59,11 @@ const ArtistPage = () => {
                 <div className={downloads.TopInfo_Right}>
                   <h5>Плейлист</h5>
                   <h2>{artistInfo.full_name}</h2>
-                  <h5>User : Quantity : {artistSongs.length} </h5>
+                  <h5>
+                    {" "}
+                    User&nbsp; : &nbsp;{currentUser} : Quantity :{" "}
+                    {artistSongs.length}{" "}
+                  </h5>
                 </div>
               </div>
               <div className={downloads.track_block}>

@@ -4,9 +4,10 @@ import right from "../assets/chevron_big_right.svg";
 import left from "../assets/chevron_big_left.svg";
 import users from "../assets/Line=empty, Name=friends.svg";
 import login_user from "../assets/Line=empty, Name=UserCircle.svg";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import Modal from "react-modal";
 import { useAuth } from "../context/AuthContextProvider";
+import { useProducts } from "../context/ProductContextProvider";
 Modal.setAppElement("#root");
 
 const Search = () => {
@@ -16,6 +17,18 @@ const Search = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
+  const {
+    setInputValue,
+    inputValue,
+    handleSearch,
+    setSearchParams,
+    searchParams,
+  } = useProducts();
+
+  const location = useLocation();
+
+  // console.log(inputValue);
+
   // console.log(currentUser);
   //! For modaalwindow
   const openModal = () => {
@@ -74,6 +87,12 @@ const Search = () => {
     const email = localStorage.getItem("email");
     setCurrentUser(email);
   }, []);
+
+  const handleSearchClick = () => {
+    handleSearch(inputValue);
+    setSearchParams({ query: inputValue });
+  };
+
   // !=================
   return (
     <>
@@ -83,18 +102,23 @@ const Search = () => {
         <div className={navbar.line_left}>
           <div className={navbar.line_arrow_left}>
             <img src={left} alt="" />
-            {/* &lsaquo; */}
           </div>
           <div className={navbar.line_arrow_left}>
-            {/* &rsaquo; */}
             <img src={right} alt="" />
           </div>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Что хочешь послушать "
-          />
+          <>
+            {location.pathname === "/search" && (
+              <div>
+                <input
+                  type="text"
+                  value={inputValue}
+                  placeholder="Что хочешь послушать"
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                <button onClick={handleSearchClick}>Search</button>
+              </div>
+            )}
+          </>
         </div>
 
         <div className={navbar.line_right}>
@@ -118,48 +142,7 @@ const Search = () => {
               </button>{" "}
             </>
           ) : (
-            <>
-              {/* <div className={navbar.line_arrow_left}>
-                <img src={users} alt="" />
-              </div>
-              <div className={navbar.line_arrow_left} onClick={handleIconClick}>
-                <img src={login_user} alt="" />
-              </div>
-              <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                overlayClassName="custom-overlay"
-                className="custom-modal"
-              >
-                <div className={navbar.modal_window}>
-                  <div className={navbar.textBlock}>
-                    <button
-                      onClick={() => {
-                        navigate("/account");
-                      }}
-                    >
-                      Account
-                    </button>
-                  </div>
-                  <div className={navbar.textBlock}>
-                    <button
-                      onClick={() => {
-                        navigate("/profile");
-                      }}
-                    >
-                      profile
-                    </button>
-                  </div>
-                  <div className={navbar.textBlock}>
-                    <button>Settings</button>
-                  </div>
-                  <hr></hr>
-                  <div className={navbar.textBlock}>
-                    <button onClick={handleLogout}>Log out</button>
-                  </div>
-                </div>
-              </Modal> */}
-            </>
+            <>{""}</>
           )}
           {currentUser ? (
             <>

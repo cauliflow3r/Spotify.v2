@@ -14,8 +14,10 @@ import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 
 const AlbumPage = () => {
+  const { currentUser } = useAuth();
   // const navigate = useNavigate();
   const {
     getFavorites,
@@ -65,7 +67,10 @@ const AlbumPage = () => {
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
                 <h2>{AlbumInfo.title} </h2>
-                <h5>User : Quantity : {AlbumBlock.length}</h5>
+                <h5>
+                  User&nbsp; : &nbsp;{currentUser} : Quantity :{" "}
+                  {AlbumBlock.length}
+                </h5>
               </div>
             </div>
             <div className={album.track_block}>

@@ -9,8 +9,10 @@ import delete_icon from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Download = () => {
+  const { currentUser } = useAuth();
   const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
   const { getDownload, downloads, deleteTrack } = useDownLoad();
@@ -30,7 +32,11 @@ const Download = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Download</h2>
-            <h5>User : Колво Треков в плейлисте </h5>
+            <h5>
+              {" "}
+              User&nbsp; : &nbsp;{currentUser} : Quantity :
+              {downloads.tracks.length}
+            </h5>
           </div>
         </div>
         <div className={classes.track_block}>
