@@ -14,7 +14,7 @@ const ProductContextProvider = ({ children }) => {
   const [artists, setArtists] = useState([]);
   // const [albumsSearch, setAlbumsSearch] = useState([]);
   const [query, setQuery] = useState("");
-  const [inputValue,setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState("");
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -28,15 +28,11 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-
   const handleSearch = () => {
     search(query, "songs", setSongs);
     search(query, "artists", setArtists);
     search(query, "albums", setAlbums);
   };
-
-
-
 
   async function getArtist() {
     try {
@@ -51,13 +47,11 @@ const ProductContextProvider = ({ children }) => {
   async function getAlbums() {
     try {
       const res = await axios.get(`${API}/albums/`);
-      setAlbums(res.data.results)
+      setAlbums(res.data.results);
     } catch (error) {
       console.log(error);
     }
   }
-
-
 
   async function getAlbumById(id) {
     try {
@@ -69,7 +63,6 @@ const ProductContextProvider = ({ children }) => {
   }
 
   // getAlbums();
-
 
   const values = {
     getArtist,
@@ -86,7 +79,10 @@ const ProductContextProvider = ({ children }) => {
     // setAlbumsSearch,
     search,
     inputValue,
-    setInputValue,handleSearch,setSearchParams,searchParams
+    setInputValue,
+    handleSearch,
+    setSearchParams,
+    searchParams,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

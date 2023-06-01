@@ -1,5 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
@@ -90,7 +95,9 @@ const SearchPage = () => {
                         .includes(inputValue.toLowerCase())
                     )
                     .map((album) => (
-                      <li key={album.id}>{album.title}</li>
+                      <Link to={`/album-page/${album.id}`}>
+                        <li key={album.id}>{album.title}</li>
+                      </Link>
                     ))}
                 </ul>
               </div>
