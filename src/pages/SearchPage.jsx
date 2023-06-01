@@ -5,27 +5,57 @@ import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
 
 const SearchPage = () => {
-  const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  const { getArtist } = useProducts();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    searchParams,
+    setSearchParams,
+    search,
+    songs,
+    artists,
+    albums,
+    setSongs,
+    setArtists,
+    setAlbumsSearch,
+  } = useProducts();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getArtist();
-  }, [searchParams]);
+    // Получение значения query из параметров поиска
+    const query = searchParams.get("query");
+
+    // Выполнение поиска и установка результатов в состояние
+    search(query, "songs", setSongs);
+    search(query, "artists", setArtists);
+    search(query, "albums", setAlbumsSearch);
+  }, [searchParams, search, setSongs, setArtists, setAlbumsSearch]);
 
   return (
     <MainLayout>
       <div className={classes.container}>
         <div className={classes.contentWrapper}>
           <div className={classes.genreComponent}>
-            <div
-              className={classes.genreBox}
-              style={{ backgroundColor: randomColor }}
-            >
-              esrgat
-            </div>
+            <div className={classes.genreBox}>esrgat</div>
           </div>
-          <div></div>
+          <div>
+            {/* Отображение результатов поиска */}
+            <h2>Songs</h2>
+            <ul>
+              {songs.map((song) => (
+                <li key={song.id}>{song.title}</li>
+              ))}
+            </ul>
+            <h2>Artists</h2>
+            <ul>
+              {artists.map((artist) => (
+                <li key={artist.id}>{artist.name}</li>
+              ))}
+            </ul>
+            <h2>Albums</h2>
+            <ul>
+              {albums.map((album) => (
+                <li key={album.id}>{album.title}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </MainLayout>

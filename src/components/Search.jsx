@@ -17,8 +17,17 @@ const Search = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
-  const { setInputValue, inputValue } = useProducts();
+  const {
+    setInputValue,
+    inputValue,
+    handleSearch,
+    setSearchParams,
+    searchParams,
+  } = useProducts();
+
   const location = useLocation();
+
+  console.log(inputValue);
 
   // console.log(currentUser);
   //! For modaalwindow
@@ -78,6 +87,12 @@ const Search = () => {
     const email = localStorage.getItem("email");
     setCurrentUser(email);
   }, []);
+
+  const handleSearchClick = () => {
+    handleSearch(inputValue);
+    setSearchParams({ query: inputValue });
+  };
+
   // !=================
   return (
     <>
@@ -93,13 +108,15 @@ const Search = () => {
           </div>
           <>
             {location.pathname === "/search" && (
-              <input
-                type="text"
-                name={inputValue}
-                id=""
-                placeholder="Что хочешь послушать"
-                onChange={(e) => setInputValue(e.target.value)}
-              />
+              <div>
+                <input
+                  type="text"
+                  value={inputValue}
+                  placeholder="Что хочешь послушать"
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                <button onClick={handleSearchClick}>Search</button>
+              </div>
             )}
           </>
         </div>
@@ -125,48 +142,7 @@ const Search = () => {
               </button>{" "}
             </>
           ) : (
-            <>
-              {/* <div className={navbar.line_arrow_left}>
-                <img src={users} alt="" />
-              </div>
-              <div className={navbar.line_arrow_left} onClick={handleIconClick}>
-                <img src={login_user} alt="" />
-              </div>
-              <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                overlayClassName="custom-overlay"
-                className="custom-modal"
-              >
-                <div className={navbar.modal_window}>
-                  <div className={navbar.textBlock}>
-                    <button
-                      onClick={() => {
-                        navigate("/account");
-                      }}
-                    >
-                      Account
-                    </button>
-                  </div>
-                  <div className={navbar.textBlock}>
-                    <button
-                      onClick={() => {
-                        navigate("/profile");
-                      }}
-                    >
-                      profile
-                    </button>
-                  </div>
-                  <div className={navbar.textBlock}>
-                    <button>Settings</button>
-                  </div>
-                  <hr></hr>
-                  <div className={navbar.textBlock}>
-                    <button onClick={handleLogout}>Log out</button>
-                  </div>
-                </div>
-              </Modal> */}
-            </>
+            <>{""}</>
           )}
           {currentUser ? (
             <>
