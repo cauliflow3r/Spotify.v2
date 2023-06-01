@@ -38,7 +38,6 @@ const AuthContextProvider = ({children}) => {
     try {
       setLoading(true);
       const res = await axios.post(`${API}/account/login/`, formData);
-      // console.log(res);
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       setCurrentUser(email);
@@ -117,21 +116,14 @@ const AuthContextProvider = ({children}) => {
     try {
       setLoading(true);
       const tokens = JSON.parse(localStorage.getItem("tokens"));
-  
-      // Запрос на обновление токена
       const refreshResponse = await axios.post(`${API}/account/refresh_token/`, {
         refresh_token: tokens.refresh,
       });
-  
-      // Обновление токена в локальном хранилище
       localStorage.setItem(
         "tokens",
         JSON.stringify({ access: refreshResponse.data.access, refresh: tokens.refresh })
       );
-  
-      console.log("Обновленный токен:", refreshResponse.data.access);
-  
-      // Возврат обновленного токена
+      // console.log("Обновленный токен:", refreshResponse.data.access);
       return refreshResponse.data.access;
     } catch (error) {
       console.log(error);

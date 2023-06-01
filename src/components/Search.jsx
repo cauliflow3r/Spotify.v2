@@ -27,7 +27,7 @@ const Search = () => {
 
   const location = useLocation();
 
-  console.log(inputValue);
+  // console.log(inputValue);
 
   // console.log(currentUser);
   //! For modaalwindow

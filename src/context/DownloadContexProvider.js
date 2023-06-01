@@ -46,7 +46,7 @@ const DownloadContextProvider = ({ children }) => {
     if (!downloads) {
       downloads = { tracks: [] };
     }
-    console.log(track);
+    // console.log(track);
     let newTrack = track;
 
     let productToFind = downloads.tracks.filter((elem) => elem.id === track.id);
@@ -86,7 +86,7 @@ const DownloadContextProvider = ({ children }) => {
     setTrackList(favorites.tracks);
     // setTrackInfo(favorites);
   }
-  console.log(favorites);
+  // console.log(favorites);
 
   function AddFavorites(track) {
     let favorites = JSON.parse(localStorage.getItem("favorites"));

@@ -6,55 +6,92 @@ import { useProducts } from "../context/ProductContextProvider";
 
 const SearchPage = () => {
   const {
+    inputValue,
     searchParams,
     setSearchParams,
     search,
     songs,
     artists,
     albums,
+    albumsSearch,
     setSongs,
     setArtists,
     setAlbumsSearch,
   } = useProducts();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    // Получение значения query из параметров поиска
-    const query = searchParams.get("query");
+  console.log("artist :", artists);
+  console.log("songs", songs);
+  console.log("albums", albums);
 
-    // Выполнение поиска и установка результатов в состояние
+  useEffect(() => {
+    const query = searchParams.get("query");
     search(query, "songs", setSongs);
     search(query, "artists", setArtists);
     search(query, "albums", setAlbumsSearch);
-  }, [searchParams, search, setSongs, setArtists, setAlbumsSearch]);
+  }, [searchParams]);
 
   return (
     <MainLayout>
       <div className={classes.container}>
         <div className={classes.contentWrapper}>
           <div className={classes.genreComponent}>
-            <div className={classes.genreBox}>esrgat</div>
+            <div className={classes.genreBox}></div>
           </div>
           <div>
             {/* Отображение результатов поиска */}
-            <h2>Songs</h2>
-            <ul>
-              {songs.map((song) => (
-                <li key={song.id}>{song.title}</li>
-              ))}
-            </ul>
-            <h2>Artists</h2>
-            <ul>
-              {artists.map((artist) => (
-                <li key={artist.id}>{artist.name}</li>
-              ))}
-            </ul>
-            <h2>Albums</h2>
-            <ul>
-              {albums.map((album) => (
-                <li key={album.id}>{album.title}</li>
-              ))}
-            </ul>
+            {songs.length > 0 && (
+              <div>
+                <h2>Songs</h2>
+                <ul>
+                  {songs
+                    .filter(
+                      (song) =>
+                        song &&
+                        song.title
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                    )
+                    .map((song) => (
+                      <li key={song.id}>{song.title}</li>
+                    ))}
+                </ul>
+              </div>
+            )}
+
+            {artists.length > 0 && (
+              <div>
+                <h2>Artists</h2>
+                <ul>
+                  {artists
+                    .filter((artist) =>
+                      artist.full_name
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                    )
+                    .map((artist) => (
+                      <li key={artist.id}>{artist.full_name}</li>
+                    ))}
+                </ul>
+              </div>
+            )}
+
+            {albums.length > 0 && (
+              <div>
+                <h2>Albums</h2>
+                <ul>
+                  {albums
+                    .filter((album) =>
+                      album.title
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                    )
+                    .map((album) => (
+                      <li key={album.id}>{album.title}</li>
+                    ))}
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

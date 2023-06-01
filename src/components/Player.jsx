@@ -12,18 +12,11 @@ import { songsContext } from "../context/SongsContextProvider";
 import ReactPlayer from "react-player";
 
 export default function Player() {
-  const {
-    Counter,
-    trackInfo,
-    setTrack,
-    trackList,
-    setTrackList,
-    currentTrack,
-    setCurrentTrack,
-  } = useContext(songsContext);
+  const { trackInfo, trackList, currentTrack, setCurrentTrack } =
+    useContext(songsContext);
 
-  console.log(trackInfo.hasOwnProperty("tracks"));
-  console.log(trackInfo);
+  // console.log(trackInfo.hasOwnProperty("tracks"));
+  // console.log(trackInfo);
 
   // !------------------------------
   // const [currentTrack, setCurrentTrack] = useState(0);
@@ -34,7 +27,7 @@ export default function Player() {
   const playerRef = useRef(null);
 
   const tracks = trackList;
-  console.log(trackList);
+  // console.log(trackList);
 
   const handlePlayNext = () => {
     setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
