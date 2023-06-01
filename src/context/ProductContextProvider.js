@@ -43,7 +43,7 @@ const ProductContextProvider = ({ children }) => {
 
   const addProduct = async (newProduct) => {
     await axios.post(`${API}/songs/upload/`, newProduct);
-    navigate("/products");
+    navigate("/playlist");
   };
   const getProductDetails = async (id) => {
     const { data } = await axios(`${API}/${id}`);

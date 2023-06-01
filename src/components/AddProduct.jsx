@@ -7,8 +7,9 @@ const AddProduct = () => {
   const [product, setProduct] = useState({
     title: "",
     audio_file: null,
-    album: 1,
+    album: "",
     genre: "",
+    artist: "",
   });
 
   const handleInp = (e) => {
@@ -33,6 +34,7 @@ const AddProduct = () => {
     newSong.append("audio_file", product.audio_file);
     newSong.append("album", product.album);
     newSong.append("genre", product.genre);
+    newSong.append("artist", product.artist);
 
     addProduct(newSong);
   }
@@ -57,6 +59,19 @@ const AddProduct = () => {
             size="small"
             name="audio_file"
             type="file"
+            onChange={handleInp}
+          />
+        </div>
+        <div>
+          <input
+            className="edit_kar"
+            sx={{ marginBottom: "10px" }}
+            fullWidth
+            id="outlined-basic"
+            placeholder="artist"
+            variant="outlined"
+            size="small"
+            name="artist"
             onChange={handleInp}
           />
         </div>
