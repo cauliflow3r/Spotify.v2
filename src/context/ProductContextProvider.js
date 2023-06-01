@@ -1,5 +1,4 @@
 import axios from "axios";
-import { async } from "q";
 import React, { createContext, useContext, useState } from "react";
 
 export const productContext = createContext();
@@ -28,15 +27,6 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
-  // ----
-  async function newArtist(newFormData) {
-    try {
-      await axios.post(`${API}/artists/`, newFormData);
-    } catch (error) {
-      console.log("error");
-    }
-  }
-  // ----
 
   const values = {
     getArtist,
@@ -45,7 +35,6 @@ const ProductContextProvider = ({ children }) => {
     getAlbums,
     albums,
     setAlbums,
-    newArtist,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>

@@ -4,7 +4,6 @@ import { createContext } from "react";
 import { songsContext, useSong } from "./SongsContextProvider";
 export const downloadContext = createContext();
 export const useDownLoad = () => useContext(downloadContext);
-
 const DownloadContextProvider = ({ children }) => {
   const { setTrackList, setTrackInfo } = useContext(songsContext);
   const [downloads, setDownloads] = useState(
@@ -85,7 +84,7 @@ const DownloadContextProvider = ({ children }) => {
     }
     setFavorites(favorites);
     setTrackList(favorites.tracks);
-    setTrackInfo(favorites);
+    // setTrackInfo(favorites);
   }
   console.log(favorites);
 
