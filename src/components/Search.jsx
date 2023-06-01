@@ -4,9 +4,10 @@ import right from "../assets/chevron_big_right.svg";
 import left from "../assets/chevron_big_left.svg";
 import users from "../assets/Line=empty, Name=friends.svg";
 import login_user from "../assets/Line=empty, Name=UserCircle.svg";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import Modal from "react-modal";
 import { useAuth } from "../context/AuthContextProvider";
+import { useProducts } from "../context/ProductContextProvider";
 Modal.setAppElement("#root");
 
 const Search = () => {
@@ -16,6 +17,9 @@ const Search = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
+  const { setInputValue, inputValue } = useProducts();
+  const location = useLocation();
+
   // console.log(currentUser);
   //! For modaalwindow
   const openModal = () => {
@@ -83,18 +87,21 @@ const Search = () => {
         <div className={navbar.line_left}>
           <div className={navbar.line_arrow_left}>
             <img src={left} alt="" />
-            {/* &lsaquo; */}
           </div>
           <div className={navbar.line_arrow_left}>
-            {/* &rsaquo; */}
             <img src={right} alt="" />
           </div>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Что хочешь послушать "
-          />
+          <>
+            {location.pathname === "/search" && (
+              <input
+                type="text"
+                name={inputValue}
+                id=""
+                placeholder="Что хочешь послушать"
+                onChange={(e) => setInputValue(e.target.value)}
+              />
+            )}
+          </>
         </div>
 
         <div className={navbar.line_right}>
