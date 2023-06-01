@@ -1,13 +1,20 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import logoSpotify from "../assets/Spotify_Logo_CMYK_Black.png";
 import classes from "../style/Login.module.css";
 import FormLayout from "../layouts/FormLayout/FormLayout";
-import { useAuth } from "../context/AuthContextProvider";
+import { authContext, useAuth } from "../context/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const ResetPassword = () => {
-  const { resetPassword } = useAuth();
+  const { resetPassword, loading } = useAuth(authContext);
+  const [inpReset, setInpReset] = useState("");
+  const navigate = useNavigate();
+  console.log(inpReset);
 
+  async function handleSave() {
+    await resetPassword(inpReset);
+    navigate("/login");
+  }
   return (
     <FormLayout>
       <div className={classes.wrapper}>
@@ -27,8 +34,24 @@ const ResetPassword = () => {
           <div className={classes.fromP}>
             <p>Email address or username</p>
           </div>
-          <input type="text" placeholder="Enter Email address adress.." />
-          <button onClick={resetPassword}>Send</button>
+          <input
+            type="text"
+            placeholder="Enter Email address adress.."
+            onChange={(e) => setInpReset(e.target.value)}
+          />
+          {loading ? (
+            <button onClick={handleSave}>Send</button>
+          ) : (
+            <button className={classes.btnLoad} onClick={handleSave}>
+              <div className={classes.wave}>
+                <div className={classes.ball}></div>
+                <div className={classes.ball}></div>
+                <div className={classes.ball}></div>
+                <div className={classes.ball}></div>
+                <div className={classes.ball}></div>
+              </div>
+            </button>
+          )}
         </div>
         <div className={classes.support}>
           <span>If you still need help, contact Spotify Support</span>
