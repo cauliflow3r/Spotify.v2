@@ -27,7 +27,7 @@ const DownloadContextProvider = ({ children }) => {
       };
     }
     setDownloads(downloads);
-    // setFavorites(downloads);
+
     setTrackList(downloads.tracks);
   }
   const checkTracksDown = (id) => {
@@ -84,7 +84,7 @@ const DownloadContextProvider = ({ children }) => {
     }
     setFavorites(favorites);
     setTrackList(favorites.tracks);
-    // setTrackInfo(favorites.track);
+    // setTrackInfo(favorites);
   }
   console.log(favorites);
 

@@ -21,7 +21,8 @@ export default function Player() {
     currentTrack,
     setCurrentTrack,
   } = useContext(songsContext);
-  console.log(trackList);
+
+  console.log(trackInfo.hasOwnProperty("tracks"));
   console.log(trackInfo);
 
   // !------------------------------
