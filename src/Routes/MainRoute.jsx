@@ -10,6 +10,7 @@ import Download from "../pages/Downloand";
 import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
 import Account from "../pages/Account";
+import AddArtist from "../pages/AddArtist";
 
 const MainRoute = () => {
   return (
@@ -25,6 +26,7 @@ const MainRoute = () => {
         <Route path="profile" element={<Profile />} />
         <Route path="account" element={<Account />} />
         <Route path="login" element={<Login />} />
+        <Route path="addart" element={<AddArtist />} />
       </Routes>
     </div>
   );

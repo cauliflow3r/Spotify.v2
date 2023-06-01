@@ -12,9 +12,11 @@ import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import deleteBtn from "../assets/Delete_icon.svg";
+import { useAuth } from "../context/AuthContextProvider";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
+  const { currentUser } = useAuth();
   const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
   const {
@@ -46,7 +48,10 @@ const PlayList = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Любимые треки</h2>
-            <h5>User : Кол-во треков {favorites.tracks.length}</h5>
+            <h5>
+              User&nbsp; : &nbsp;{currentUser} : Quantity :
+              {favorites.tracks.length}
+            </h5>
           </div>
         </div>
         <div className={classes.track_block}>

@@ -22,7 +22,8 @@ export default function Player() {
     setCurrentTrack,
   } = useContext(songsContext);
 
-  // console.log(trackInfo.hasOwnProperty("tracks"));
+  console.log(trackInfo.hasOwnProperty("tracks"));
+  console.log(trackInfo);
 
   // !------------------------------
   // const [currentTrack, setCurrentTrack] = useState(0);
@@ -33,7 +34,7 @@ export default function Player() {
   const playerRef = useRef(null);
 
   const tracks = trackList;
-  console.log(tracks);
+  console.log(trackList);
 
   const handlePlayNext = () => {
     setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
@@ -84,7 +85,9 @@ export default function Player() {
             {trackInfo.songs ? trackInfo.songs[currentTrack].title : "Name"}
           </h3>
           <p className="subTitle">
-            {trackInfo.songs ? tracks[currentTrack].artist[1] : "Artist"}
+            {trackInfo.songs
+              ? trackInfo.songs[currentTrack].artist[1]
+              : "Artist"}
           </p>
         </div>
       </div>

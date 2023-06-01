@@ -85,7 +85,7 @@ const DownloadContextProvider = ({ children }) => {
     }
     setFavorites(favorites);
     setTrackList(favorites.tracks);
-    // setTrackInfo(favorites);
+    setTrackInfo(favorites);
   }
   console.log(favorites);
 
