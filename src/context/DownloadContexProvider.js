@@ -36,7 +36,7 @@ const DownloadContextProvider = ({ children }) => {
     // console.log(downloads);
 
     if (downloads) {
-      let down = downloads.tracks.filter((elem) => elem.id == id);
+      let down = downloads?.tracks?.filter((elem) => elem.id == id);
       return down.length > 0 ? true : false;
     }
   };
@@ -111,8 +111,8 @@ const DownloadContextProvider = ({ children }) => {
     let favorites = JSON.parse(localStorage.getItem("favorites"));
 
     if (favorites) {
-      let Track = favorites.tracks.filter((elem) => elem.id == id);
-      return Track.length > 0 ? true : false;
+      let Track = favorites?.tracks?.filter((elem) => elem.id == id);
+      return Track?.length > 0 ? true : false;
     }
   };
   const deleteLikedTrack = (id) => {

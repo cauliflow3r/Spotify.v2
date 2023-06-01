@@ -20,6 +20,7 @@ export default function Player() {
     setTrackList,
     currentTrack,
     setCurrentTrack,
+    getALbumTrack,
   } = useContext(songsContext);
 
   // console.log(trackInfo.hasOwnProperty("tracks"));
@@ -32,16 +33,20 @@ export default function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
+  useEffect(() => {
+    getALbumTrack(3);
+  }, []);
+
   const tracks = trackList;
-  console.log(tracks);
+  console.log(trackList);
 
   const handlePlayNext = () => {
-    setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
+    setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks?.length);
   };
 
   const handlePlayPrev = () => {
     setCurrentTrack(
-      (prevTrack) => (prevTrack - 1 + tracks.length) % tracks.length
+      (prevTrack) => (prevTrack - 1 + tracks?.length) % tracks?.length
     );
   };
 
@@ -81,10 +86,10 @@ export default function Player() {
         />
         <div>
           <h3 className="title">
-            {trackInfo.songs ? trackInfo.songs[currentTrack].title : "Name"}
+            {trackInfo?.songs ? trackInfo?.songs[currentTrack].title : "Name"}
           </h3>
           <p className="subTitle">
-            {trackInfo.songs ? tracks[currentTrack].artist[1] : "Artist"}
+            {trackInfo.songs ? tracks[currentTrack]?.artist[1] : "Artist"}
           </p>
         </div>
       </div>
@@ -94,8 +99,8 @@ export default function Player() {
           height={0}
           ref={playerRef}
           url={
-            tracks.length != 0
-              ? tracks[currentTrack].audio_file
+            tracks?.length != 0
+              ? tracks[currentTrack]?.audio_file
               : "http://34.125.87.211/media/songs/Linkin_Park_-_Bleed_It_Out_pPDQK7N.mp3"
           }
           playing={isPlaying}

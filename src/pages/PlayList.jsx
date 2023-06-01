@@ -46,7 +46,7 @@ const PlayList = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Любимые треки</h2>
-            <h5>User : Кол-во треков {favorites.tracks.length}</h5>
+            <h5>User : Кол-во треков {favorites.tracks?.length}</h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -85,7 +85,7 @@ const PlayList = () => {
                 <img src={like_song} alt="" />
               </div>
             </div>
-            {favorites.tracks.map((elem, index) => {
+            {favorites.tracks?.map((elem, index) => {
               console.log(elem.id);
               return (
                 <div className={classes.track_line}>
