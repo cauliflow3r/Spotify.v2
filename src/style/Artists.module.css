@@ -8,6 +8,15 @@ h5 {
 h4 {
   font-family: "Open Sans", sans-serif;
 }
+.download_container {
+  background: linear-gradient(
+    0deg,
+    rgba(24, 24, 24, 1) 0%,
+    rgba(13, 57, 56, 0.9094231442577031) 43%,
+    rgba(18, 113, 110, 1) 100%
+  );
+  border-radius: 15px;
+}
 .TopInfo_Right {
   margin: 20px;
   display: flex;
@@ -16,7 +25,8 @@ h4 {
 }
 .TopInfo {
   width: 95%;
-  margin: 30px auto;
+  margin: 0 auto;
+  margin-bottom: 30px;
   display: flex;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
@@ -24,16 +34,13 @@ h4 {
   padding-top: 60px;
 }
 .TopInfo_Left {
+  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 250px;
   height: 250px;
-  background: linear-gradient(
-    to left top,
-    rgba(122, 142, 135, 1),
-    rgba(66, 24, 183, 1)
-  );
+  background: linear-gradient(to left top, rgb(244, 217, 8), rgb(29, 180, 19));
   /* margin: 20px; */
   -webkit-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
   -moz-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
@@ -101,6 +108,9 @@ h4 {
 .track_props_right img:last-child {
   width: 25px;
 }
+.TopInfo_Left img {
+  width: 6em;
+}
 
 /* ! блок грид  */
 .container_grid {
@@ -119,6 +129,12 @@ h4 {
   align-items: center;
   margin-bottom: 10px;
 }
+.container_grid :first-child {
+  margin-left: 20px;
+}
+.track_line div {
+  margin-left: 20px;
+}
 .number {
   margin-left: 20px;
 }
@@ -132,6 +148,7 @@ h4 {
   margin: 30px auto;
   font-family: "Open Sans", sans-serif;
 }
+
 .track_line div {
   display: flex;
   /* justify-content: center; */
@@ -139,9 +156,6 @@ h4 {
 }
 .track_line_section {
   display: flex;
-}
-.track_line div :last-child {
-  margin-left: 20px;
 }
 
 .track_line_section_name {

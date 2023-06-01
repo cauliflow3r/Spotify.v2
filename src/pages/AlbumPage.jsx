@@ -13,6 +13,7 @@ import like_song from "../assets/like_song_icon.svg";
 import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
+import { useProducts } from "../context/ProductContextProvider";
 
 const AlbumPage = () => {
   // const navigate = useNavigate();
@@ -24,6 +25,8 @@ const AlbumPage = () => {
     checkTracks,
     checkTracksDown,
   } = useDownLoad();
+
+  const { saveEditedProduct } = useProducts();
 
   useEffect(() => {
     getFavorites();
@@ -121,6 +124,7 @@ const AlbumPage = () => {
                         </div>
                       </div>
                       <div className={album.album}>{AlbumInfo.title}</div>
+                      <button>Edit</button>
                       <div className={album.dateAdd}>1 day ago</div>
                       <div className={album.time}>3:22</div>
                       <div

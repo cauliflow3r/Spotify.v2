@@ -15,6 +15,7 @@ const SongContextProvider = ({ children }) => {
   const [AlbumBlock, setAlbumBlock] = useState([]);
   const [AlbumInfo, setAlbumInfo] = useState({});
   const [artistSongs, setArtistSongs] = useState([]);
+  const [artistInfo, setArtistInfo] = useState([]);
   // todo - получение данных по id
   async function getALbumTrack(id) {
     try {
@@ -34,6 +35,9 @@ const SongContextProvider = ({ children }) => {
     try {
       let res = await axios.get(`${API}/artists/${id}/`);
       setArtistSongs(res.data.songs);
+      setTrackList(res.data.songs);
+      setArtistInfo(res.data);
+      setTrackInfo(res.data);
       console.log(res.data);
     } catch (error) {
       console.log(error);
@@ -55,6 +59,7 @@ const SongContextProvider = ({ children }) => {
     currentTrack,
     setCurrentTrack,
     AlbumInfo,
+    artistInfo,
   };
   return (
     <songsContext.Provider value={values}>{children}</songsContext.Provider>

@@ -7,7 +7,7 @@ import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
@@ -15,6 +15,7 @@ import deleteBtn from "../assets/Delete_icon.svg";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
+  const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
   const {
     getDownload,
@@ -25,14 +26,14 @@ const PlayList = () => {
     deleteLikedTrack,
   } = useDownLoad();
 
-  // console.log(favorites);
+  console.log(favorites);
 
   useEffect(() => {
     getFavorites();
   }, []);
-  useEffect(() => {
-    getDownload();
-  }, []);
+  // useEffect(() => {
+  //   getDownload();
+  // }, []);
   // !downloads
 
   return (
@@ -90,7 +91,13 @@ const PlayList = () => {
                 <div className={classes.track_line}>
                   <div>
                     {" "}
-                    <img src={play_btn} alt="" />
+                    <img
+                      src={play_btn}
+                      alt=""
+                      onClick={() => {
+                        setCurrentTrack(index);
+                      }}
+                    />
                   </div>
                   <div className={classes.track_line_section}>
                     <img src={elem.cover_photo} width={48} alt="" />

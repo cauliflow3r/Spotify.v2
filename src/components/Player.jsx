@@ -21,7 +21,8 @@ export default function Player() {
     currentTrack,
     setCurrentTrack,
   } = useContext(songsContext);
-  console.log(trackList);
+
+  // console.log(trackInfo.hasOwnProperty("tracks"));
 
   // !------------------------------
   // const [currentTrack, setCurrentTrack] = useState(0);
@@ -32,7 +33,7 @@ export default function Player() {
   const playerRef = useRef(null);
 
   const tracks = trackList;
-  console.log(trackInfo.songs);
+  console.log(tracks);
 
   const handlePlayNext = () => {
     setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
@@ -64,7 +65,6 @@ export default function Player() {
     playerRef.current.seekTo(seconds);
   };
 
-  // Функция для форматирования времени в формат "минуты:секунды"
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
@@ -84,9 +84,7 @@ export default function Player() {
             {trackInfo.songs ? trackInfo.songs[currentTrack].title : "Name"}
           </h3>
           <p className="subTitle">
-            {trackInfo.songs
-              ? trackInfo.songs[currentTrack].artist[1]
-              : "Artist"}
+            {trackInfo.songs ? tracks[currentTrack].artist[1] : "Artist"}
           </p>
         </div>
       </div>

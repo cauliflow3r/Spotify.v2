@@ -1,16 +1,13 @@
-import "./EditProduct.css";
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 
-const EditProduct = () => {
+const EditCard = () => {
   const { saveEditedProduct, getProductDetails, productDetails } =
     useProducts();
   console.log(productDetails);
 
   const { id } = useParams();
-  console.log(id, "IDs");
 
   useEffect(() => {
     getProductDetails(id);
@@ -23,7 +20,7 @@ const EditProduct = () => {
   const [product, setProduct] = useState(productDetails);
 
   const handleInp = (e) => {
-    if (e.target.name === "name") {
+    if (e.target.name === "price") {
       let obj = {
         ...product,
         [e.target.name]: Number(e.target.value),
@@ -50,24 +47,24 @@ const EditProduct = () => {
           sx={{ marginBottom: "10px" }}
           fullWidth
           id="outlined-basic"
-          label="song"
+          label="title"
           variant="outlined"
           size="small"
           name="image"
           onChange={handleInp}
-          value={product.image || ""}
+          value={product.title || ""}
         />
         <input
           className="edit_nazvanie1"
           sx={{ marginBottom: "10px" }}
           fullWidth
           id="outlined-basic"
-          label="name"
+          label="audio_file"
           variant="outlined"
           size="small"
           name="name"
           onChange={handleInp}
-          value={product.name || ""}
+          value={product.audio_file || ""}
         />
 
         <input
@@ -75,24 +72,24 @@ const EditProduct = () => {
           sx={{ marginBottom: "10px" }}
           fullWidth
           id="outlined-basic"
-          label="LastName"
+          label="Цена"
           variant="outlined"
           size="small"
-          name="price"
+          name="album"
           onChange={handleInp}
-          value={product.price || ""}
+          value={product.album || ""}
         />
         <input
           className="edit_opi1"
           sx={{ marginBottom: "10px" }}
           fullWidth
           id="outlined-basic"
-          label="Описание"
+          label="genre"
           variant="outlined"
           size="small"
           name="description"
           onChange={handleInp}
-          value={product.description || ""}
+          value={product.genre || ""}
         />
 
         <button
@@ -108,4 +105,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default EditCard;
