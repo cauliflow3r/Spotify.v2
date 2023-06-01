@@ -68,7 +68,7 @@ const Download = () => {
             {download
               ? downloads.tracks.map((elem) => {
                   return (
-                    <div className={classes.track_line}>
+                    <div className={classes.track_line} key={elem.id}>
                       <div>
                         {" "}
                         <img src={play} alt="" />

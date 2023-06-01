@@ -33,11 +33,13 @@ const AlbumPage = () => {
   }, []);
   // !downloads
   // !----------------
-  const { getSongs, getALbumTrack, AlbumBlock } = useContext(songsContext);
-
-  useEffect(() => {
-    getSongs();
-  }, []);
+  const {
+    getALbumTrack,
+    AlbumBlock,
+    AlbumInfo,
+    currentTrack,
+    setCurrentTrack,
+  } = useContext(songsContext);
 
   // todo -------------------
   const { id } = useParams();
@@ -55,12 +57,12 @@ const AlbumPage = () => {
           <div>
             <div className={album.TopInfo}>
               <div className={album.TopInfo_Left}>
-                <img src={heart} alt="" />
+                <img src={AlbumInfo.cover_photo} width={250} alt="" />
               </div>
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
-                <h2>Какой-то плейлист </h2>
-                {/* <h5>User : {trackList.length}</h5> */}
+                <h2>{AlbumInfo.title} </h2>
+                <h5>User : Quantity : {AlbumBlock.length}</h5>
               </div>
             </div>
             <div className={album.track_block}>
@@ -102,8 +104,12 @@ const AlbumPage = () => {
 
                 {AlbumBlock.map((elem, index) => {
                   return (
-                    <div className={album.track_line}>
-                      <div>
+                    <div className={album.track_line} key={elem.id}>
+                      <div
+                        onClick={() => {
+                          setCurrentTrack(index);
+                        }}
+                      >
                         {" "}
                         <img src={play_btn} alt="" />
                       </div>
@@ -114,7 +120,7 @@ const AlbumPage = () => {
                           <h5> {elem.artist[1]} </h5>
                         </div>
                       </div>
-                      <div className={album.album}>{elem.album}</div>
+                      <div className={album.album}>{AlbumInfo.title}</div>
                       <div className={album.dateAdd}>1 day ago</div>
                       <div className={album.time}>3:22</div>
                       <div

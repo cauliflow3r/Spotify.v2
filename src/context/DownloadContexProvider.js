@@ -107,6 +107,14 @@ const DownloadContextProvider = ({ children }) => {
       return Track.length > 0 ? true : false;
     }
   };
+  const deleteLikedTrack = (id) => {
+    let favorites = JSON.parse(localStorage.getItem("favorites"));
+
+    favorites.tracks = favorites.tracks.filter((elem) => elem.id !== id);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    setDownloads(favorites);
+    getFavorites();
+  };
 
   //   todo ------ Favorites-----BLock----------------
 
@@ -120,6 +128,7 @@ const DownloadContextProvider = ({ children }) => {
     favorites,
     checkTracks,
     checkTracksDown,
+    deleteLikedTrack,
   };
   return (
     <downloadContext.Provider value={values}>
