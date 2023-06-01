@@ -33,12 +33,7 @@ export default function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
 
-  useEffect(() => {
-    getALbumTrack(3);
-  }, []);
-
   const tracks = trackList;
-  console.log(trackList);
 
   const handlePlayNext = () => {
     setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks?.length);

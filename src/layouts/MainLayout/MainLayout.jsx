@@ -4,6 +4,7 @@ import Sidebar from "../../components/Sidebar";
 import Search from "../../components/Search";
 import classes from "../../style/PalyListBlock.module.css";
 import Homepage from "../../pages/Homepage";
+import { useSong } from "../../context/SongsContextProvider";
 
 const MainLayout = ({ children }) => {
   const [scrolled, setScrolled] = useState(false);
