@@ -1,12 +1,3 @@
-import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react'
-import { useNavigate } from "react-router-dom";
-
-export const authContext =  createContext();
-export const useAuth = () => useContext(authContext);
-export const API = 'http://34.125.87.211';
-
-
 const AuthContextProvider = ({children}) => {
 
   const [currentUser, setCurrentUser] = useState(null);
@@ -23,7 +14,7 @@ const AuthContextProvider = ({children}) => {
   async function handleRegister(formData,email) {
     try {
       setLoading(true);
-      const res = await axios.post(`${API}/accounts/register/`, formData);
+      const res = await axios.post(`${API}/account/register/`, formData);
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
       navigate("/");
@@ -37,7 +28,7 @@ const AuthContextProvider = ({children}) => {
   async function handleLogin(formData, email) {
     try {
       setLoading(true);
-      const res = await axios.post(`${API}/accounts/login/`, formData);
+      const res = await axios.post(`${API}/account/login/`, formData);
       // console.log(res);
       localStorage.setItem("tokens", JSON.stringify(res.data));
       localStorage.setItem("email", email);
@@ -54,7 +45,7 @@ const AuthContextProvider = ({children}) => {
     try {
       setLoading(true);
       const tokens = JSON.parse(localStorage.getItem("tokens"));
-      const res = await axios.post(`${API}/accounts/logout/`, {
+      const res = await axios.post(`${API}/account/logout/`, {
         refresh_token: tokens.refresh,
         title: "Refresh token",
       });
@@ -85,31 +76,85 @@ const AuthContextProvider = ({children}) => {
 
   async function resetPassword (email) {
     try {
-      await axios.post(`${API}/accounts/password-reset/`,{email} );
+      setLoading(true);
+      await axios.post(`${API}/account/password-reset/`,{email} );
+      console.log(email);
     } catch (error) {
       console.log(error);
     }
   }
 
 
+  // async function changePassword() {
+  //   try {
+  //     const tokens = JSON.parse(localStorage.getItem("tokens"));
+  //     const response = await axios.post(`${API}/account/change_password/`, {
+  //       current_password: currentPassword,
+  //       new_password: newPassword,
+  //       confirm_password: confirmPassword
+  //     }, {
+  //       headers: {
+  //         Authorization: `Bearer ${tokens.access}`
+  //       }
+  //     });
+  //     console.log(response.data);
+
+  //   } catch (error) {
+  //     console.log(error.response);
+  //   }
+  // }
+
+  async function refreshToken() {
+    try {
+      setLoading(true);
+      const tokens = JSON.parse(localStorage.getItem("tokens"));
+  
+      // Запрос на обновление токена
+      const refreshResponse = await axios.post(`${API}/account/refresh_token/`, {
+        refresh_token: tokens.refresh,
+      });
+  
+      // Обновление токена в локальном хранилище
+      localStorage.setItem(
+        "tokens",
+        JSON.stringify({ access: refreshResponse.data.access, refresh: tokens.refresh })
+      );
+  
+      console.log("Обновленный токен:", refreshResponse.data.access);
+  
+      // Возврат обновленного токена
+      return refreshResponse.data.access;
+    } catch (error) {
+      console.log(error);
+      handleLogout();
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function changePassword() {
     try {
-      const tokens = JSON.parse(localStorage.getItem("tokens"));
-      const response = await axios.post(`${API}/accounts/change_password/`, {
+      setLoading(true);
+      const refreshedToken = await refreshToken();
+      const response = await axios.post(`${API}/account/change_password/`, {
         current_password: currentPassword,
         new_password: newPassword,
         confirm_password: confirmPassword
       }, {
         headers: {
-          Authorization: `Bearer ${tokens.access}`
+          Authorization: `Bearer ${refreshedToken}`
         }
       });
+  
       console.log(response.data);
-
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
+  
+  
 
   const values = {
     handleRegister,
@@ -128,7 +173,7 @@ const AuthContextProvider = ({children}) => {
     confirmPassword,
     setCurrentPassword,
     setNewPassword,
-    setConfirmPassword
+    setConfirmPassword,refreshToken
   };
   return (
     <authContext.Provider value={values}>{children}</authContext.Provider>
