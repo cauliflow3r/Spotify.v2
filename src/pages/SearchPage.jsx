@@ -20,7 +20,10 @@ const SearchPage = () => {
   } = useProducts();
   const navigate = useNavigate();
 
-  console.log("artist :", artists);
+  console.log(
+    "artist.albums :",
+    artists.map((a) => a.albums)
+  );
   console.log("songs", songs);
   console.log("albums", albums);
 
@@ -47,7 +50,7 @@ const SearchPage = () => {
                   {songs
                     .filter(
                       (song) =>
-                        song &&
+                        song.artist[1] &&
                         song.title
                           .toLowerCase()
                           .includes(inputValue.toLowerCase())
