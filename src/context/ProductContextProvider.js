@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { createContext, useContext, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import React, { createContext, useContext, useReducer, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { API_ALBUMS } from "./SongsContextProvider";
+
 import { async } from "q";
 import App from "../App";
-import AddArtist from "../pages/AddArtist";
-import AddAlbum from "../pages/AddAlbum";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
 export const API = "http://34.125.87.211";
 
 const ProductContextProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [artist, setArtist] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
@@ -19,6 +19,7 @@ const ProductContextProvider = ({ children }) => {
   // const [albumsSearch, setAlbumsSearch] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [selectedRating, setSelectedRating] = useState("");
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -57,6 +58,48 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  async function getAlbumById(id) {
+    try {
+      const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
+      // console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // getAlbums();
+
+  // todo -----------------------------------------------
+  function getConfig() {
+    const tokens = JSON.parse(localStorage.getItem("tokens"));
+    //config
+    const Authorization = `Bearer ${tokens.access}`;
+    const config = {
+      headers: { Authorization },
+    };
+    return config;
+  }
+
+  // console.log(getConfig());
+
+  async function AddArtist(newAtrist) {
+    try {
+      let res = await axios.post(`${API}/artists/`, newAtrist, getConfig());
+    } catch (error) {
+      console.log("error");
+    }
+  }
+  // todo -----------------------------------------------
+  // ! added album --------------------
+  async function AddAlbum(newAlbum) {
+    try {
+      let res = await axios.post(`${API}/albums/`, newAlbum, getConfig());
+    } catch (error) {
+      console.log("error");
+    }
+  }
+  // ! added album --------------------
+
   const values = {
     getArtist,
     artist,
@@ -76,7 +119,15 @@ const ProductContextProvider = ({ children }) => {
     searchParams,
     AddArtist,
     AddAlbum,
+    deleteProduct,
+    saveEditedProduct,
+    getProductDetails,
+    addProduct,
+    productDetails: state.productDetails,
+    sendRating,
+    setSelectedRating,
   };
+
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
   );

@@ -15,6 +15,8 @@ import { useAuth } from "../context/AuthContextProvider";
 import Feed from "../pages/Feed";
 import AddArtist from "../pages/AddArtist";
 import AddAlbum from "../pages/AddAlbum";
+import AddSongs from "../pages/AddSongs";
+import EditSongs from "../pages/EditSongs";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();
@@ -35,6 +37,8 @@ const MainRoute = () => {
         <Route path="login" element={<Login />} />
         <Route path="addart" element={<AddArtist />} />
         <Route path="addalbum" element={<AddAlbum />} />
+        <Route path="/addproduct" element={<AddSongs />} />
+        <Route path="/editproduct/:id" element={<EditSongs />} />
       </Routes>
     </div>
   );

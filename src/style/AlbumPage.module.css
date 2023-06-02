@@ -168,6 +168,42 @@ h4 {
 .track_line_section_name h5 {
   margin: 5px;
 }
+
+input[type="radio"] {
+  appearance: none;
+  margin: 0 -3px;
+  padding: 0;
+}
+
+input[type="radio"] + label {
+  font-size: 18px;
+  line-height: 30px;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border-radius: 8px;
+}
+
+input[type="radio"] + label:hover {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+input[type="radio"]:checked + label,
+:has(~ input[type="radio"]:checked + label) {
+  color: orange;
+}
+
+:has(~ input[type="radio"]:hover + label),
+input[type="radio"] + label:hover {
+  color: orangered;
+}
+
+:has(~ input[type="radio"] + label) {
+  color: grey;
+  transition: all 0.3s ease-in-out;
+}
+
 @media (max-width: 1024px) {
   .track_props_left {
     width: 30%;
