@@ -27,10 +27,10 @@ const SearchPage = () => {
 
   console.log(
     "artist.albums :",
-    artists.map((a) => a.albums)
+    artists.map((a) => a.songs.map((e) => e.artist.map((art) => art)))
   );
-  console.log("songs", songs);
-  console.log("albums", albums);
+  // console.log("songs", songs);
+  // console.log("albums", albums);
 
   useEffect(() => {
     const query = searchParams.get("query");
@@ -78,7 +78,21 @@ const SearchPage = () => {
                         .includes(inputValue.toLowerCase())
                     )
                     .map((artist) => (
-                      <li key={artist.id}>{artist.full_name}</li>
+                      <div
+                        className={classes.preview}
+                        key={artist.id}
+                        onClick={() => navigate(`/artist-page/${artist.id}`)}
+                      >
+                        <div className={classes.cardPreview}>
+                          <img src={artist.photo} alt="" />
+                          <p>{artist.full_name}</p>
+                          <div className={classes.icon_play}>
+                            <div className={classes.circle_play}>
+                              <div className={classes.triangle_play}></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                 </ul>
               </div>
@@ -95,8 +109,30 @@ const SearchPage = () => {
                         .includes(inputValue.toLowerCase())
                     )
                     .map((album) => (
-                      <Link to={`/album-page/${album.id}`}>
-                        <li key={album.id}>{album.title}</li>
+                      <Link
+                        to={`/album-page/${album.id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div
+                          className={classes.playlist}
+                          key={album.id}
+                          onClick={() => navigate(`/album-page/${album.id}`)}
+                        >
+                          <div className={classes.card}>
+                            <div className={classes.mg_holder}>
+                              <img src={album.cover_photo} alt="image" />
+                            </div>
+                            <div className={classes.text}>
+                              <h2>{album.title}</h2>
+                              <p>{album.id}</p>
+                            </div>
+                            <div className={classes.play_icon}>
+                              <div className={classes.circle}>
+                                <div className={classes.triangle}></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </Link>
                     ))}
                 </ul>
