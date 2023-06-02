@@ -61,6 +61,7 @@ h4 {
     rgba(0, 0, 0, 0.23)
   );
   color: aliceblue;
+  padding-bottom: 100px;
   /* background-color: rgba(0, 0, 0, 0.345); */
 }
 .track_props {

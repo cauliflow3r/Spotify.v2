@@ -8,6 +8,18 @@ h5 {
 h4 {
   font-family: "Open Sans", sans-serif;
 }
+.container {
+  padding-top: 60px;
+  width: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 74%,
+    rgba(46, 22, 15, 1) 100%
+  );
+  color: #fff;
+  border-radius: 15px;
+}
 .TopInfo_Right {
   margin: 20px;
   display: flex;
@@ -31,8 +43,8 @@ h4 {
   height: 250px;
   background: linear-gradient(
     to left top,
-    rgba(122, 142, 135, 1),
-    rgba(66, 24, 183, 1)
+    rgb(226, 149, 25),
+    rgba(66, 24, 183, 0.868)
   );
   /* margin: 20px; */
   -webkit-box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
@@ -53,8 +65,8 @@ h4 {
     rgba(0, 0, 0, 0.678),
     rgba(0, 0, 0, 0.23)
   );
-  color: aliceblue;
   padding-bottom: 100px;
+  color: aliceblue;
   /* background-color: rgba(0, 0, 0, 0.345); */
 }
 .track_props {

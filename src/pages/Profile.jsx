@@ -1,5 +1,8 @@
 import React from "react";
-import { useAuth } from "../../context/AuthContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
+import MainLayout from "../layouts/MainLayout/MainLayout";
+import classes from "../style/Main.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const {
@@ -8,25 +11,15 @@ const Profile = () => {
     setNewPassword,
     setConfirmPassword,
   } = useAuth();
+
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="current "
-        onChange={(e) => setCurrentPassword(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="new"
-        onChange={(e) => setNewPassword(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="confirm "
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <button onClick={changePassword}>change</button>
-    </div>
+    <MainLayout>
+      <div className={classes.container}>
+        <div className={classes.contentWrapper}></div>
+      </div>
+    </MainLayout>
   );
 };
 

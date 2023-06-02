@@ -4,9 +4,10 @@ import right from "../assets/chevron_big_right.svg";
 import left from "../assets/chevron_big_left.svg";
 import users from "../assets/Line=empty, Name=friends.svg";
 import login_user from "../assets/Line=empty, Name=UserCircle.svg";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import Modal from "react-modal";
 import { useAuth } from "../context/AuthContextProvider";
+import { useProducts } from "../context/ProductContextProvider";
 Modal.setAppElement("#root");
 
 const Search = () => {
@@ -16,7 +17,27 @@ const Search = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
-  // console.log(currentUser);
+  const {
+    setInputValue,
+    inputValue,
+    handleSearch,
+    setSearchParams,
+    searchParams,
+  } = useProducts();
+
+  const location = useLocation();
+
+  // ...
+
+  // Handle backward and forward navigation
+  const navigateBackward = () => {
+    navigate(-1); // Go back one step
+  };
+
+  const navigateForward = () => {
+    navigate(1); // Go forward one step
+  };
+
   //! For modaalwindow
   const openModal = () => {
     setIsModalOpen(true);
@@ -74,27 +95,39 @@ const Search = () => {
     const email = localStorage.getItem("email");
     setCurrentUser(email);
   }, []);
+
+  const handleSearchClick = () => {
+    handleSearch(inputValue);
+    setSearchParams({ query: inputValue });
+  };
+
   // !=================
+
   return (
     <>
       <div
         className={scrolled ? navbar.line_container_1 : navbar.line_container}
       >
         <div className={navbar.line_left}>
-          <div className={navbar.line_arrow_left}>
+          <div className={navbar.line_arrow_left} onClick={navigateBackward}>
             <img src={left} alt="" />
-            {/* &lsaquo; */}
           </div>
-          <div className={navbar.line_arrow_left}>
-            {/* &rsaquo; */}
+          <div className={navbar.line_arrow_left} onClick={navigateForward}>
             <img src={right} alt="" />
           </div>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="Что хочешь послушать "
-          />
+          <>
+            {location.pathname === "/search" && (
+              <div>
+                <input
+                  type="text"
+                  value={inputValue}
+                  placeholder="Что хочешь послушать"
+                  onChange={(e) => setInputValue(e.target.value)}
+                />
+                <button onClick={handleSearchClick}>Search</button>
+              </div>
+            )}
+          </>
         </div>
 
         <div className={navbar.line_right}>
@@ -117,7 +150,9 @@ const Search = () => {
                 Login
               </button>{" "}
             </>
-          ) : null}
+          ) : (
+            <>{""}</>
+          )}
           {currentUser ? (
             <>
               <div className={navbar.line_arrow_left}>
@@ -134,10 +169,22 @@ const Search = () => {
               >
                 <div className={navbar.modal_window}>
                   <div className={navbar.textBlock}>
-                    <button>Account</button>
+                    <button
+                      onClick={() => {
+                        navigate("/account");
+                      }}
+                    >
+                      Account
+                    </button>
                   </div>
                   <div className={navbar.textBlock}>
-                    <button>Profule</button>
+                    <button
+                      onClick={() => {
+                        navigate("/profile");
+                      }}
+                    >
+                      profile
+                    </button>
                   </div>
                   <div className={navbar.textBlock}>
                     <button>Settings</button>

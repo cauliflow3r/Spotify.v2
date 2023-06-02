@@ -1,19 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import classes from "../style/Download.module.css";
 import play from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
-import clock from "../assets/Line=Clock.svg";
 import song from "../assets/Rectangle 236.svg";
 import delete_icon from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useDownLoad } from "../context/DownloadContexProvider";
+import { songsContext } from "../context/SongsContextProvider";
+import { useAuth } from "../context/AuthContextProvider";
 
 const Download = () => {
+  const { currentUser } = useAuth();
+  const { setCurrentTrack } = useContext(songsContext);
   // ! downloads
-  const { getDownload } = useDownLoad();
-  console.log(getDownload);
+  const { getDownload, downloads, deleteTrack } = useDownLoad();
+  console.log(downloads);
+
   useEffect(() => {
     getDownload();
   }, []);
@@ -28,7 +32,11 @@ const Download = () => {
           <div className={classes.TopInfo_Right}>
             <h5>Плейлист</h5>
             <h2>Download</h2>
-            <h5>User : Колво Треков в плейлисте </h5>
+            <h5>
+              {" "}
+              User&nbsp; : &nbsp;{currentUser} : Quantity :
+              {downloads.tracks.length}
+            </h5>
           </div>
         </div>
         <div className={classes.track_block}>
@@ -65,7 +73,45 @@ const Download = () => {
                 <h4>Delete</h4>
               </div>
             </div>
-            <div className={classes.track_line}>
+            {download
+              ? downloads.tracks.map((elem, index) => {
+                  return (
+                    <div className={classes.track_line} key={elem.id}>
+                      <div>
+                        {" "}
+                        <img
+                          src={play}
+                          alt=""
+                          onClick={() => {
+                            setCurrentTrack(index);
+                          }}
+                        />
+                      </div>
+                      <div className={classes.track_line_section}>
+                        <img src={elem.cover_photo} width={48} alt="" />
+                        <div className={classes.track_line_section_name}>
+                          <h4> {elem.title} </h4>
+                          <h5> {elem.artist} </h5>
+                        </div>
+                      </div>
+                      <div>SOS</div>
+                      {/* <div>1 day ago</div> */}
+                      <div>3:22</div>
+                      <div>
+                        <h4>1 day ago</h4>
+                      </div>
+                      <div
+                        onClick={() => {
+                          deleteTrack(elem.id);
+                        }}
+                      >
+                        <img src={delete_icon} alt="" />
+                      </div>
+                    </div>
+                  );
+                })
+              : null}
+            {/* <div className={classes.track_line}>
               <div>
                 {" "}
                 <img src={play} alt="" />
@@ -78,7 +124,7 @@ const Download = () => {
                 </div>
               </div>
               <div>SOS</div>
-              {/* <div>1 day ago</div> */}
+          
               <div>3:22</div>
               <div>
                 <h4>1 day ago</h4>
@@ -86,7 +132,7 @@ const Download = () => {
               <div>
                 <img src={delete_icon} alt="" />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
