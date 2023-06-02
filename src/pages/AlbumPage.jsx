@@ -17,7 +17,7 @@ import { useAuth } from "../context/AuthContextProvider";
 
 const AlbumPage = () => {
   const { currentUser } = useAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     getFavorites,
     AddFavorites,
@@ -127,6 +127,12 @@ const AlbumPage = () => {
                       </div>
                       <div className={album.album}>{AlbumInfo.title}</div>
                       <div className={album.dateAdd}>1 day ago</div>
+                      <button
+                        style={{ width: "30px" }}
+                        onClick={() => navigate(`/editproduct/${elem.id}`)}
+                      >
+                        edit
+                      </button>
                       <div className={album.time}>3:22</div>
                       <div
                         className={album.time}
