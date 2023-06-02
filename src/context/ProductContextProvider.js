@@ -17,6 +17,7 @@ const ProductContextProvider = ({ children }) => {
   // const [albumsSearch, setAlbumsSearch] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [selectedRating, setSelectedRating] = useState('');
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -88,6 +89,31 @@ const ProductContextProvider = ({ children }) => {
   }
   // ! added album --------------------
 
+
+
+  // ! Rating 
+
+    const sendRating = async (id) => {
+      const rating = {
+        value: selectedRating,
+        playlist: id,
+      };
+
+      try {
+        let res = await axios.post(`${API}/rating/`, rating, getConfig());
+
+        if (res.ok) {
+          console.log('Запрос успешно отправлен.');
+        } else {
+          console.error('Произошла ошибка при отправке запроса.');
+        }
+      } catch (error) {
+        console.error('Произошла ошибка при отправке запроса.', error);
+      }
+    };
+    console.log();
+
+
   const values = {
     getArtist,
     artist,
@@ -107,7 +133,10 @@ const ProductContextProvider = ({ children }) => {
     searchParams,
     AddArtist,
     AddAlbum,
+    sendRating,
+    setSelectedRating,
   };
+
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
   );
