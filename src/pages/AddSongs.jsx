@@ -19,10 +19,22 @@ const AddSongs = () => {
     getAlbums();
   }, []);
 
+  // function handleAdd() {
+  //   const newSong = new FormData();
+  //   newSong.append("title", title);
+  //   newSong.append("audio_file", file[0]);
+  //   newSong.append("album", album);
+  //   newSong.append("genre", genre);
+  //   console.log(newSong);
+
+  //   addProduct(newSong);
+  // }
   function handleAdd() {
     const newSong = new FormData();
     newSong.append("title", title);
-    newSong.append("audio_file", file[0]);
+    if (file) {
+      newSong.append("audio_file", file);
+    }
     newSong.append("album", album);
     newSong.append("genre", genre);
     newSong.append("artist", artists);
