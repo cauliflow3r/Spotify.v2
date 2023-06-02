@@ -27,15 +27,12 @@ const Search = () => {
 
   const location = useLocation();
 
-  // ...
-
-  // Handle backward and forward navigation
   const navigateBackward = () => {
-    navigate(-1); // Go back one step
+    navigate(-1);
   };
 
   const navigateForward = () => {
-    navigate(1); // Go forward one step
+    navigate(1);
   };
 
   //! For modaalwindow
