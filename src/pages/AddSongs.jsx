@@ -10,6 +10,7 @@ const AddSongs = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
   const [genre, setGenre] = useState("");
+  console.log(artists);
 
   useEffect(() => {
     getArtist();
