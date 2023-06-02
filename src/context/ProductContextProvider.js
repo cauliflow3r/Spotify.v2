@@ -55,48 +55,6 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  async function getAlbumById(id) {
-    try {
-      const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
-      // console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  // getAlbums();
-
-  // todo -----------------------------------------------
-  function getConfig() {
-    const tokens = JSON.parse(localStorage.getItem("tokens"));
-    //config
-    const Authorization = `Bearer ${tokens.access}`;
-    const config = {
-      headers: { Authorization },
-    };
-    return config;
-  }
-
-  // console.log(getConfig());
-
-  async function AddArtist(newAtrist) {
-    try {
-      let res = await axios.post(`${API}/artists/`, newAtrist, getConfig());
-    } catch (error) {
-      console.log("error");
-    }
-  }
-  // todo -----------------------------------------------
-  // ! added album --------------------
-  async function AddAlbum(newAlbum) {
-    try {
-      let res = await axios.post(`${API}/albums/`, newAlbum, getConfig());
-    } catch (error) {
-      console.log("error");
-    }
-  }
-  // ! added album --------------------
-
   const values = {
     getArtist,
     artist,
@@ -108,8 +66,6 @@ const ProductContextProvider = ({ children }) => {
     setSongs,
     artists,
     setArtists,
-    // albumsSearch,
-    // setAlbumsSearch,
     search,
     inputValue,
     setInputValue,
