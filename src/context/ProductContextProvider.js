@@ -3,6 +3,7 @@ import React, { createContext, useContext, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { API_ALBUMS } from "./SongsContextProvider";
 import { async } from "q";
+import App from "../App";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
@@ -39,7 +40,7 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      // console.log(res.data.results);
+      console.log(res.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -86,6 +87,15 @@ const ProductContextProvider = ({ children }) => {
     }
   }
   // todo -----------------------------------------------
+  // ! added album --------------------
+  async function AddAlbum(newAlbum) {
+    try {
+      let res = await axios.post(`${API}/albums/`, newAlbum, getConfig());
+    } catch (error) {
+      console.log("error");
+    }
+  }
+  // ! added album --------------------
 
   const values = {
     getArtist,
@@ -107,6 +117,7 @@ const ProductContextProvider = ({ children }) => {
     setSearchParams,
     searchParams,
     AddArtist,
+    AddAlbum,
   };
   return (
     <productContext.Provider value={values}>{children}</productContext.Provider>
