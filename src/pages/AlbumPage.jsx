@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import heart from "../assets/Vector.svg";
 import play_btn from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
 import undownload from "../assets/UN_Line=empty, Name=download.svg";
@@ -14,9 +13,12 @@ import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
+import { useProducts } from "../context/ProductContextProvider";
 
 const AlbumPage = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
   // const navigate = useNavigate();
   const {
     getFavorites,
@@ -27,6 +29,8 @@ const AlbumPage = () => {
     checkTracksDown,
   } = useDownLoad();
 
+  const { sendRating, setSelectedRating } = useProducts();
+
   useEffect(() => {
     getFavorites();
   }, []);
@@ -35,13 +39,8 @@ const AlbumPage = () => {
   }, []);
   // !downloads
   // !----------------
-  const {
-    getALbumTrack,
-    AlbumBlock,
-    AlbumInfo,
-    currentTrack,
-    setCurrentTrack,
-  } = useContext(songsContext);
+  const { getALbumTrack, AlbumBlock, AlbumInfo, setCurrentTrack } =
+    useContext(songsContext);
 
   // todo -------------------
   const { id } = useParams();
@@ -49,7 +48,9 @@ const AlbumPage = () => {
 
   useEffect(() => {
     getALbumTrack(id);
+    sendRating(id);
   }, []);
+
   // todo -------------------
 
   return (
@@ -68,6 +69,57 @@ const AlbumPage = () => {
                   User&nbsp; : &nbsp;{currentUser} : Quantity :{" "}
                   {AlbumBlock.length}
                 </h5>
+                <div>
+                  <div>
+                    <div>
+                      <input
+                        type="radio"
+                        id="r-01"
+                        name="r"
+                        value="1"
+                        onChange={(e) => setSelectedRating(e.target.value)}
+                        onBlur={() => sendRating(id)}
+                      />
+                      <label htmlFor="r-01">★</label>
+                      <input
+                        type="radio"
+                        id="r-02"
+                        name="r"
+                        value="2"
+                        onChange={(e) => setSelectedRating(e.target.value)}
+                        onBlur={() => sendRating(id)}
+                      />
+                      <label htmlFor="r-02">★</label>
+                      <input
+                        type="radio"
+                        id="r-03"
+                        name="r"
+                        value="3"
+                        onChange={(e) => setSelectedRating(e.target.value)}
+                        onBlur={() => sendRating(id)}
+                      />
+                      <label htmlFor="r-03">★</label>
+                      <input
+                        type="radio"
+                        id="r-04"
+                        name="r"
+                        value="4"
+                        onChange={(e) => setSelectedRating(e.target.value)}
+                        onBlur={() => sendRating(id)}
+                      />
+                      <label htmlFor="r-04">★</label>
+                      <input
+                        type="radio"
+                        id="r-05"
+                        name="r"
+                        value="5"
+                        onChange={(e) => setSelectedRating(e.target.value)}
+                        onBlur={() => sendRating(id)}
+                      />
+                      <label htmlFor="r-05">★</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className={album.track_block}>
@@ -127,6 +179,12 @@ const AlbumPage = () => {
                       </div>
                       <div className={album.album}>{AlbumInfo.title}</div>
                       <div className={album.dateAdd}>1 day ago</div>
+                      <button
+                        style={{ width: "30px" }}
+                        onClick={() => navigate(`/editproduct/${elem.id}`)}
+                      >
+                        edit
+                      </button>
                       <div className={album.time}>3:22</div>
                       <div
                         className={album.time}

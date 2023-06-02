@@ -7,9 +7,6 @@ const AddAlbum = () => {
   const [descr, setDescr] = useState("");
   const [artists, setArtist] = useState(1);
 
-  useEffect(() => {
-    getArtist();
-  }, []);
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);

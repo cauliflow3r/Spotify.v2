@@ -13,6 +13,8 @@ import Account from "../pages/Account";
 import SearchPage from "../pages/SearchPage";
 import AddArtist from "../pages/AddArtist";
 import AddAlbum from "../pages/AddAlbum";
+import AddSongs from "../pages/AddSongs";
+import EditSongs from "../pages/EditSongs";
 
 const MainRoute = () => {
   return (
@@ -31,6 +33,8 @@ const MainRoute = () => {
         <Route path="login" element={<Login />} />
         <Route path="addart" element={<AddArtist />} />
         <Route path="addalbum" element={<AddAlbum />} />
+        <Route path="/addproduct" element={<AddSongs />} />
+        <Route path="/editproduct/:id" element={<EditSongs />} />
       </Routes>
     </div>
   );
