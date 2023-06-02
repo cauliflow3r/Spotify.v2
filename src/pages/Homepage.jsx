@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
-import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
-import { useDownLoad } from "../context/DownloadContexProvider";
 
 const Homepage = () => {
   // const { getDownload, getFavorites } = useDownLoad();
@@ -66,7 +64,10 @@ const Homepage = () => {
               </div>
             ))}
           </div>
-          <h2>Made for you</h2>
+          <div className={classes.ablumsSection}>
+            <h2>Made for you</h2>
+            <button> Create playlists</button>
+          </div>
           <div className={classes.playlistBox}>
             {albums.map((item) => (
               <div
