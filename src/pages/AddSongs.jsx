@@ -22,7 +22,7 @@ const AddSongs = () => {
   function handleAdd() {
     const newSong = new FormData();
     newSong.append("title", title);
-    newSong.append("audio_file", file);
+    newSong.append("audio_file", file[0]);
     newSong.append("album", album);
     newSong.append("genre", genre);
     newSong.append("artist", artists);
@@ -52,7 +52,7 @@ const AddSongs = () => {
               name="audio_file"
               type="file"
               onChange={(e) => {
-                setFile(e.target.value);
+                setFile(e.target.files[0]);
               }}
             />
           </div>
