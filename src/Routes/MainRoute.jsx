@@ -11,16 +11,20 @@ import ResetPassword from "../pages/ResetPassword";
 import Profile from "../pages/Profile";
 import Account from "../pages/Account";
 import SearchPage from "../pages/SearchPage";
+import { useAuth } from "../context/AuthContextProvider";
+import Feed from "../pages/Feed";
 import AddArtist from "../pages/AddArtist";
 import AddAlbum from "../pages/AddAlbum";
 import AddSongs from "../pages/AddSongs";
 import EditSongs from "../pages/EditSongs";
 
 const MainRoute = () => {
+  const { currentUser } = useAuth();
+  // console.log(currentUser);
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={currentUser ? <Feed /> : <Homepage />} />
         <Route path="album-page/:id" element={<AlbumPage />} />
         <Route path="artist-page/:id" element={<ArtistPage />} />
         <Route path="search" element={<SearchPage />} />
