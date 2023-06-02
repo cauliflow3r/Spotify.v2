@@ -61,7 +61,7 @@ const ProductContextProvider = ({ children }) => {
   // todo -----------------------------------------------
   function getConfig() {
     const tokens = JSON.parse(localStorage.getItem("tokens"));
-    //config
+    // console.log(tokens);
     const Authorization = `Bearer ${tokens.access}`;
     const config = {
       headers: { Authorization },
