@@ -13,6 +13,8 @@ import Account from "../pages/Account";
 import SearchPage from "../pages/SearchPage";
 import { useAuth } from "../context/AuthContextProvider";
 import Feed from "../pages/Feed";
+import AddArtist from "../pages/AddArtist";
+import AddAlbum from "../pages/AddAlbum";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();

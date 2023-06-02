@@ -4,6 +4,8 @@ import { useSearchParams } from "react-router-dom";
 import { API_ALBUMS } from "./SongsContextProvider";
 import { async } from "q";
 import App from "../App";
+import AddArtist from "../pages/AddArtist";
+import AddAlbum from "../pages/AddAlbum";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
