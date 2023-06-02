@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
 import play_btn from "../assets/Play.svg";
@@ -17,6 +17,7 @@ import { useProducts } from "../context/ProductContextProvider";
 
 const AlbumPage = () => {
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   // const navigate = useNavigate();
   const {
@@ -178,6 +179,12 @@ const AlbumPage = () => {
                       </div>
                       <div className={album.album}>{AlbumInfo.title}</div>
                       <div className={album.dateAdd}>1 day ago</div>
+                      <button
+                        style={{ width: "30px" }}
+                        onClick={() => navigate(`/editproduct/${elem.id}`)}
+                      >
+                        edit
+                      </button>
                       <div className={album.time}>3:22</div>
                       <div
                         className={album.time}
