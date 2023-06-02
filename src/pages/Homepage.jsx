@@ -17,7 +17,9 @@ const Homepage = () => {
   const navigate = useNavigate();
   const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
     useProducts([]);
+  console.log(albums);
 
+  console.log(artist);
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
@@ -37,10 +39,6 @@ const Homepage = () => {
     getArtist();
     getAlbums();
   }, []);
-
-  // console.log(artist);
-
-  // console.log(artist);
 
   return (
     <MainLayout>
