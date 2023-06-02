@@ -44,7 +44,7 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      console.log(res.data.results);
+      // console.log(res.data.results);
     } catch (error) {
       console.log(error);
     }

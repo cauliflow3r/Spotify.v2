@@ -88,7 +88,6 @@ export default function Player() {
       <div className={playerblock.songLine}>
         <ReactPlayer
           height={0}
-          git
           ref={playerRef}
           url={
             tracks.length != 0
