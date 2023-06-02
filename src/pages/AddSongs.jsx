@@ -54,7 +54,7 @@ const AddSongs = () => {
               name="audio_file"
               type="file"
               onChange={(e) => {
-                setFile(e.target.value);
+                setFile(e.target.value[0]);
               }}
             />
           </div>
