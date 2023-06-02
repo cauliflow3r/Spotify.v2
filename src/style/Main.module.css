@@ -379,9 +379,9 @@ footer {
 
 /*! Card  */
 .artistBox {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
 }
 .preview {
   width: 330px;
@@ -453,7 +453,7 @@ footer {
 /* card */
 .playlist {
   /* width: 96%; */
-  margin: 0 0 20px auto;
+  margin: 0 auto 20px auto;
   /* width: 25%; */
 }
 .playlist h2 {
@@ -462,11 +462,16 @@ footer {
 }
 
 /* !Albums */
-.playlistBox {
+/* .playlistBox {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
+.playlistBox {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
 .ablumsSection {
   width: 100%;
   justify-content: space-between;
@@ -480,7 +485,7 @@ footer {
   background-color: rgb(50, 233, 50);
   border: none;
   color: #fff;
-  font-weight: bold;
+  ont-weight: bold;
 }
 
 /* ! Account */

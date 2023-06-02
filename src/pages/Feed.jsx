@@ -69,7 +69,10 @@ const Feed = () => {
               </div>
             ))}
           </div>
-          <h2>Made for you</h2>
+          <div className={classes.ablumsSection}>
+            <h2>Made for you</h2>
+            <button> Create playlists</button>
+          </div>
           <div className={classes.playlistBox}>
             {albums.map((item) => (
               <div

@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
+import CardComponent from "./CardComponent";
+import ArtistCard from "./ArtistCard";
 
 const Homepage = () => {
   // const { getDownload, getFavorites } = useDownLoad();
@@ -15,9 +17,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
     useProducts([]);
-  console.log(albums);
 
-  console.log(artist);
   const [greeting, setGreeting] = useState("");
 
   useEffect(() => {
@@ -43,7 +43,8 @@ const Homepage = () => {
       <div className={classes.container}>
         <div className={classes.contentWrapper}>
           <h2>{greeting}</h2>
-          <div className={classes.artistBox}>
+          <ArtistCard />
+          {/* <div className={classes.artistBox}>
             {artist.map((item) => (
               <div
                 className={classes.preview}
@@ -61,35 +62,11 @@ const Homepage = () => {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
           <div className={classes.ablumsSection}>
             <h2>Made for you</h2>
-            <button> Create playlists</button>
           </div>
-          <div className={classes.playlistBox}>
-            {albums.map((item) => (
-              <div
-                className={classes.playlist}
-                key={item.id}
-                onClick={() => navigate(`/album-page/${item.id}`)}
-              >
-                <div className={classes.card}>
-                  <div className={classes.mg_holder}>
-                    <img src={item.cover_photo} alt="image" />
-                  </div>
-                  <div className={classes.text}>
-                    <h2>{item.title}</h2>
-                    <p>{item.id}</p>
-                  </div>
-                  <div className={classes.play_icon}>
-                    <div className={classes.circle}>
-                      <div className={classes.triangle}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <CardComponent />
         </div>
       </div>
     </MainLayout>
