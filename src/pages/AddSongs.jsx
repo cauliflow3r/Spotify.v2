@@ -5,24 +5,20 @@ import "../style/AddSongs.module.css";
 const AddSongs = () => {
   const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
 
-  const [album, setAlbum] = useState("");
-  const [artists, setArtists] = useState("");
+  const [album, setAlbum] = useState(0);
+  const [artists, setArtists] = useState(0);
   const [title, setTitle] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");
-  console.log(artists);
 
-  useEffect(() => {
-    getArtist();
-  }, []);
-  useEffect(() => {
-    getAlbums();
-  }, []);
-
+  const [obj, setObj] = useState({});
+  console.log(obj);
   function handleAdd() {
     const newSong = new FormData();
     newSong.append("title", title);
-    newSong.append("audio_file", file);
+    if (file) {
+      newSong.append("audio_file", file);
+    }
     newSong.append("album", album);
     newSong.append("genre", genre);
     newSong.append("artist", artists);
@@ -30,6 +26,12 @@ const AddSongs = () => {
 
     addProduct(newSong);
   }
+  useEffect(() => {
+    getArtist();
+  }, []);
+  useEffect(() => {
+    getAlbums();
+  }, []);
 
   return (
     <>
