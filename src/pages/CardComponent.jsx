@@ -6,6 +6,7 @@ import { useProducts } from "../context/ProductContextProvider";
 const CardComponent = () => {
   const navigate = useNavigate();
   const { albums } = useProducts([]);
+  console.log(albums);
 
   return (
     <>
@@ -22,7 +23,7 @@ const CardComponent = () => {
               </div>
               <div className={classes.text}>
                 <h2>{item.title}</h2>
-                <p>{item.id}</p>
+                <p>{item.release}</p>
               </div>
               <div className={classes.play_icon}>
                 <div className={classes.circle}>

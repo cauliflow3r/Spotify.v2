@@ -1,10 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { API_ALBUMS } from "./SongsContextProvider";
-
-import { async } from "q";
-import App from "../App";
 import { ACTIONS } from "../helpers/const";
 
 export const productContext = createContext();
@@ -21,6 +17,9 @@ const ProductContextProvider = ({ children }) => {
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
+
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -117,6 +116,7 @@ const ProductContextProvider = ({ children }) => {
     await axios.post(`${API}/songs/upload/`, newProduct, getConfig());
     navigate("/playlist");
   };
+
   const getProductDetails = async (id) => {
     const { data } = await axios(`${API}/songs/${id}/`);
 
@@ -141,6 +141,17 @@ const ProductContextProvider = ({ children }) => {
     getProducts();
   };
   // * -------------------------------------
+
+// ! add playlist
+
+  async function postPlaylist () {
+try {
+  const res = await axios.post(`${API}/playlist/author/`,{title:title, description:description}, getConfig())
+  console.log(res);
+  navigate("/playadd");
+} catch (error) {
+  console.log("error :",error );
+}  }
 
   // ! Rating
 
@@ -190,6 +201,8 @@ const ProductContextProvider = ({ children }) => {
     productDetails: state.productDetails,
     sendRating,
     setSelectedRating,
+    postPlaylist,
+    title, setTitle, description, setDescription 
   };
 
   return (

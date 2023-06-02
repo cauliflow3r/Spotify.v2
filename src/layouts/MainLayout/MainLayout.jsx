@@ -3,7 +3,6 @@ import Player from "../../components/Player";
 import Sidebar from "../../components/Sidebar";
 import Search from "../../components/Search";
 import classes from "../../style/PalyListBlock.module.css";
-import Homepage from "../../pages/Homepage";
 
 const MainLayout = ({ children }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +20,7 @@ const MainLayout = ({ children }) => {
     };
   }, []);
   return (
-    <div className={scrolled ? classes.container_1 : classes.container}>
+    <div className={scrolled ? classes.container_1 : classes.container_1}>
       <div className={classes.leftPart}>
         <Sidebar />
       </div>

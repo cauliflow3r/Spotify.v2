@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 .line_container {
   z-index: 3;
-  width: 100%;
-  margin: 10px auto;
+  width: 99%;
+  margin: 30px auto 10px;
   display: flex;
   justify-content: space-between;
   transition: background-color 0.1s ease-in-out;

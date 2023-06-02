@@ -31,14 +31,14 @@ p {
 }
 
 .container {
-  padding-top: 100px;
-  width: 100%;
-  background: linear-gradient(
+  /* padding-top: 100px; */
+  /* width: 100%; */
+  /* background: linear-gradient(
     0deg,
     rgb(20 20 20 / 100%) 0%,
     rgb(0 0 0) 74%,
     rgb(5 8 33) 100%
-  );
+  ); */
   color: #fff;
   border-radius: 10px;
 }
@@ -48,8 +48,9 @@ p {
   margin: 0 auto;
 }
 .contentWrapper h2 {
-  margin: 30px 0;
+  margin: 0 0 30px 0;
   font-size: 34px;
+  color: #fff;
 }
 
 .cards {
@@ -296,10 +297,10 @@ footer {
 }
 
 .card {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 14rem;
+  align-items: center; */
+  /* width: 14rem; */
   border-radius: 0.3rem;
   padding: 1rem;
   background-color: #111;
@@ -328,7 +329,7 @@ footer {
 
 .text {
   line-height: 1;
-  /* margin-top: 1rem; */
+  margin-top: 2rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -381,21 +382,20 @@ footer {
 .artistBox {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 20px;
+  grid-gap: 16px 25px;
 }
 .preview {
   width: 330px;
-  padding-bottom: 30px;
+  /* padding-bottom: 30px; */
 }
 .cardPreview {
   align-items: center;
-  width: 92%;
+  /* width: 92%; */
   background-color: #8080804d;
   border-radius: 5px;
   display: flex;
   height: 85px;
   align-content: center;
-  display: flex;
 }
 .cardPreview img {
   width: 80px;
@@ -403,8 +403,8 @@ footer {
   border-radius: 5px 0px 0px 5px;
 }
 .cardPreview p {
-  margin: 35px 15px;
-  width: 90px;
+  margin: 0 15px;
+  width: 130px;
 }
 
 .icon_play {
@@ -451,32 +451,30 @@ footer {
 }
 
 /* card */
-.playlist {
-  /* width: 96%; */
+/* .playlist {
+  width: 96%;
   margin: 0 auto 20px auto;
-  /* width: 25%; */
-}
+width: 25%;
+} */
 .playlist h2 {
   /* padding-bottom: 30px; */
   font-size: 1em;
 }
 
 /* !Albums */
-/* .playlistBox {
-  display: flex;
-  flex-wrap: wrap;
-} */
 
 .playlistBox {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
+  padding-top: 20px;
 }
 .ablumsSection {
   width: 100%;
   justify-content: space-between;
   display: flex;
   align-items: center;
+  padding-top: 40px;
 }
 .ablumsSection button {
   width: 140px;
@@ -485,7 +483,10 @@ footer {
   background-color: rgb(50, 233, 50);
   border: none;
   color: #fff;
-  ont-weight: bold;
+  font-weight: bold;
+}
+.ablumsSection button:hover {
+  scale: 1.1;
 }
 
 /* ! Account */

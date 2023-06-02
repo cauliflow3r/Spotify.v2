@@ -44,25 +44,6 @@ const Homepage = () => {
         <div className={classes.contentWrapper}>
           <h2>{greeting}</h2>
           <ArtistCard />
-          {/* <div className={classes.artistBox}>
-            {artist.map((item) => (
-              <div
-                className={classes.preview}
-                key={item.id}
-                onClick={() => navigate(`/artist-page/${item.id}`)}
-              >
-                <div className={classes.cardPreview}>
-                  <img src={item.photo} alt="" />
-                  <p>{item.full_name}</p>
-                  <div className={classes.icon_play}>
-                    <div className={classes.circle_play}>
-                      <div className={classes.triangle_play}></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div> */}
           <div className={classes.ablumsSection}>
             <h2>Made for you</h2>
           </div>
