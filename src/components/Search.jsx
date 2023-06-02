@@ -27,9 +27,17 @@ const Search = () => {
 
   const location = useLocation();
 
-  // console.log(inputValue);
+  // ...
 
-  // console.log(currentUser);
+  // Handle backward and forward navigation
+  const navigateBackward = () => {
+    navigate(-1); // Go back one step
+  };
+
+  const navigateForward = () => {
+    navigate(1); // Go forward one step
+  };
+
   //! For modaalwindow
   const openModal = () => {
     setIsModalOpen(true);
@@ -94,16 +102,17 @@ const Search = () => {
   };
 
   // !=================
+
   return (
     <>
       <div
         className={scrolled ? navbar.line_container_1 : navbar.line_container}
       >
         <div className={navbar.line_left}>
-          <div className={navbar.line_arrow_left}>
+          <div className={navbar.line_arrow_left} onClick={navigateBackward}>
             <img src={left} alt="" />
           </div>
-          <div className={navbar.line_arrow_left}>
+          <div className={navbar.line_arrow_left} onClick={navigateForward}>
             <img src={right} alt="" />
           </div>
           <>
