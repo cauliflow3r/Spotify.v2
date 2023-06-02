@@ -53,17 +53,6 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  async function getAlbumById(id) {
-    try {
-      const res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
-      // console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  // getAlbums();
-
   const values = {
     getArtist,
     artist,
@@ -75,8 +64,6 @@ const ProductContextProvider = ({ children }) => {
     setSongs,
     artists,
     setArtists,
-    // albumsSearch,
-    // setAlbumsSearch,
     search,
     inputValue,
     setInputValue,
