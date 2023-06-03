@@ -6,13 +6,15 @@
 }
 
 .container {
-  /* z-index: 3; */
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 23% 75%;
+  grid-gap: 10px;
+  /* display: flex; */
   justify-content: space-evenly;
   padding-top: 20px;
   background-color: black;
-  /* transition: background-color 0.3s ease-in-out; */
+  transition: background-color 0.3s ease-in-out;
 }
 .container_1 {
   width: 100%;
@@ -21,17 +23,18 @@
   grid-gap: 10px;
   /* display: flex; */
   justify-content: space-evenly;
-  /* padding-top: 4vh; */
+  padding-top: 4vh;
   background-color: black;
+  transition: background-color 0.3s ease-in-out;
 
-  /* transition: background-color 0.3s ease-in-out;
+  /* /* transition: background-color 0.3s ease-in-out; */
 }
 
 .navbar_line {
   z-index: 3;
-  width: inherit;
+  width: 75%;
   position: fixed;
-  /* top: 0vh; */
+  top: 0vh;
 }
 
 .rightPart {

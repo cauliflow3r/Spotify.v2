@@ -142,17 +142,6 @@ const ProductContextProvider = ({ children }) => {
     getProducts();
   };
 
-  // const [genre, setGenre] = useState({});
-  // console.log(genre ? genre.data.results : "nothing");
-  // async function getGenre() {
-  //   try {
-  //     let res = await axios.get(`${API}/genre/`);
-  //     setGenre(res);
-  //   } catch (error) {
-  //     console.log("ошибка запроса на серверв жанры ");
-  //   }
-  // }
-
   // * -------------------------------------
 
   // ! add playlist
