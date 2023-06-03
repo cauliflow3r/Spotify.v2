@@ -10,9 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 
-export default function AddToPlaylistModal({ isOpen, handleClose }) {
-  const { playlists } = useFeedDataLists();
-
+export default function AddToPlaylistModal({ isOpen, handleClose, playlists }) {
   return (
     <Dialog open={isOpen} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>Add To Playlist</DialogTitle>
@@ -21,7 +19,9 @@ export default function AddToPlaylistModal({ isOpen, handleClose }) {
           <InputLabel>Playlists</InputLabel>
           <Select value={playlists[0].id} label="Playlists">
             {playlists.map((playlist) => (
-              <MenuItem value={playlist.id}>{playlist.title}</MenuItem>
+              <MenuItem key={playlist.id} value={playlist.id}>
+                {playlist.title}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>

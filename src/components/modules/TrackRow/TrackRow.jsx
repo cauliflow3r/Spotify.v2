@@ -17,8 +17,6 @@ const TrackRow = ({
 }) => {
   const { id: trackId, cover_photo, title, artist } = track;
 
-  const [selectedSong, setSelectedSong] = useState(null);
-
   const { setCurrentTrackIndex } = usePlayer();
 
   const navigate = useNavigate();

@@ -37,7 +37,7 @@ const PlaylistsContextProvider = ({ children }) => {
   };
 
   return (
-    <PlaylistsContext.Provider values={values}>
+    <PlaylistsContext.Provider value={values}>
       {children}
     </PlaylistsContext.Provider>
   );

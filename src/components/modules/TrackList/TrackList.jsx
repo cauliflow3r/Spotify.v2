@@ -7,8 +7,10 @@ import like_song from "../../../assets/like_song_icon.svg";
 import TrackRow from "../TrackRow";
 import classes from "./TracList.module.css";
 import AddToPlaylistModal from "../AddToPlaylistModal";
+import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 
 const TrackList = ({ albumInfo, trackList }) => {
+  const { playlists } = useFeedDataLists();
   const [trackIdToAddToPlaylist, setTrackIdToAddToPlaylist] = useState(null);
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
     useState(false);
@@ -26,10 +28,14 @@ const TrackList = ({ albumInfo, trackList }) => {
 
   return (
     <>
-      <AddToPlaylistModal
-        isOpen={isAddToPlaylistModalOpen}
-        handleClose={handleCloseAddtoPlaylistModal}
-      />
+      {playlists.length ? (
+        <AddToPlaylistModal
+          playlists={playlists}
+          isOpen={isAddToPlaylistModalOpen}
+          handleClose={handleCloseAddtoPlaylistModal}
+        />
+      ) : null}
+
       <div className={classes.track_block}>
         <div className={classes.track_props}>
           <div className={classes.track_props_left}>
