@@ -12,14 +12,6 @@ import CardComponent from "./CardComponent";
 import PlaylistComponent from "./PlaylistComponent";
 
 const Feed = () => {
-  // const { getDownload, getFavorites } = useDownLoad();
-  // useEffect(() => {
-  //   getDownload();
-  // }, []);
-  // useEffect(() => {
-  //   getFavorites();
-  // }, []);
-
   const { id } = useParams();
 
   const { getArtist, getAlbums, getPlaylist } = useProducts([]);
