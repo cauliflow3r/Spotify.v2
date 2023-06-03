@@ -44,7 +44,7 @@
     rgba(8, 8, 8, 0.8534007352941176) 81%,
     rgba(21, 112, 130, 0.9206276260504201) 100%
   );
-  height: 100vh;
+  /* height: 100vh; */
   border-radius: 10px;
 }
 .rightPart_1 {

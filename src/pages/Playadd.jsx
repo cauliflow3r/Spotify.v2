@@ -1,43 +1,107 @@
-import React from "react";
+// import React, { useState } from "react";
+// import { useProducts } from "../context/ProductContextProvider";
+
+// const Playadd = () => {
+//   const { title, setTitle, description, setDescription, postPlaylist } =
+//     useProducts();
+
+//   const [coverPhoto, setCoverPhoto] = useState(null);
+
+//   function addPlayList(e) {
+//     e.preventDefault();
+//     const playlistForm = new FormData();
+//     playlistForm.append("title", title);
+//     playlistForm.append("description", description);
+//     if (coverPhoto) {
+//       playlistForm.append("cover_photo", e.target.files[0]);
+//     }
+//     postPlaylist(playlistForm);
+//   }
+
+//   return (
+//     <div>
+//       <form enctype="multipart/form-data">
+//         <input
+//           placeholder="title"
+//           value={title}
+//           type="text"
+//           onChange={(e) => {
+//             setTitle(e.target.value);
+//           }}
+//         />
+//         <input
+//           value={description}
+//           placeholder="description"
+//           type="text"
+//           onChange={(e) => {
+//             setDescription(e.target.value);
+//           }}
+//         />
+//         <input
+//           value={coverPhoto}
+//           placeholder="photo"
+//           type="file"
+//           onChange={(e) => {
+//             setCoverPhoto(e.target.value);
+//           }}
+//         />
+//         <button onClick={addPlayList}>add</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default Playadd;
+
+import React, { useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 
 const Playadd = () => {
-  const {
-    title,
-    setTitle,
-    description,
-    setDescription,
-    postPlaylist,
-    artistId,
-    setArtistId,
-  } = useProducts();
+  const { title, setTitle, description, setDescription, postPlaylist } =
+    useProducts();
+
+  const [coverPhoto, setCoverPhoto] = useState(null);
+
+  function addPlayList(e) {
+    e.preventDefault();
+    const playlistForm = new FormData();
+    playlistForm.append("title", title);
+    playlistForm.append("description", description);
+    if (coverPhoto) {
+      playlistForm.append("cover_photo", coverPhoto);
+    }
+    postPlaylist(playlistForm);
+  }
+
   return (
     <div>
-      <input
-        placeholder="title"
-        value={title}
-        type="text"
-        onChange={(e) => {
-          setTitle(e.target.value);
-        }}
-      />
-      <input
-        value={description}
-        placeholder="description"
-        type="des"
-        onChange={(e) => {
-          setDescription(e.target.value);
-        }}
-      />
-      <input
-        value={artistId}
-        placeholder="artist"
-        type="des"
-        onChange={(e) => {
-          setArtistId(e.target.value);
-        }}
-      />
-      <button onClick={postPlaylist}>add</button>
+      <form encType="multipart/form-data">
+        <input
+          placeholder="title"
+          value={title}
+          type="text"
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <input
+          value={description}
+          placeholder="description"
+          type="text"
+          onChange={(e) => {
+            setDescription(e.target.value);
+          }}
+        />
+        <input
+          placeholder="photo"
+          type="file"
+          onChange={(e) => {
+            setCoverPhoto(e.target.files[0]);
+          }}
+        />
+
+        <button onClick={addPlayList}>add</button>
+      </form>
     </div>
   );
 };

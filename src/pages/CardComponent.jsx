@@ -6,7 +6,7 @@ import { useProducts } from "../context/ProductContextProvider";
 const CardComponent = () => {
   const navigate = useNavigate();
   const { albums } = useProducts([]);
-  console.log(albums);
+  // console.log(albums);
 
   return (
     <>

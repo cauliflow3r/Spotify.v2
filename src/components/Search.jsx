@@ -152,9 +152,12 @@ const Search = () => {
           )}
           {currentUser ? (
             <>
-              <div className={navbar.line_arrow_left}>
-                <img src={users} alt="" />
-              </div>
+              <button
+                onClick={() => navigate("/playadd")}
+                className={navbar.btn}
+              >
+                Create playlists
+              </button>
               <div className={navbar.line_arrow_left} onClick={handleIconClick}>
                 <img src={login_user} alt="" />
               </div>

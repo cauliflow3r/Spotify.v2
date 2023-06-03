@@ -476,18 +476,6 @@ width: 25%;
   align-items: center;
   padding-top: 40px;
 }
-.ablumsSection button {
-  width: 140px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: rgb(50, 233, 50);
-  border: none;
-  color: #fff;
-  font-weight: bold;
-}
-.ablumsSection button:hover {
-  scale: 1.1;
-}
 
 /* ! Account */
 

@@ -37,6 +37,7 @@ const AlbumPage = () => {
   useEffect(() => {
     getDownload();
   }, []);
+
   // !downloads
   // !----------------
   const { getALbumTrack, AlbumBlock, AlbumInfo, setCurrentTrack } =
