@@ -1,5 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import useSound from "use-sound";
+import { useRef, useState } from "react";
 import playerblock from "../style/Player.module.css";
 import playBtn from "../assets/Play.svg";
 import pauseBtn from "../assets/Pause.svg";
@@ -7,19 +6,13 @@ import prevSong from "../assets/prevSong.svg";
 import nextSong from "../assets/nextSong.svg";
 import fullScreen from "../assets/Full Screen.svg";
 import valume from "../assets/valume.svg";
-
-import { songsContext } from "../context/SongsContextProvider";
 import ReactPlayer from "react-player";
+import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 
 export default function Player() {
-  const { trackInfo, trackList, currentTrack, setCurrentTrack } =
-    useContext(songsContext);
+  const { currentTrack, trackList, playerNextTrack, playerPrevTrack } =
+    usePlayer();
 
-  // console.log(trackInfo.hasOwnProperty("tracks"));
-  // console.log(trackInfo);
-
-  // !------------------------------
-  // const [currentTrack, setCurrentTrack] = useState(0);
   const [volume, setVolume] = useState(0.5);
   const [duration, setDuration] = useState(0);
   const [playedSeconds, setPlayedSeconds] = useState(0);
@@ -27,17 +20,6 @@ export default function Player() {
   const playerRef = useRef(null);
 
   const tracks = trackList;
-  // console.log(trackList);
-
-  const handlePlayNext = () => {
-    setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
-  };
-
-  const handlePlayPrev = () => {
-    setCurrentTrack(
-      (prevTrack) => (prevTrack - 1 + tracks.length) % tracks.length
-    );
-  };
 
   const handlePlayPause = () => {
     setIsPlaying((prevState) => !prevState);
@@ -64,24 +46,20 @@ export default function Player() {
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
+
   // !------------------------------
-  return (
+  return currentTrack ? (
     <div className={playerblock.component}>
-      {/* <h2>Playing Now</h2> */}
       <div className={playerblock.songInfo}>
         <img
           className={playerblock.musicCover}
-          src={tracks ? trackInfo.cover_photo : "https://picsum.photos/200/200"}
+          src={
+            tracks ? currentTrack.cover_photo : "https://picsum.photos/200/200"
+          }
         />
         <div>
-          <h3 className="title">
-            {trackInfo.songs ? trackInfo.songs[currentTrack].title : "Name"}
-          </h3>
-          <p className="subTitle">
-            {trackInfo.songs
-              ? trackInfo.songs[currentTrack].artist[1]
-              : "Artist"}
-          </p>
+          <h3 className="title">{currentTrack.title}</h3>
+          <p className="subTitle">{currentTrack.artist.title}</p>
         </div>
       </div>
 
@@ -91,17 +69,17 @@ export default function Player() {
           ref={playerRef}
           url={
             tracks.length != 0
-              ? tracks[currentTrack].audio_file
+              ? currentTrack.audio_file
               : "http://34.125.87.211/media/songs/Linkin_Park_-_Bleed_It_Out_pPDQK7N.mp3"
           }
           playing={isPlaying}
           volume={volume}
-          onEnded={handlePlayNext}
+          onEnded={playerNextTrack}
           onDuration={handleDuration}
           onProgress={handleProgress}
         />
         <div>
-          <button className={playerblock.playButton} onClick={handlePlayPrev}>
+          <button className={playerblock.playButton} onClick={playerPrevTrack}>
             <img src={prevSong} alt="" />
           </button>
           <button
@@ -114,7 +92,7 @@ export default function Player() {
               <img src={playBtn} alt="" />
             )}
           </button>
-          <button className={playerblock.playButton} onClick={handlePlayNext}>
+          <button className={playerblock.playButton} onClick={playerNextTrack}>
             <img src={nextSong} alt="" />
           </button>
         </div>
@@ -160,5 +138,5 @@ export default function Player() {
         <img src={fullScreen} alt="" />
       </div>
     </div>
-  );
+  ) : null;
 }

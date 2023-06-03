@@ -8,16 +8,17 @@ import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useContext, useEffect } from "react";
-import { songsContext } from "../context/SongsContextProvider";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import deleteBtn from "../assets/Delete_icon.svg";
 import { useAuth } from "../context/AuthContextProvider";
+import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 // import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
   const { currentUser } = useAuth();
-  const { setCurrentTrack } = useContext(songsContext);
+
+  const { setCurrentTrackIndex } = usePlayer();
   // ! downloads
   const {
     getDownload,
@@ -99,7 +100,7 @@ const PlayList = () => {
                       src={play_btn}
                       alt=""
                       onClick={() => {
-                        setCurrentTrack(index);
+                        setCurrentTrackIndex(index);
                       }}
                     />
                   </div>

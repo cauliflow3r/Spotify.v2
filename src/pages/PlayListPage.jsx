@@ -14,6 +14,8 @@ import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
+import TrackRow from "../components/modules/TrackRow";
+import TrackList from "../components/modules/TrackList";
 
 const PlayListPage = () => {
   const { currentUser } = useAuth();
@@ -25,7 +27,6 @@ const PlayListPage = () => {
     AddFavorites,
     AddDownload,
     getDownload,
-    checkTracks,
     checkTracksDown,
   } = useDownLoad();
 
@@ -40,7 +41,7 @@ const PlayListPage = () => {
 
   // !downloads
   // !----------------
-  const { getALbumTrack, AlbumBlock, AlbumInfo, setCurrentTrack } =
+  const { getALbumTrack, trackList, AlbumInfo, setCurrentTrack } =
     useContext(songsContext);
 
   // todo -------------------
@@ -51,6 +52,8 @@ const PlayListPage = () => {
     getALbumTrack(id);
     sendRating(id);
   }, []);
+
+  useEffect(() => {}, []);
 
   // todo -------------------
 
@@ -68,7 +71,7 @@ const PlayListPage = () => {
                 <h2>{AlbumInfo.title} </h2>
                 <h5>
                   User&nbsp; : &nbsp;{currentUser} : Quantity :
-                  {AlbumBlock.length}
+                  {trackList.length}
                 </h5>
                 <div>
                   <div>
@@ -123,99 +126,7 @@ const PlayListPage = () => {
                 </div>
               </div>
             </div>
-            <div className={album.track_block}>
-              <div className={album.track_props}>
-                <div className={album.track_props_left}>
-                  <img src={play_btn} alt="" />
-                  <img src={download} alt="" />
-                </div>
-                <div className={album.track_props_right}>
-                  <img src={search} alt="" style={{ width: "25px" }} />
-                  <span>Дата добавления </span>
-                  <img src={drop} alt="" />
-                </div>
-              </div>
-              <div className={album.track_line_head}>
-                <div className={album.container_grid}>
-                  <div className={album.number}>
-                    <h4>#</h4>
-                  </div>
-                  <div>
-                    <h4>Name</h4>
-                  </div>
-                  <div>
-                    <h4>Album</h4>
-                  </div>
-                  <div>
-                    <h4>Date </h4>
-                  </div>
-                  <div>
-                    <img src={clock} alt="" />
-                  </div>
-                  <div className={album.number}>
-                    <img src={download} alt="" />
-                  </div>
-                  <div className={album.number}>
-                    <img src={like_song} alt="" />
-                  </div>
-                </div>
-
-                {AlbumBlock.map((elem, index) => {
-                  return (
-                    <div className={album.track_line} key={elem.id}>
-                      <div
-                        onClick={() => {
-                          setCurrentTrack(index);
-                        }}
-                      >
-                        {" "}
-                        <img src={play_btn} alt="" />
-                      </div>
-                      <div className={album.track_line_section}>
-                        <img src={elem.cover_photo} width={48} alt="" />
-                        <div className={album.track_line_section_name}>
-                          <h4> {elem.title} </h4>
-                          <h5> {elem.artist[1]} </h5>
-                        </div>
-                      </div>
-                      <div className={album.album}>{AlbumInfo.title}</div>
-                      <div className={album.dateAdd}>1 day ago</div>
-                      <button
-                        style={{ width: "30px" }}
-                        onClick={() => navigate(`/editproduct/${elem.id}`)}
-                      >
-                        edit
-                      </button>
-                      <div className={album.time}>3:22</div>
-                      <div
-                        className={album.time}
-                        onClick={() => {
-                          AddDownload(elem);
-                        }}
-                      >
-                        {checkTracksDown(elem.id) ? (
-                          <img src={undownload} alt="" />
-                        ) : (
-                          <img src={download} alt="" />
-                        )}
-                      </div>
-                      <div
-                        className={album.favorites}
-                        onClick={() => {
-                          AddFavorites(elem);
-                        }}
-                      >
-                        {checkTracks(elem.id) ? (
-                          <img src={unlike_song} alt="" />
-                        ) : (
-                          <img src={like_song} alt="" />
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <TrackList trackList={trackList} />
             <div></div>
           </div>
         </div>

@@ -9,19 +9,12 @@ export const API = "http://34.125.87.211";
 
 const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [artist, setArtist] = useState([]);
-  const [albums, setAlbums] = useState([]);
-  const [songs, setSongs] = useState([]);
-  const [artists, setArtists] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [playlistAdd, setPlaylistAdd] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  
-  
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -35,30 +28,11 @@ const ProductContextProvider = ({ children }) => {
   }
   // -------------------
 
-  const handleSearch = () => {
-    search(query, "songs", setSongs);
-    search(query, "artists", setArtists);
-    search(query, "albums", setAlbums);
-  };
-
-  async function getArtist() {
-    try {
-      const res = await axios.get(`${API}/artists/`);
-      setArtist(res.data.results);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getAlbums() {
-    try {
-      const res = await axios.get(`${API}/albums/`);
-      setAlbums(res.data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const handleSearch = () => {
+  //   search(query, "songs", setSongs);
+  //   search(query, "artists", setArtists);
+  //   search(query, "albums", setAlbums);
+  // };
 
   // getAlbums();
 
@@ -138,6 +112,7 @@ const ProductContextProvider = ({ children }) => {
     const { data } = await axios(`${API}${window.location.search}`);
     dispatch({ type: API, payload: data });
   };
+
   const deleteProduct = async (id) => {
     await axios.delete(`${API}/songs/${id}/`);
     getProducts();
@@ -161,21 +136,6 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  // ?
-  async function getPlaylist() {
-    try {
-      let res = await axios.get(`${API}/playlist/author/`, getConfig());
-      setPlaylistAdd(res.data.results);
-      console.log(res);
-    } catch (error) {
-      console.log("error:", error);
-    }
-  }
-
-  // getPlaylist()
-
-  
-
   // ! Rating
 
   const sendRating = async (id) => {
@@ -195,24 +155,12 @@ const ProductContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
-    
-  }
+  };
 
   const values = {
-    getArtist,
-    artist,
-    setArtist,
-    getAlbums,
-    albums,
-    setAlbums,
-    songs,
-    setSongs,
-    artists,
-    setArtists,
     search,
     inputValue,
     setInputValue,
-    handleSearch,
     setSearchParams,
     searchParams,
     AddArtist,
@@ -229,10 +177,6 @@ const ProductContextProvider = ({ children }) => {
     setTitle,
     description,
     setDescription,
-    setPlaylistAdd,
-    playlistAdd,
-    getPlaylist,
-
   };
 
   return (
