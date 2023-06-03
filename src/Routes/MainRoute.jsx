@@ -27,20 +27,20 @@ const MainRoute = () => {
     <div>
       <Routes>
         <Route path="/" element={currentUser ? <Feed /> : <Homepage />} />
-        <Route path="playadd" element={<Playadd />} />
-        <Route path="album-page/:id" element={<AlbumPage />} />
-        <Route path="artist-page/:id" element={<ArtistPage />} />
-        <Route path="playlist-page/:id" element={<PlayListPage />} />
-        <Route path="search" element={<SearchPage />} />
-        <Route path="playlist" element={<PlayList />} />
-        <Route path="download" element={<Download />} />
-        <Route path="registration" element={<Registration />} />
-        <Route path="reset" element={<ResetPassword />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="account" element={<Account />} />
-        <Route path="login" element={<Login />} />
-        <Route path="addart" element={<AddArtist />} />
-        <Route path="addalbum" element={<AddAlbum />} />
+        <Route path="/playadd" element={<Playadd />} />
+        <Route path="/album-page/:id" element={<AlbumPage />} />
+        <Route path="/artist-page/:id" element={<ArtistPage />} />
+        <Route path="/playlist-page/:id" element={<PlayListPage />} />
+        <Route path="/search" element={<SearchPage />} />
+        <Route path="/playlist" element={<PlayList />} />
+        <Route path="/download" element={<Download />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/addart" element={<AddArtist />} />
+        <Route path="/addalbum" element={<AddAlbum />} />
         <Route path="/addproduct" element={<AddSongs />} />
         <Route path="/editproduct/:id" element={<EditSongs />} />
       </Routes>

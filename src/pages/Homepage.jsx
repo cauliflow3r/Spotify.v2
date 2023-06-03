@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import ArtistsBlock from "../components/modules/ArtistsBlock";
+import AlbumsBlock from "../components/modules/AlbumsBlock";
 import classes from "../style/Main.module.css";
-import { useProducts } from "../context/ProductContextProvider";
-import CardComponent from "./CardComponent";
-import ArtistCard from "./ArtistCard";
 
 const Homepage = () => {
   // const { getDownload, getFavorites } = useDownLoad();
@@ -14,12 +13,12 @@ const Homepage = () => {
   // useEffect(() => {
   //   getFavorites();
   // }, []);
-  const navigate = useNavigate();
-  const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
-    useProducts([]);
+
+  const { artists, albums, playlists } = useFeedDataLists();
 
   const [greeting, setGreeting] = useState("");
 
+  // !Великий код
   useEffect(() => {
     const currentHour = new Date().getHours();
     let newGreeting = "";
@@ -33,21 +32,16 @@ const Homepage = () => {
     setGreeting(newGreeting);
   }, []);
 
-  useEffect(() => {
-    getArtist();
-    getAlbums();
-  }, []);
-
   return (
     <MainLayout>
       <div className={classes.container}>
         <div className={classes.contentWrapper}>
           <h2>{greeting}</h2>
-          <ArtistCard />
+          <ArtistsBlock artists={artists} />
           <div className={classes.ablumsSection}>
             <h2>Made for you</h2>
           </div>
-          <CardComponent />
+          <AlbumsBlock albums={albums} />
         </div>
       </div>
     </MainLayout>

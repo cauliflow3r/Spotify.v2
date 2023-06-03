@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
 import ReactPlayer from "react-player";
+import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 // import './AudioPlayer.css';
 
 const AudioPlayer = () => {
-  const [currentTrack, setCurrentTrack] = useState(0);
+  const { currentTrack, setCurrentTrackIndex } = usePlayer();
+
   const [volume, setVolume] = useState(0.5);
   const [duration, setDuration] = useState(0);
   const [playedSeconds, setPlayedSeconds] = useState(0);
@@ -26,11 +28,11 @@ const AudioPlayer = () => {
   ];
 
   const handlePlayNext = () => {
-    setCurrentTrack((prevTrack) => (prevTrack + 1) % tracks.length);
+    setCurrentTrackIndex((prevTrack) => (prevTrack + 1) % tracks.length);
   };
 
   const handlePlayPrev = () => {
-    setCurrentTrack(
+    setCurrentTrackIndex(
       (prevTrack) => (prevTrack - 1 + tracks.length) % tracks.length
     );
   };

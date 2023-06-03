@@ -3,26 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useAuth } from "../context/AuthContextProvider";
-import { useProducts } from "../context/ProductContextProvider";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import FreshBlood from "../components/FreshBlood";
 import playlist from "../style/PalyListBlock.module.css";
-import ArtistCard from "./ArtistCard";
-import CardComponent from "./CardComponent";
 import PlaylistComponent from "./PlaylistComponent";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import AlbumsBlock from "../components/modules/AlbumsBlock";
+import ArtistsBlock from "../components/modules/ArtistsBlock";
+import PlaylistsBlock from "../components/modules/PlaylistsBlock";
 
 const Feed = () => {
-  // const { getDownload, getFavorites } = useDownLoad();
-  // useEffect(() => {
-  //   getDownload();
-  // }, []);
-  // useEffect(() => {
-  //   getFavorites();
-  // }, []);
-
   const { id } = useParams();
 
-  const { getArtist, getAlbums, getPlaylist } = useProducts([]);
+  const { artists, albums, playlists } = useFeedDataLists();
 
   const [greeting, setGreeting] = useState("");
 
@@ -39,12 +32,6 @@ const Feed = () => {
     setGreeting(newGreeting);
   }, []);
 
-  useEffect(() => {
-    getArtist();
-    getAlbums();
-    getPlaylist();
-  }, []);
-
   // console.log(artist);
 
   // console.log(artist);
@@ -55,15 +42,16 @@ const Feed = () => {
         <div className={classes.contentWrapper}>
           <FreshBlood />
           <h2>{greeting}</h2>
-          <ArtistCard />
+          <ArtistsBlock artists={artists} />
           <div className={classes.ablumsSection}>
             <h2>Made for you</h2>
           </div>
-          <CardComponent />
+          <AlbumsBlock albums={albums} />
           <div className={classes.ablumsSection}>
             <h2>Made by you</h2>
           </div>
-          <PlaylistComponent />
+          {/* <PlaylistComponent /> */}
+          <PlaylistsBlock playlists={playlists} />
         </div>
       </div>
     </MainLayout>

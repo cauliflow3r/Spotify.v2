@@ -1,14 +1,12 @@
-import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react'
+import axios from "axios";
+import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const authContext =  createContext();
+export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
-export const API = 'http://34.125.87.211';
+export const API = "http://34.125.87.211";
 
-
-const AuthContextProvider = ({children}) => {
-
+const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,11 +14,9 @@ const AuthContextProvider = ({children}) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const navigate = useNavigate();
 
-
-  const navigate = useNavigate()
-
-  async function handleRegister(formData,email) {
+  async function handleRegister(formData, email) {
     try {
       setLoading(true);
       const res = await axios.post(`${API}/account/register/`, formData);
@@ -33,7 +29,7 @@ const AuthContextProvider = ({children}) => {
       setLoading(false);
     }
   }
-  
+
   async function handleLogin(formData, email) {
     try {
       setLoading(true);
@@ -63,7 +59,7 @@ const AuthContextProvider = ({children}) => {
       );
       const email = localStorage.getItem("email");
       setCurrentUser(email);
-  
+
       console.log("Обновленный токен:", res.data.access);
     } catch (error) {
       console.log(error);
@@ -72,8 +68,6 @@ const AuthContextProvider = ({children}) => {
       setLoading(false);
     }
   }
-  
-  
 
   function handleLogout() {
     localStorage.removeItem("tokens");
@@ -82,46 +76,32 @@ const AuthContextProvider = ({children}) => {
     navigate("/");
   }
 
-  async function resetPassword (email) {
+  async function resetPassword(email) {
     try {
       setLoading(true);
-      await axios.post(`${API}/account/password-reset/`,{email} );
+      await axios.post(`${API}/account/password-reset/`, { email });
       console.log(email);
     } catch (error) {
       console.log(error);
     }
   }
 
-
-  // async function changePassword() {
-  //   try {
-  //     const tokens = JSON.parse(localStorage.getItem("tokens"));
-  //     const response = await axios.post(`${API}/account/change_password/`, {
-  //       current_password: currentPassword,
-  //       new_password: newPassword,
-  //       confirm_password: confirmPassword
-  //     }, {
-  //       headers: {
-  //         Authorization: `Bearer ${tokens.access}`
-  //       }
-  //     });
-  //     console.log(response.data);
-
-  //   } catch (error) {
-  //     console.log(error.response);
-  //   }
-  // }
-
   async function refreshToken() {
     try {
       setLoading(true);
       const tokens = JSON.parse(localStorage.getItem("tokens"));
-      const refreshResponse = await axios.post(`${API}/account/refresh_token/`, {
-        refresh_token: tokens.refresh,
-      });
+      const refreshResponse = await axios.post(
+        `${API}/account/refresh_token/`,
+        {
+          refresh_token: tokens.refresh,
+        }
+      );
       localStorage.setItem(
         "tokens",
-        JSON.stringify({ access: refreshResponse.data.access, refresh: tokens.refresh })
+        JSON.stringify({
+          access: refreshResponse.data.access,
+          refresh: tokens.refresh,
+        })
       );
       // console.log("Обновленный токен:", refreshResponse.data.access);
       return refreshResponse.data.access;
@@ -137,16 +117,20 @@ const AuthContextProvider = ({children}) => {
     try {
       setLoading(true);
       const refreshedToken = await refreshToken();
-      const response = await axios.post(`${API}/account/change_password/`, {
-        current_password: currentPassword,
-        new_password: newPassword,
-        confirm_password: confirmPassword
-      }, {
-        headers: {
-          Authorization: `Bearer ${refreshedToken}`
+      const response = await axios.post(
+        `${API}/account/change_password/`,
+        {
+          current_password: currentPassword,
+          new_password: newPassword,
+          confirm_password: confirmPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${refreshedToken}`,
+          },
         }
-      });
-  
+      );
+
       console.log(response.data);
     } catch (error) {
       console.log(error);
@@ -154,8 +138,6 @@ const AuthContextProvider = ({children}) => {
       setLoading(false);
     }
   }
-  
-  
 
   const values = {
     handleRegister,
@@ -174,11 +156,10 @@ const AuthContextProvider = ({children}) => {
     confirmPassword,
     setCurrentPassword,
     setNewPassword,
-    setConfirmPassword,refreshToken
+    setConfirmPassword,
+    refreshToken,
   };
-  return (
-    <authContext.Provider value={values}>{children}</authContext.Provider>
-  )
-}
+  return <authContext.Provider value={values}>{children}</authContext.Provider>;
+};
 
-export default AuthContextProvider
+export default AuthContextProvider;

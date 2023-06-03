@@ -10,20 +10,17 @@ export const API_ALBUMS = "http://34.125.87.211";
 const SongContextProvider = ({ children }) => {
   const [trackInfo, setTrackInfo] = useState({});
   const [trackList, setTrackList] = useState([]);
+
   const [Counter, setCounter] = useState(3);
-  const [AlbumBlock, setAlbumBlock] = useState([]);
   const [AlbumInfo, setAlbumInfo] = useState({});
   const [artistSongs, setArtistSongs] = useState([]);
   const [artistInfo, setArtistInfo] = useState([]);
-  
 
-  console.log(trackList);
   // todo - получение данных по id
   async function getALbumTrack(id) {
     try {
       let res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
       console.log(res.data);
-      setAlbumBlock(res.data.songs);
       setTrackList(res.data.songs);
       setAlbumInfo(res.data);
       setTrackInfo(res.data);
@@ -31,23 +28,6 @@ const SongContextProvider = ({ children }) => {
       console.log(error);
     }
   }
-  const [currentTrack, setCurrentTrack] = useState(0);
-
-  async function getArtistSongs(id) {
-    try {
-      let res = await axios.get(`${API}/artists/${id}/`);
-      setArtistSongs(res.data.songs);
-      setTrackList(res.data.songs);
-      setArtistInfo(res.data);
-      setTrackInfo(res.data);
-      console.log(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-    // getArtistSongs();
-
-  
 
   // todo - получение данных по id
   const values = {
@@ -57,14 +37,19 @@ const SongContextProvider = ({ children }) => {
     trackList,
     setTrackList,
     getALbumTrack,
-    AlbumBlock,
     artistSongs,
-    getArtistSongs,
-    currentTrack,
-    setCurrentTrack,
     AlbumInfo,
     artistInfo,
   };
+
+  console.log("trackInfo: ", trackInfo);
+  console.log("trackList: ", trackList);
+  console.log("Counter: ", Counter);
+
+  console.log("AlbumInfo: ", AlbumInfo);
+  console.log("artistSongs: ", artistSongs);
+  console.log("artistInfo:", artistInfo);
+
   return (
     <songsContext.Provider value={values}>{children}</songsContext.Provider>
   );

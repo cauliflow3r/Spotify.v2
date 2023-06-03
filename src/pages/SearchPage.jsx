@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 
 const SearchPage = () => {
   const {
@@ -11,8 +12,6 @@ const SearchPage = () => {
     setSearchParams,
     search,
     songs,
-    artists,
-    albums,
     albumsSearch,
     setSongs,
     setArtists,
@@ -20,16 +19,13 @@ const SearchPage = () => {
   } = useProducts();
   const navigate = useNavigate();
 
+  const { artists, albums } = useFeedDataLists();
+
   console.log(
     "artist.albums :",
     artists.map((a) => a.albums.map((item) => item))
   );
   console.log("artist.:", artists);
-  // console.log("songs", songs);
-  // console.log(
-  //   "albums",
-  //   albums.map((a) => a.id)
-  // );
 
   useEffect(() => {
     const query = searchParams.get("query");
@@ -47,7 +43,7 @@ const SearchPage = () => {
           </div>
           <div>
             {/* Отображение результатов поиска */}
-            {songs.length > 0 && (
+            {songs?.length > 0 && (
               <div>
                 <h2>Songs</h2>
                 <ul>

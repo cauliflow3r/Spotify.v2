@@ -601,3 +601,13 @@ width: 25%;
     justify-content: center;
   }
 }
+@media screen and (max-width: 1405px) {
+  .PalyListBlock_rightPart__kz7AG {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 405px) {
+  .PalyListBlock_rightPart__kz7AG {
+    width: 100%;
+  }
+}
