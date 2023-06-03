@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ACTIONS } from "../helpers/const";
+import { async } from "q";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
@@ -18,8 +19,8 @@ const ProductContextProvider = ({ children }) => {
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -43,7 +44,7 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      // console.log(res.data.results);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -126,8 +127,8 @@ const ProductContextProvider = ({ children }) => {
     });
   };
 
-  const saveEditedProduct = async (newProduct) => {
-    await axios.patch(`${API}/songs/${newProduct.id}/`, newProduct);
+  const saveEditedProduct = async (newProduct, id) => {
+    await axios.patch(`${API}/songs/${id}/`, newProduct);
     getProducts();
     navigate("/products");
   };
@@ -140,18 +141,35 @@ const ProductContextProvider = ({ children }) => {
     await axios.delete(`${API}/songs/${id}/`);
     getProducts();
   };
+
+  // const [genre, setGenre] = useState({});
+  // console.log(genre ? genre.data.results : "nothing");
+  // async function getGenre() {
+  //   try {
+  //     let res = await axios.get(`${API}/genre/`);
+  //     setGenre(res);
+  //   } catch (error) {
+  //     console.log("ошибка запроса на серверв жанры ");
+  //   }
+  // }
+
   // * -------------------------------------
 
-// ! add playlist
+  // ! add playlist
 
-  async function postPlaylist () {
-try {
-  const res = await axios.post(`${API}/playlist/author/`,{title:title, description:description}, getConfig())
-  console.log(res);
-  navigate("/playadd");
-} catch (error) {
-  console.log("error :",error );
-}  }
+  async function postPlaylist() {
+    try {
+      const res = await axios.post(
+        `${API}/playlist/author/`,
+        { title: title, description: description },
+        getConfig()
+      );
+      console.log(res);
+      navigate("/playadd");
+    } catch (error) {
+      console.log("error :", error);
+    }
+  }
 
   // ! Rating
 
@@ -202,7 +220,12 @@ try {
     sendRating,
     setSelectedRating,
     postPlaylist,
-    title, setTitle, description, setDescription 
+    title,
+    setTitle,
+    description,
+    setDescription,
+    // getGenre,
+    // genre,
   };
 
   return (
