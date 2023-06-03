@@ -14,7 +14,7 @@ const PlaylistComponent = () => {
         <div
           className={classes.playlist}
           key={item.id}
-          onClick={() => navigate(`/album-page/${item.id}`)}
+          onClick={() => navigate(`/playlist-page${item.id}`)}
         >
           <div className={classes.card}>
             <div className={classes.mg_holder}>

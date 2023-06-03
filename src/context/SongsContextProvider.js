@@ -1,5 +1,4 @@
 import axios from "axios";
-import { async } from "q";
 import React, { createContext, useContext, useState } from "react";
 import { API } from "./AuthContextProvider";
 
@@ -16,6 +15,9 @@ const SongContextProvider = ({ children }) => {
   const [AlbumInfo, setAlbumInfo] = useState({});
   const [artistSongs, setArtistSongs] = useState([]);
   const [artistInfo, setArtistInfo] = useState([]);
+  
+
+  console.log(trackList);
   // todo - получение данных по id
   async function getALbumTrack(id) {
     try {
@@ -38,12 +40,14 @@ const SongContextProvider = ({ children }) => {
       setTrackList(res.data.songs);
       setArtistInfo(res.data);
       setTrackInfo(res.data);
-      // console.log(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
   }
-  //   getArtistSongs();
+    // getArtistSongs();
+
+  
 
   // todo - получение данных по id
   const values = {
