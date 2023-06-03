@@ -1,32 +1,25 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import navbar from "../style/Navbar.module.css";
 import play_btn from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
 import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
+import clock from "../assets/Line=Clock.svg";
 import like_song from "../assets/like_song_icon.svg";
 import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
-import Modal from "react-modal";
-Modal.setAppElement("#root");
 
-const AlbumPage = () => {
+const PlayListPage = () => {
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null);
+
+  // const navigate = useNavigate();
   const {
     getFavorites,
     AddFavorites,
@@ -35,44 +28,6 @@ const AlbumPage = () => {
     checkTracks,
     checkTracksDown,
   } = useDownLoad();
-
-  //! For modaalwindow
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleIconClick = () => {
-    if (isModalOpen) {
-      closeModal();
-    } else {
-      openModal();
-    }
-  };
-
-  const handleOutsideClick = useCallback(
-    (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
-      }
-    },
-    [modalRef, closeModal]
-  );
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener("click", handleOutsideClick);
-    } else {
-      document.removeEventListener("click", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [isModalOpen, handleOutsideClick]);
 
   const { sendRating, setSelectedRating } = useProducts();
 
@@ -111,8 +66,11 @@ const AlbumPage = () => {
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
                 <h2>{AlbumInfo.title} </h2>
-                <h5>Quantity :{AlbumBlock.length}</h5>
-                {/* <div>
+                <h5>
+                  User&nbsp; : &nbsp;{currentUser} : Quantity :
+                  {AlbumBlock.length}
+                </h5>
+                <div>
                   <div>
                     <div>
                       <input
@@ -162,7 +120,7 @@ const AlbumPage = () => {
                       <label htmlFor="r-05">★</label>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
             <div className={album.track_block}>
@@ -188,18 +146,17 @@ const AlbumPage = () => {
                   <div>
                     <h4>Album</h4>
                   </div>
-
-                  {/* <div>
+                  <div>
                     <h4>Date </h4>
-                  </div> */}
+                  </div>
+                  <div>
+                    <img src={clock} alt="" />
+                  </div>
                   <div className={album.number}>
                     <img src={download} alt="" />
                   </div>
                   <div className={album.number}>
                     <img src={like_song} alt="" />
-                  </div>
-                  <div>
-                    <img src="" alt="" />
                   </div>
                 </div>
 
@@ -222,7 +179,14 @@ const AlbumPage = () => {
                         </div>
                       </div>
                       <div className={album.album}>{AlbumInfo.title}</div>
-                      {/* <div className={album.dateAdd}>1 day ago</div> */}
+                      <div className={album.dateAdd}>1 day ago</div>
+                      <button
+                        style={{ width: "30px" }}
+                        onClick={() => navigate(`/editproduct/${elem.id}`)}
+                      >
+                        edit
+                      </button>
+                      <div className={album.time}>3:22</div>
                       <div
                         className={album.time}
                         onClick={() => {
@@ -247,42 +211,6 @@ const AlbumPage = () => {
                           <img src={like_song} alt="" />
                         )}
                       </div>
-                      <button className={album.add} onClick={handleIconClick}>
-                        Add to playlist
-                      </button>
-                      <Modal
-                        isOpen={isModalOpen}
-                        onRequestClose={closeModal}
-                        overlayClassName="custom-overlay"
-                        className="custom-modal"
-                      >
-                        <div className={album.modal_window}>
-                          <div className={album.textBlock}>
-                            <button
-                              onClick={() => {
-                                navigate("/account");
-                              }}
-                            >
-                              Account
-                            </button>
-                          </div>
-                          <div className={album.textBlock}>
-                            <button
-                              onClick={() => {
-                                navigate("/profile");
-                              }}
-                            >
-                              profile
-                            </button>
-                          </div>
-                        </div>
-                      </Modal>
-                      <button
-                        style={{ width: "30px" }}
-                        onClick={() => navigate(`/editproduct/${elem.id}`)}
-                      >
-                        edit
-                      </button>
                     </div>
                   );
                 })}
@@ -296,4 +224,4 @@ const AlbumPage = () => {
   );
 };
 
-export default AlbumPage;
+export default PlayListPage;

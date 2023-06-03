@@ -38,7 +38,7 @@ const SongContextProvider = ({ children }) => {
       setTrackList(res.data.songs);
       setArtistInfo(res.data);
       setTrackInfo(res.data);
-      // console.log(res.data);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }

@@ -385,7 +385,6 @@ footer {
   grid-gap: 16px 25px;
 }
 .preview {
-  width: 330px;
   /* padding-bottom: 30px; */
 }
 .cardPreview {
@@ -462,7 +461,6 @@ width: 25%;
 }
 
 /* !Albums */
-
 .playlistBox {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

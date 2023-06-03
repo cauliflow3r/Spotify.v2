@@ -161,14 +161,12 @@ async function  getPlaylist () {
 try {
   let res = await axios.get(`${API}/playlist/author/`, getConfig())
   setPlaylistAdd(res.data.results)
-  console.log(res);
+  console.log(res.data.results);
 } catch (error) {
   console.log("error:" ,error);
   
 }
 }
-
-// getPlaylist()
 
   // ! Rating
 
@@ -190,7 +188,6 @@ try {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
   };
-  console.log();
 
   const values = {
     getArtist,
