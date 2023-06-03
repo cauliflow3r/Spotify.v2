@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useAuth } from "../context/AuthContextProvider";
@@ -9,6 +9,7 @@ import FreshBlood from "../components/FreshBlood";
 import playlist from "../style/PalyListBlock.module.css";
 import ArtistCard from "./ArtistCard";
 import CardComponent from "./CardComponent";
+import PlaylistComponent from "./PlaylistComponent";
 
 const Feed = () => {
   // const { getDownload, getFavorites } = useDownLoad();
@@ -19,9 +20,9 @@ const Feed = () => {
   //   getFavorites();
   // }, []);
 
-  const navigate = useNavigate();
-  const { getArtist, artist, setArtist, getAlbums, albums, setAlbums } =
-    useProducts([]);
+  const { id } = useParams();
+
+  const { getArtist, getAlbums, getPlaylist } = useProducts([]);
 
   const [greeting, setGreeting] = useState("");
 
@@ -41,6 +42,7 @@ const Feed = () => {
   useEffect(() => {
     getArtist();
     getAlbums();
+    getPlaylist();
   }, []);
 
   // console.log(artist);
@@ -56,11 +58,12 @@ const Feed = () => {
           <ArtistCard />
           <div className={classes.ablumsSection}>
             <h2>Made for you</h2>
-            <button onClick={() => navigate("/playadd")}>
-              Create playlists
-            </button>
           </div>
           <CardComponent />
+          <div className={classes.ablumsSection}>
+            <h2>Made by you</h2>
+          </div>
+          <PlaylistComponent />
         </div>
       </div>
     </MainLayout>

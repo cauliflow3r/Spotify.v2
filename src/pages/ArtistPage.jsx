@@ -27,7 +27,7 @@ const ArtistPage = () => {
     getArtistSongs(id);
   }, []);
 
-  console.log(artistInfo);
+  // console.log(artistInfo);
 
   // todo ----------------------------------
   const {

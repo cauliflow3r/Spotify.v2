@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ArtistCard = () => {
   const navigate = useNavigate();
-  const { artist, albums } = useProducts([]);
+  const { artist } = useProducts([]);
 
   return (
     <>

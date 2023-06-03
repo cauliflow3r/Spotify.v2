@@ -14,16 +14,15 @@ const ProductContextProvider = ({ children }) => {
   const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
   const [artists, setArtists] = useState([]);
-  // const [albumsSearch, setAlbumsSearch] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const [playlistAdd, setPlaylistAdd] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // ! Search
   async function search(query, endpoint, setData) {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
@@ -33,6 +32,7 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+  // -------------------
 
   const handleSearch = () => {
     search(query, "songs", setSongs);
@@ -157,11 +157,11 @@ const ProductContextProvider = ({ children }) => {
 
   // ! add playlist
 
-  async function postPlaylist() {
+  async function postPlaylist(playlistForm) {
     try {
       const res = await axios.post(
         `${API}/playlist/author/`,
-        { title: title, description: description },
+        playlistForm,
         getConfig()
       );
       console.log(res);
@@ -170,6 +170,19 @@ const ProductContextProvider = ({ children }) => {
       console.log("error :", error);
     }
   }
+
+  // ?
+  async function getPlaylist() {
+    try {
+      let res = await axios.get(`${API}/playlist/author/`, getConfig());
+      setPlaylistAdd(res.data.results);
+      console.log(res);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  // getPlaylist()
 
   // ! Rating
 
@@ -224,8 +237,9 @@ const ProductContextProvider = ({ children }) => {
     setTitle,
     description,
     setDescription,
-    // getGenre,
-    // genre,
+    setPlaylistAdd,
+    playlistAdd,
+    getPlaylist,
   };
 
   return (
