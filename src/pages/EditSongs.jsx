@@ -11,6 +11,8 @@ const EditSongs = () => {
     getAlbums,
     artist,
     albums,
+    // getGenre,
+    // genre
   } = useProducts();
   console.log(productDetails);
 
@@ -24,6 +26,7 @@ const EditSongs = () => {
   }, []);
   useEffect(() => {
     getProductDetails(id);
+    // getGenre();
   }, []);
 
   useEffect(() => {
@@ -58,7 +61,6 @@ const EditSongs = () => {
           <input
             className="edit_kar1"
             sx={{ marginBottom: "10px" }}
-            fullWidth
             id="outlined-basic"
             label="title"
             variant="outlined"
@@ -68,23 +70,10 @@ const EditSongs = () => {
             value={product.title || ""}
           />
 
-          {/* <input
-            className="edit_nazvanie1"
-            sx={{ marginBottom: "10px" }}
-            fullWidth
-            id="outlined-basic"
-            label="artist"
-            variant="outlined"
-            size="small"
-            name="name"
-            onChange={handleInp}
-            value={product.artist || ""}
-          /> */}
-
-          <select name="artist" id="">
+          <select name="artist" id="" onChange={handleInp}>
             {albums ? (
               albums.map((elem) => (
-                <option key={elem.id} value={elem.id} onChange={handleInp}>
+                <option key={elem.id} value={elem.id}>
                   {elem.title}
                 </option>
               ))
@@ -96,20 +85,30 @@ const EditSongs = () => {
           <input
             className="edit_opi1"
             sx={{ marginBottom: "10px" }}
-            fullWidth
             id="outlined-basic"
             label="genre"
             variant="outlined"
             size="small"
             name="description"
             onChange={handleInp}
-            value={product.genre || ""}
+            // value={product.genre || ""}
           />
+          {/* <input
+            type="file"
+            className="edit_opi1"
+            sx={{ marginBottom: "10px" }}
+            id="outlined-basic"
+            label="genre"
+            variant="outlined"
+            size="small"
+            name="description"
+            onChange={handleInp}
+            // value={product.audio_file || ""}
+          /> */}
 
           <button
             className="edit_btn1"
-            onClick={() => saveEditedProduct(product)}
-            fullWidth
+            onClick={() => saveEditedProduct(product, id)}
             variant="outlined"
           >
             Save Changes

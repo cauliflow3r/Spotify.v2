@@ -1,10 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import {
-  Link,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
@@ -27,10 +22,14 @@ const SearchPage = () => {
 
   console.log(
     "artist.albums :",
-    artists.map((a) => a.songs.map((e) => e.artist.map((art) => art)))
+    artists.map((a) => a.albums.map((item) => item))
   );
+  console.log("artist.:", artists);
   // console.log("songs", songs);
-  // console.log("albums", albums);
+  // console.log(
+  //   "albums",
+  //   albums.map((a) => a.id)
+  // );
 
   useEffect(() => {
     const query = searchParams.get("query");
@@ -70,7 +69,7 @@ const SearchPage = () => {
             {artists.length > 0 && (
               <div>
                 <h2>Artists</h2>
-                <ul>
+                <div className={classes.artistBox}>
                   {artists
                     .filter((artist) =>
                       artist.full_name
@@ -94,14 +93,15 @@ const SearchPage = () => {
                         </div>
                       </div>
                     ))}
-                </ul>
+                </div>
               </div>
             )}
 
             {albums.length > 0 && (
-              <div>
+              <div className={classes.ablumsSectio}>
                 <h2>Albums</h2>
-                <ul>
+
+                <div className={classes.artistBox}>
                   {albums
                     .filter((album) =>
                       album.title
@@ -109,33 +109,28 @@ const SearchPage = () => {
                         .includes(inputValue.toLowerCase())
                     )
                     .map((album) => (
-                      <Link
-                        to={`/album-page/${album.id}`}
-                        style={{ textDecoration: "none" }}
+                      <div
+                        className={classes.playlist}
+                        key={album.id}
+                        onClick={() => navigate(`/album-page/${album.id}`)}
                       >
-                        <div
-                          className={classes.playlist}
-                          key={album.id}
-                          onClick={() => navigate(`/album-page/${album.id}`)}
-                        >
-                          <div className={classes.card}>
-                            <div className={classes.mg_holder}>
-                              <img src={album.cover_photo} alt="image" />
-                            </div>
-                            <div className={classes.text}>
-                              <h2>{album.title}</h2>
-                              <p>{album.id}</p>
-                            </div>
-                            <div className={classes.play_icon}>
-                              <div className={classes.circle}>
-                                <div className={classes.triangle}></div>
-                              </div>
+                        <div className={classes.card}>
+                          <div className={classes.mg_holder}>
+                            <img src={album.cover_photo} alt="image" />
+                          </div>
+                          <div className={classes.text}>
+                            <h2>{album.title}</h2>
+                            <p>{album.release}</p>
+                          </div>
+                          <div className={classes.play_icon}>
+                            <div className={classes.circle}>
+                              <div className={classes.triangle}></div>
                             </div>
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     ))}
-                </ul>
+                </div>
               </div>
             )}
           </div>

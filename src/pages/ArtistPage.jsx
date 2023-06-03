@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import downloads from "../style/Artists.module.css";
 import play from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
@@ -9,7 +9,7 @@ import undownload from "../assets/UN_Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
-import song from "../assets/Rectangle 236.svg";
+
 import like_song from "../assets/like_song_icon.svg";
 import unlike_song from "../assets/unlike _song_icon.svg";
 import { songsContext } from "../context/SongsContextProvider";
@@ -27,7 +27,7 @@ const ArtistPage = () => {
     getArtistSongs(id);
   }, []);
 
-  console.log(artistInfo);
+  // console.log(artistInfo);
 
   // todo ----------------------------------
   const {
@@ -86,7 +86,7 @@ const ArtistPage = () => {
                       <h4>Name</h4>
                     </div>
                     <div>
-                      <h4>Album</h4>
+                      <h4>Add</h4>
                     </div>
                     <div>
                       <h4>Date publick</h4>
@@ -99,8 +99,7 @@ const ArtistPage = () => {
                     </div>
                   </div>
                   {artistSongs.map((item, index) => (
-                    <div className={downloads.track_line}>
-                      {console.log(item)}
+                    <div className={downloads.track_line} key={item.id}>
                       <div
                         onClick={() => {
                           setCurrentTrack(index);

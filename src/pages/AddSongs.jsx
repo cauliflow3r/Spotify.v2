@@ -5,30 +5,31 @@ import "../style/AddSongs.module.css";
 const AddSongs = () => {
   const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
 
-  const [album, setAlbum] = useState("");
-  const [artists, setArtists] = useState("");
+  const [album, setAlbum] = useState(0);
+  //   const [artists, setArtists] = useState(0);
   const [title, setTitle] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");
 
+  function handleAdd() {
+    const newSong = new FormData();
+    newSong.append("title", title);
+    if (file) {
+      newSong.append("audio_file", file);
+    }
+    newSong.append("album", album);
+    newSong.append("genre", genre);
+    // newSong.append("artist", artists);
+    console.log(newSong);
+
+    addProduct(newSong);
+  }
   useEffect(() => {
     getArtist();
   }, []);
   useEffect(() => {
     getAlbums();
   }, []);
-
-  function handleAdd() {
-    const newSong = new FormData();
-    newSong.append("title", title);
-    newSong.append("audio_file", file);
-    newSong.append("album", album);
-    newSong.append("genre", genre);
-    newSong.append("artist", artists);
-    console.log(newSong);
-
-    addProduct(newSong);
-  }
 
   return (
     <>
@@ -43,7 +44,6 @@ const AddSongs = () => {
             <input
               className="edit_kar"
               sx={{ marginBottom: "10px" }}
-              fullWidth
               id="outlined-basic"
               placeholder="song"
               variant="outlined"
@@ -51,11 +51,11 @@ const AddSongs = () => {
               name="audio_file"
               type="file"
               onChange={(e) => {
-                setFile(e.target.value);
+                setFile(e.target.files[0]);
               }}
             />
           </div>
-          <select
+          {/* <select
             name="artist"
             onChange={(e) => {
               setArtists(e.target.value);
@@ -70,13 +70,12 @@ const AddSongs = () => {
             ) : (
               <option value="">artist </option>
             )}
-          </select>
+          </select> */}
           <div>
             <div>
               <input
                 className="edit_kar"
                 sx={{ marginBottom: "10px" }}
-                fullWidth
                 id="outlined-basic"
                 placeholder="genre"
                 variant="outlined"
@@ -90,7 +89,6 @@ const AddSongs = () => {
             <input
               className="edit_nazvanie"
               sx={{ marginBottom: "10px" }}
-              fullWidth
               id="outlined-basic"
               placeholder="title"
               variant="outlined"
@@ -121,12 +119,7 @@ const AddSongs = () => {
             )}
           </select>
           <div>
-            <button
-              className="edit_btn"
-              onClick={handleAdd}
-              fullWidth
-              variant="outlined"
-            >
+            <button className="edit_btn" onClick={handleAdd} variant="outlined">
               New song
             </button>
           </div>

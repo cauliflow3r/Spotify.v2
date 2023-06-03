@@ -2,9 +2,9 @@
 .container {
   position: fixed;
   width: 23%;
-  top: 0;
-  left: 1%;
-  margin-top: 20px;
+  /* top: 0; */
+  /* left: 1%; */
+  /* margin-top: 20px; */
   color: aliceblue;
 }
 .container_top {

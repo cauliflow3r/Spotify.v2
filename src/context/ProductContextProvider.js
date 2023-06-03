@@ -1,10 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { API_ALBUMS } from "./SongsContextProvider";
-
-import { async } from "q";
-import App from "../App";
 import { ACTIONS } from "../helpers/const";
 
 export const productContext = createContext();
@@ -17,13 +13,17 @@ const ProductContextProvider = ({ children }) => {
   const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
   const [artists, setArtists] = useState([]);
-  // const [albumsSearch, setAlbumsSearch] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
-
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [playlistAdd, setPlaylistAdd] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  
+  
 
+  // ! Search
   async function search(query, endpoint, setData) {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
@@ -33,6 +33,7 @@ const ProductContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+  // -------------------
 
   const handleSearch = () => {
     search(query, "songs", setSongs);
@@ -44,7 +45,7 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await axios.get(`${API}/artists/`);
       setArtist(res.data.results);
-      console.log(res.data.results);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -117,6 +118,7 @@ const ProductContextProvider = ({ children }) => {
     await axios.post(`${API}/songs/upload/`, newProduct, getConfig());
     navigate("/playlist");
   };
+
   const getProductDetails = async (id) => {
     const { data } = await axios(`${API}/songs/${id}/`);
 
@@ -126,8 +128,8 @@ const ProductContextProvider = ({ children }) => {
     });
   };
 
-  const saveEditedProduct = async (newProduct) => {
-    await axios.patch(`${API}/songs/${newProduct.id}/`, newProduct);
+  const saveEditedProduct = async (newProduct, id) => {
+    await axios.patch(`${API}/songs/${id}/`, newProduct);
     getProducts();
     navigate("/products");
   };
@@ -140,7 +142,39 @@ const ProductContextProvider = ({ children }) => {
     await axios.delete(`${API}/songs/${id}/`);
     getProducts();
   };
+
   // * -------------------------------------
+
+  // ! add playlist
+
+  async function postPlaylist(playlistForm) {
+    try {
+      const res = await axios.post(
+        `${API}/playlist/author/`,
+        playlistForm,
+        getConfig()
+      );
+      console.log(res);
+      navigate("/playadd");
+    } catch (error) {
+      console.log("error :", error);
+    }
+  }
+
+  // ?
+  async function getPlaylist() {
+    try {
+      let res = await axios.get(`${API}/playlist/author/`, getConfig());
+      setPlaylistAdd(res.data.results);
+      console.log(res);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }
+
+  // getPlaylist()
+
+  
 
   // ! Rating
 
@@ -161,8 +195,8 @@ const ProductContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
-  };
-  console.log();
+    
+  }
 
   const values = {
     getArtist,
@@ -190,6 +224,15 @@ const ProductContextProvider = ({ children }) => {
     productDetails: state.productDetails,
     sendRating,
     setSelectedRating,
+    postPlaylist,
+    title,
+    setTitle,
+    description,
+    setDescription,
+    setPlaylistAdd,
+    playlistAdd,
+    getPlaylist,
+
   };
 
   return (

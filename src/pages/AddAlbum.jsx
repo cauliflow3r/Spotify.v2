@@ -7,6 +7,10 @@ const AddAlbum = () => {
   const [descr, setDescr] = useState("");
   const [artists, setArtist] = useState(1);
 
+  useEffect(() => {
+    getArtist();
+  }, []);
+
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
@@ -24,16 +28,16 @@ const AddAlbum = () => {
           setTitile(e.target.value);
         }}
       />
-      <select name="artist" id="">
+      <select
+        name="artist"
+        id=""
+        onChange={(e) => {
+          setArtist(e.target.value);
+        }}
+      >
         {artist ? (
           artist.map((elem) => (
-            <option
-              key={elem.id}
-              value={elem.id}
-              onChange={(e) => {
-                setArtist(e.target.value);
-              }}
-            >
+            <option key={elem.id} value={elem.id}>
               {elem.full_name}
             </option>
           ))
