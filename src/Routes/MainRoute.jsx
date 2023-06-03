@@ -18,6 +18,7 @@ import AddAlbum from "../pages/AddAlbum";
 import AddSongs from "../pages/AddSongs";
 import EditSongs from "../pages/EditSongs";
 import Playadd from "../pages/Playadd";
+import PlayListPage from "../pages/PlayListPage";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();
@@ -29,6 +30,7 @@ const MainRoute = () => {
         <Route path="playadd" element={<Playadd />} />
         <Route path="album-page/:id" element={<AlbumPage />} />
         <Route path="artist-page/:id" element={<ArtistPage />} />
+        <Route path="playlist-page/:id" element={<PlayListPage />} />
         <Route path="search" element={<SearchPage />} />
         <Route path="playlist" element={<PlayList />} />
         <Route path="download" element={<Download />} />

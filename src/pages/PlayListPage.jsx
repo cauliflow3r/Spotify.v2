@@ -45,7 +45,7 @@ const PlayListPage = () => {
 
   // todo -------------------
   const { id } = useParams();
-  // console.log("Это будет айди ", id);
+  console.log("Это будет айди ", id);
 
   useEffect(() => {
     getALbumTrack(id);

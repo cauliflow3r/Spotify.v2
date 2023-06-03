@@ -8,7 +8,6 @@ import React, {
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import navbar from "../style/Navbar.module.css";
 import play_btn from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
 import undownload from "../assets/UN_Line=empty, Name=download.svg";
@@ -18,7 +17,6 @@ import like_song from "../assets/like_song_icon.svg";
 import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
-import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
@@ -35,6 +33,11 @@ const AlbumPage = () => {
     checkTracks,
     checkTracksDown,
   } = useDownLoad();
+
+  const [selectedSong, setSelectedSong] = useState(null);
+
+  const { playlistAdd, getPlaylist } = useProducts();
+  console.log(playlistAdd);
 
   //! For modaalwindow
   const openModal = () => {
@@ -95,6 +98,7 @@ const AlbumPage = () => {
   useEffect(() => {
     getALbumTrack(id);
     sendRating(id);
+    getPlaylist();
   }, []);
 
   // todo -------------------
@@ -247,7 +251,13 @@ const AlbumPage = () => {
                           <img src={like_song} alt="" />
                         )}
                       </div>
-                      <button className={album.add} onClick={handleIconClick}>
+                      <button
+                        className={album.add}
+                        onClick={() => {
+                          setSelectedSong(elem);
+                          handleIconClick();
+                        }}
+                      >
                         Add to playlist
                       </button>
                       <Modal
@@ -267,13 +277,16 @@ const AlbumPage = () => {
                             </button>
                           </div>
                           <div className={album.textBlock}>
-                            <button
-                              onClick={() => {
-                                navigate("/profile");
-                              }}
-                            >
-                              profile
-                            </button>
+                            <select>
+                              {Object.values(playlistAdd).map((playlist) => (
+                                <option
+                                  key={playlist.id}
+                                  value={playlist.title}
+                                >
+                                  {playlist.title}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                       </Modal>

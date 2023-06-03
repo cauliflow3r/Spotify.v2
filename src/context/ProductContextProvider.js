@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ACTIONS } from "../helpers/const";
-import { async } from "q";
 
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
@@ -21,6 +20,8 @@ const ProductContextProvider = ({ children }) => {
   const [description, setDescription] = useState("");
   const [playlistAdd, setPlaylistAdd] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  
+  
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -173,6 +174,8 @@ const ProductContextProvider = ({ children }) => {
 
   // getPlaylist()
 
+  
+
   // ! Rating
 
   const sendRating = async (id) => {
@@ -192,7 +195,8 @@ const ProductContextProvider = ({ children }) => {
     } catch (error) {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
-  };
+    
+  }
 
   const values = {
     getArtist,
@@ -228,6 +232,7 @@ const ProductContextProvider = ({ children }) => {
     setPlaylistAdd,
     playlistAdd,
     getPlaylist,
+
   };
 
   return (
