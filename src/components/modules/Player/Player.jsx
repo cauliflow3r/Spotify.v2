@@ -1,13 +1,14 @@
 import { useRef, useState } from "react";
-import playerblock from "../style/Player.module.css";
-import playBtn from "../assets/Play.svg";
-import pauseBtn from "../assets/Pause.svg";
-import prevSong from "../assets/prevSong.svg";
-import nextSong from "../assets/nextSong.svg";
-import fullScreen from "../assets/Full Screen.svg";
-import valume from "../assets/valume.svg";
+import playerblock from "../../../style/Player.module.css";
+import playBtn from "../../../assets/Play.svg";
+import pauseBtn from "../../../assets/Pause.svg";
+import prevSong from "../../../assets/prevSong.svg";
+import nextSong from "../../../assets/nextSong.svg";
+import fullScreen from "../../../assets/Full Screen.svg";
+import valume from "../../../assets/valume.svg";
 import ReactPlayer from "react-player";
-import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
+import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
+import SongInfo from "./components/SongInfo";
 
 export default function Player() {
   const { currentTrack, trackList, playerNextTrack, playerPrevTrack } =
@@ -47,21 +48,9 @@ export default function Player() {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   };
 
-  // !------------------------------
   return currentTrack ? (
     <div className={playerblock.component}>
-      <div className={playerblock.songInfo}>
-        <img
-          className={playerblock.musicCover}
-          src={
-            tracks ? currentTrack.cover_photo : "https://picsum.photos/200/200"
-          }
-        />
-        <div>
-          <h3 className="title">{currentTrack.title}</h3>
-          <p className="subTitle">{currentTrack.artist.title}</p>
-        </div>
-      </div>
+      <SongInfo currentTrack={currentTrack} />
 
       <div className={playerblock.songLine}>
         <ReactPlayer
@@ -78,24 +67,7 @@ export default function Player() {
           onDuration={handleDuration}
           onProgress={handleProgress}
         />
-        <div>
-          <button className={playerblock.playButton} onClick={playerPrevTrack}>
-            <img src={prevSong} alt="" />
-          </button>
-          <button
-            className={playerblock.playButton_1}
-            onClick={handlePlayPause}
-          >
-            {isPlaying ? (
-              <img src={pauseBtn} alt="" />
-            ) : (
-              <img src={playBtn} alt="" />
-            )}
-          </button>
-          <button className={playerblock.playButton} onClick={playerNextTrack}>
-            <img src={nextSong} alt="" />
-          </button>
-        </div>
+        {/* Player Controller */}
 
         <div className={playerblock.songTimeLine}>
           <div className={playerblock.time}>
@@ -122,6 +94,7 @@ export default function Player() {
           </div>
         </div>
       </div>
+
       <div className={playerblock.rightLineSong}>
         <img src={valume} alt="" />
 

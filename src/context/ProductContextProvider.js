@@ -15,13 +15,15 @@ const ProductContextProvider = ({ children }) => {
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const [artist, setArtist] = useState("");
+  const [filter, setfilter] = useState({});
+  console.log(filter);
 
   // ! Search
   async function search(query, endpoint, setData) {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
       const res = await axios.get(url);
-      setData(res.data.results);
+      // setData(res.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -161,6 +163,15 @@ const ProductContextProvider = ({ children }) => {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
   };
+  async function getSongfilter(query) {
+    const url = `${API}/songs/?genre=${query}`;
+    try {
+      const res = await axios.get(url);
+      setfilter(res.data.results);
+    } catch (error) {
+      console.log("error");
+    }
+  }
 
   const values = {
     search,
@@ -182,6 +193,8 @@ const ProductContextProvider = ({ children }) => {
     setTitle,
     description,
     setDescription,
+    getSongfilter,
+    filter,
   };
 
   return (

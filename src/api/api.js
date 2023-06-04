@@ -1,4 +1,6 @@
+import axios from "axios";
 import confAxios from "../config/confAxios";
+import { API } from "../constants";
 
 export const api = {
   getArtists: async function () {
