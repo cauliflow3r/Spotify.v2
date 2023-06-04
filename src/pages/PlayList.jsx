@@ -13,7 +13,6 @@ import { useDownLoad } from "../context/DownloadContexProvider";
 import deleteBtn from "../assets/Delete_icon.svg";
 import { useAuth } from "../context/AuthContextProvider";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
-// import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
   const { currentUser } = useAuth();
@@ -92,7 +91,7 @@ const PlayList = () => {
               </div>
             </div>
             {favorites.tracks.map((elem, index) => {
-              console.log(elem.id);
+              console.log(elem);
               return (
                 <div className={classes.track_line}>
                   <div>
@@ -112,7 +111,7 @@ const PlayList = () => {
                       <h5> {elem.artist[1]} </h5>
                     </div>
                   </div>
-                  <div className={classes.album}>{elem.album}</div>
+                  <div className={classes.album}>{elem.album[0]}</div>
                   <div className={classes.dateAdd}>1 day ago</div>
                   <div className={classes.time}>3:22</div>
                   <div
@@ -140,7 +139,6 @@ const PlayList = () => {
             })}
           </div>
         </div>
-        {/* <div></div> */}
       </div>
     </MainLayout>
   );

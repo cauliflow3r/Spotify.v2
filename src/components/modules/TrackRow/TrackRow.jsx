@@ -23,7 +23,8 @@ const TrackRow = ({
   const navigate = useNavigate();
 
   const artistTitle = artist[1];
-  const { AddDownload, downloads, AddFavorites } = useDownLoad();
+  const { AddDownload, downloads, AddFavorites, checkTracksDown } =
+    useDownLoad();
 
   const isFavorite = (trackId) => {
     let favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -61,7 +62,7 @@ const TrackRow = ({
           AddDownload(track);
         }}
       >
-        {downloads ? (
+        {checkTracksDown(trackId) ? (
           <img src={undownload} alt="" />
         ) : (
           <img src={download} alt="" />

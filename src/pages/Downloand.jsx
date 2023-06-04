@@ -93,7 +93,7 @@ const Download = () => {
                         <img src={elem.cover_photo} width={48} alt="" />
                         <div className={classes.track_line_section_name}>
                           <h4> {elem.title} </h4>
-                          <h5> {elem.artist} </h5>
+                          <h5> {elem.artist[0]} </h5>
                         </div>
                       </div>
                       <div>SOS</div>
