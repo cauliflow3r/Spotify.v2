@@ -26,6 +26,8 @@ const TrackList = ({ albumInfo, trackList }) => {
   const handleCloseAddtoPlaylistModal = () =>
     setIsAddToPlaylistModalOpen(false);
 
+  console.log("trackList", trackList);
+
   return (
     <>
       {playlists.length ? (

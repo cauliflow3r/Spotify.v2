@@ -42,21 +42,22 @@ const EditSongs = () => {
   return (
     <>
       <div>
-        <div className={classes.glav_div}>
+        <div className="glav_div">
           <img
             id="img1"
             width={300}
-            src="http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
+            src=" http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
             alt=""
           />
           <div>
-            <h2 className={classes.edit_h4} variant="h4">
+            <h2 className="edit_h4" variant="h4">
               Edit Song
             </h2>
           </div>
-          <div className={classes.div2}>
+          <div className="div2">
             <input
-              className={classes.edit_kar1}
+              className="edit_kar1"
+              sx={{ marginBottom: "10px" }}
               id="outlined-basic"
               label="title"
               variant="outlined"
@@ -66,29 +67,44 @@ const EditSongs = () => {
               value={product.title || ""}
             />
 
-            <select name="artist" onChange={handleInp}>
+            <select name="artist" id="" onChange={handleInp}>
               {albums ? (
-                albums.map((album) => (
-                  <option key={album.id} value={album.id}>
-                    {album.title}
+                albums.map((elem) => (
+                  <option key={elem.id} value={elem.id}>
+                    {elem.title}
                   </option>
                 ))
               ) : (
-                <option value="">artist</option>
+                <option value="">artist </option>
               )}
             </select>
 
             <input
-              className={classes.edit_opi1}
+              className="edit_opi1"
+              sx={{ marginBottom: "10px" }}
               id="outlined-basic"
               label="genre"
               variant="outlined"
               size="small"
               name="description"
               onChange={handleInp}
+              // value={product.genre || ""}
             />
+            <input
+              type="file"
+              className="edit_opi1"
+              sx={{ marginBottom: "10px" }}
+              id="outlined-basic"
+              label="genre"
+              variant="outlined"
+              size="small"
+              name="description"
+              onChange={handleInp}
+              // value={product.audio_file || ""}
+            />
+
             <button
-              className={classes.edit_btn1}
+              className="edit_btn1"
               onClick={() => saveEditedProduct(product, id)}
               variant="outlined"
             >

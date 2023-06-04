@@ -3,12 +3,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
-import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
 
 import TrackList from "../components/modules/TrackList";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 
 const PlayListPage = ({ trackList }) => {
   console.log("trackList", trackList);
@@ -20,6 +20,7 @@ const PlayListPage = ({ trackList }) => {
 
   const { sendRating, setSelectedRating } = useProducts();
   const { getFeedDataListsAndSet, playlists } = useFeedDataLists();
+  const { setTrackList } = usePlayer();
   console.log(playlists);
 
   useEffect(() => {
@@ -29,11 +30,6 @@ const PlayListPage = ({ trackList }) => {
     getDownload();
   }, []);
 
-  // !downloads
-  // !----------------
-  // const { getALbumTrack, trackList, AlbumInfo, setCurrentTrack } =
-  //   useContext(songsContext);
-
   // todo -------------------
   const { id } = useParams();
   console.log("Это будет айди ", id);
@@ -41,6 +37,7 @@ const PlayListPage = ({ trackList }) => {
   useEffect(() => {
     getFeedDataListsAndSet();
     sendRating(id);
+    setTrackList(id);
   }, []);
 
   useEffect(() => {}, []);

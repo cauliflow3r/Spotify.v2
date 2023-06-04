@@ -89,10 +89,7 @@ const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   // *------use redicer--------
   // * -------------------------------------
-  const addProduct = async (newProduct) => {
-    await axios.post(`${API}/songs/upload/`, newProduct, getConfig());
-    navigate("/playlist");
-  };
+
 
   const getProductDetails = async (id) => {
     const { data } = await axios(`${API}/songs/${id}/`);
@@ -181,7 +178,6 @@ async function postPlayListComment (playlistId) {
     deleteProduct,
     saveEditedProduct,
     getProductDetails,
-    addProduct,
     productDetails: state.productDetails,
     sendRating,
     setSelectedRating,
