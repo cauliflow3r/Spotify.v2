@@ -40,7 +40,7 @@
 .rightPart {
   /* padding-top: 4vh; */
   position: relative;
-  /* width: 73%; */
+  width: 100%;
   /* background: linear-gradient(
     360deg,
     rgba(0, 0, 0, 1) 0%,
@@ -71,10 +71,127 @@
   bottom: 0;
   left: 0;
 }
+
+.containerComments {
+  width: 1200px;
+  margin: auto;
+}
+
+.wrapperComments {
+  margin-left: 82px;
+  width: 710px;
+  min-height: 250px;
+  border: 1px solid #2e2f22;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.commentList {
+  padding: 32px 22px 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.comment-list li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+  margin: 0 auto 10px auto;
+  border: 1px solid #2e2f22;
+  width: 90%;
+  height: 60px;
+  list-style-type: none;
+}
+
+.commentForm {
+  width: 710px;
+  margin-left: 82px;
+  height: 208px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-title {
+  margin-bottom: 80px;
+  margin-left: 82px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.leftForm {
+  width: 406px;
+  display: block;
+}
+.leftForm textarea {
+  background-color: transparent;
+}
+
+.leftForm input {
+  width: 224px;
+  padding-bottom: 1em;
+  border: none;
+  border-bottom: 1px solid #2e2f22;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.email-input {
+  margin-top: 40px;
+}
+
+.rightForm button {
+  margin-top: 50px;
+  width: 224px;
+  height: 45px;
+  background: none;
+  border-radius: 10px;
+  font-size: 16px;
+  border: 1px solid #2e2f22;
+  box-sizing: border-box;
+  color: white;
+}
+
+.rightForm {
+  width: 224px;
+}
+
+textarea {
+  width: 100%;
+  height: 208px;
+  resize: none;
+  border: 0;
+  border: 1px solid #2e2f22;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  padding: 20px;
+}
+
+textarea,
+textarea:active,
+input,
+input:active,
+button,
+button:active {
+  outline: none;
+}
+
+@media (max-width: 1200px) {
+  .navbar_line {
+    z-index: 3;
+    width: 75%;
+    position: fixed;
+    top: 0vh;
+  }
+}
+
 @media (max-width: 430px) {
   .container {
     /* z-index: 3; */
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     flex-direction: column;
     padding-top: 20px;

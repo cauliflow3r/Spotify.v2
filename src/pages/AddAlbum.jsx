@@ -15,7 +15,7 @@ const AddAlbum = () => {
     api.getArtists();
   }, []);
   const [form, setForm] = useState({});
-
+  console.log("pidr", form);
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
@@ -35,7 +35,7 @@ const AddAlbum = () => {
         <img
           id="img1"
           width={300}
-          src="	http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
+          src=" http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
           alt=""
         />
         <div>
@@ -80,11 +80,10 @@ const AddAlbum = () => {
               <option value="">artist </option>
             )}
           </select>
-          <Link to={"/addsong"}>
-            <button className="edit_btn" onClick={handleAddAlbum}>
-              Add Album
-            </button>
-          </Link>
+
+          <button className="edit_btn" onClick={handleAddAlbum}>
+            Add Album
+          </button>
         </div>
       </div>
     </>

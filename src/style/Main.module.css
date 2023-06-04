@@ -443,9 +443,10 @@ footer {
 /* !Albums */
 .playlistBox {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 3fr);
   grid-gap: 20px;
   padding-top: 20px;
+  width: 90%;
 }
 .ablumsSection {
   width: 100%;
@@ -520,6 +521,18 @@ footer {
   align-self: center;
 }
 
+@media screen and (max-width: 1250px) {
+  .artistBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .playlistBox {
+    display: grid;
+    grid-template-columns: repeat(2, 3fr);
+    grid-gap: 20px;
+    padding-top: 20px;
+    width: 100%;
+  }
+}
 @media screen and (max-width: 1024px) {
   .footer__container {
     padding-left: 1.875rem;
@@ -544,9 +557,19 @@ footer {
   .about__puma {
     flex-direction: column;
   }
+  .artistBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .playlistBox {
+    display: grid;
+    grid-template-columns: repeat(2, 3fr);
+    grid-gap: 20px;
+    padding-top: 20px;
+    width: 90%;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
   .footer__right {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -565,6 +588,16 @@ footer {
   .footer__bottom {
     align-items: center;
     justify-content: center;
+  }
+  .artistBox {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .playlistBox {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    grid-gap: 20px;
+    padding-top: 20px;
+    width: 90%;
   }
 }
 

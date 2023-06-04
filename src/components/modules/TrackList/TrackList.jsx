@@ -27,6 +27,8 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
   const handleCloseAddtoPlaylistModal = () =>
     setIsAddToPlaylistModalOpen(false);
 
+  // console.log("trackList", trackList);
+
   return (
     <>
       {playlists.length ? (
@@ -71,7 +73,7 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
             </div>
           </div>
 
-          {trackList.map((track, index) => {
+          {trackList?.map((track, index) => {
             return (
               <TrackRow
                 key={track.id}

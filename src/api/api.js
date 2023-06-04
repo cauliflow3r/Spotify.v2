@@ -29,6 +29,15 @@ export const api = {
       console.log("getAlbums: ", error);
     }
   },
+  getSongs: async function () {
+    try {
+      const response = await confAxios.get(`/songs/`);
+      return response.data.results;
+    } catch (error) {
+      console.log("getSongs: ", error);
+    }
+  },
+
   getGenres: async function () {
     try {
       const response = await confAxios.get(`/genre/`);
@@ -54,7 +63,38 @@ export const api = {
       console.log("getALbum: ", error);
     }
   },
-
+  getPlayList:async function (id) {
+    try {
+      let response = await confAxios.get(`/playlist/author/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.log("getPlayList: ", error);
+    }
+  },
+  postPlaylist: async function (playlistForm) {
+    try {
+      let response = await confAxios.get(`playlist/author/`,playlistForm);
+        return response.data
+    } catch (error) {
+      console.log("postPlaylist :", error);
+    }
+  },
+  postPlaylistComment: async function (commentForm) {
+    try {
+      let response = await confAxios.post(`/review/comments/`,commentForm);
+        return response.data
+    } catch (error) {
+      console.log("postPlaylist :", error);
+    }
+  },
+   postRating: async function (ratingForm) {
+    try {
+      let response = await confAxios.post(`/review/rating/`,ratingForm);
+        return response.data
+    } catch (error) {
+      console.log("postRating :", error);
+    }
+  },
   getTrack: async function (id) {
     try {
       const response = await confAxios.get(`/songs/${id}/`);
@@ -97,8 +137,19 @@ export const api = {
   addProduct: async function (newProduct) {
     await confAxios.post(`/songs/upload/`, newProduct);
   },
+  getUserCommentFromPlayList: async function (id, setGetCommentFromUSer) {
+    try {
+      let response = await confAxios.get(`/playlist/user/${id}`);
+      setGetCommentFromUSer(response.data.comments);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log("getUserCommentFromPlayList:", error);
+    }
+  },
   getProductDetails: async function (id) {
     const data = await confAxios.get(`/songs/${id}`);
     return data;
   },
 };
+
