@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddArtist.css";
+import { api } from "../api/api";
 
 const AddArtist = () => {
   const { AddArtist } = useProducts();
@@ -13,7 +14,7 @@ const AddArtist = () => {
     const newArtist = new FormData();
     newArtist.append("full_name", fullName);
     newArtist.append("bio", bio);
-    AddArtist(newArtist);
+    api.addArtist(newArtist);
   }
   return (
     <>

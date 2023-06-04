@@ -7,7 +7,7 @@ const AddSongs = () => {
   const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
 
   const [album, setAlbum] = useState(0);
-  //   const [artists, setArtists] = useState(0);
+  // const [artists, setArtists] = useState(0);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");

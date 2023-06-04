@@ -1,34 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
-import "../style/AddAlbum.css";
 import { api } from "../api/api";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import "../style/AddAlbum.css";
 import { Link } from "react-router-dom";
 
 const AddAlbum = () => {
-  const { AddAlbum } = useProducts();
+  const { artists: artists2 } = useFeedDataLists();
   const [title, setTitile] = useState("");
   const [descr, setDescr] = useState("");
-  const [artists, setArtists] = useState([]);
-  const [artistId, setArtistId] = useState(0);
+  const [artist, setArtist] = useState("");
 
   useEffect(() => {
-    // api.getArtists();
-    getArtistsResponse();
+    api.getArtists();
   }, []);
-
-  const getArtistsResponse = async () => {
-    const response = await api.getArtists();
-    setArtists(response);
-  };
+  const [form, setForm] = useState({});
 
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
-    newAlbum.append("artist", artistId);
+    newAlbum.append("artist", artist);
     newAlbum.append("description", descr);
-    console.log(newAlbum);
-    AddAlbum(newAlbum);
+    setForm(newAlbum);
+    // Call your API function here
+    api.addAlbum(newAlbum);
   }
+  console.log("title", title);
+  console.log("descr", descr);
+  console.log("title", title);
 
   return (
     <>
@@ -68,11 +67,11 @@ const AddAlbum = () => {
             name="artist"
             id=""
             onChange={(e) => {
-              setArtistId(e.target.value);
+              setArtist(e.target.value);
             }}
           >
-            {artists.length > 0 ? (
-              artists.map((elem) => (
+            {artists2 ? (
+              artists2.map((elem) => (
                 <option key={elem.id} value={elem.id}>
                   {elem.full_name}
                 </option>

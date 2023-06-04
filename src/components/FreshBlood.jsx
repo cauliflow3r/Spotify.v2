@@ -11,7 +11,11 @@ const FreshBlood = () => {
         alt=""
         style={{ maxWidth: "200px" }}
       />
-      <h2 style={{ left: "50px" }}>WHYTDAN</h2>
+      <div className="artist_header" style={{ marginleft: "50px" }}>
+        <img src="https://icons8.com/icon/98A4yZTt9abw/verified-badge" alt="" />
+
+        <h2>WHYTDAN</h2>
+      </div>
     </div>
   );
 };
