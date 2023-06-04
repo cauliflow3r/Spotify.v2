@@ -10,10 +10,12 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
+import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 
 const Download = () => {
   const { currentUser } = useAuth();
   const { setCurrentTrack } = useContext(songsContext);
+  const { setCurrentTrackIndex } = usePlayer();
   // ! downloads
   const { getDownload, downloads, deleteTrack } = useDownLoad();
   console.log(downloads);
@@ -83,7 +85,7 @@ const Download = () => {
                           src={play}
                           alt=""
                           onClick={() => {
-                            setCurrentTrack(index);
+                            setCurrentTrackIndex(index);
                           }}
                         />
                       </div>
@@ -91,7 +93,7 @@ const Download = () => {
                         <img src={elem.cover_photo} width={48} alt="" />
                         <div className={classes.track_line_section_name}>
                           <h4> {elem.title} </h4>
-                          <h5> {elem.artist} </h5>
+                          <h5> {elem.artist[0]} </h5>
                         </div>
                       </div>
                       <div>SOS</div>

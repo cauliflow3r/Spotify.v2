@@ -4,6 +4,7 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import FilterBlock from "./FilterBlock";
 
 const SearchPage = () => {
   const {
@@ -16,6 +17,7 @@ const SearchPage = () => {
     setSongs,
     setArtists,
     setAlbumsSearch,
+    filter,
   } = useProducts();
   const navigate = useNavigate();
 
@@ -41,6 +43,7 @@ const SearchPage = () => {
           <div className={classes.genreComponent}>
             <div className={classes.genreBox}></div>
           </div>
+
           <div>
             {/* Отображение результатов поиска */}
             {songs?.length > 0 && (
@@ -64,6 +67,45 @@ const SearchPage = () => {
 
             {artists.length > 0 && (
               <div>
+                <FilterBlock />
+                {filter.length
+                  ? filter.map((elem) => {
+                      return (
+                        <div>
+                          <div className={classes.track_line}>
+                            {/* <div>
+                              {" "}
+                              <img
+                                src={play_btn}
+                                alt=""
+                                onClick={() => {
+                                  setCurrentTrackIndex(index);
+                                }}
+                              />
+                            </div> */}
+                            <div className={classes.track_line_section}>
+                              <img src={elem.cover_photo} width={48} alt="" />
+                              <div className={classes.track_line_section_name}>
+                                <h4> {elem.title} </h4>
+                                <h5> {elem.artist[1]} </h5>
+                              </div>
+                            </div>
+                            <div className={classes.album}>{elem.album[0]}</div>
+                            <div className={classes.dateAdd}>1 day ago</div>
+                            <div className={classes.time}>3:22</div>
+                            {/* <div
+                              className={classes.favorites}
+                              onClick={() => {
+                                deleteLikedTrack(elem.id);
+                              }}
+                            >
+                              <img src={deleteBtn} alt="" />
+                            </div> */}
+                          </div>
+                        </div>
+                      );
+                    })
+                  : null}
                 <h2>Artists</h2>
                 <div className={classes.artistBox}>
                   {artists

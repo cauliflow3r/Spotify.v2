@@ -1,4 +1,5 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
@@ -10,6 +11,8 @@ import PlayerContextProvider from "./context/PlayerContextProvider";
 import PlaylistsContextProvider from "./context/PlaylistsContextProvider";
 import FeedContextProvider from "./context/FeedContextProvider/FeedContextProvider";
 
+import "react-toastify/dist/ReactToastify.css";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -20,6 +23,7 @@ root.render(
             <DownloadContextProvider>
               <ProductContextProvider>
                 <AuthContextProvider>
+                  <ToastContainer />
                   <App />
                 </AuthContextProvider>
               </ProductContextProvider>
