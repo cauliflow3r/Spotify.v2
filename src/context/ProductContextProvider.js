@@ -9,13 +9,14 @@ export const API = "http://34.125.87.211";
 
 const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
-  // const [selectedRating, setSelectedRating] = useState(null);
+  const [selectedRating, setSelectedRating] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const [artist, setArtist] = useState("");
+  const [artistList, setArtistList] = useState("");
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -37,42 +38,13 @@ const ProductContextProvider = ({ children }) => {
 
   // getAlbums();
 
-  // todo -----------------------------------------------
-  function getConfig() {
-    const tokens = JSON.parse(localStorage.getItem("tokens"));
-    // console.log(tokens);
-    const Authorization = `Bearer ${tokens.access}`;
-    const config = {
-      headers: { Authorization },
-    };
-    return config;
-  }
 
-  // console.log(getConfig());
-
-  async function AddArtist(newAtrist) {
-    try {
-      let res = await axios.post(`${API}/artists/`, newAtrist, getConfig());
-    } catch (error) {
-      console.log("error");
-    }
-  }
-  // todo -----------------------------------------------
-  // ! added album --------------------
-  async function AddAlbum(newAlbum) {
-    try {
-      let res = await axios.post(`${API}/albums/`, newAlbum, getConfig());
-    } catch (error) {
-      console.log("error");
-    }
-  }
   // ! added album --------------------
 
   // *------use redicer--------
   const INIT_STATE = {
     products: [],
     productDetails: {},
-    oneSong: null,
   };
 
   const reducer = (state = INIT_STATE, action) => {
@@ -91,19 +63,11 @@ const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   // *------use redicer--------
   // * -------------------------------------
-  const addProduct = async (newProduct) => {
-    await axios.post(`${API}/songs/upload/`, newProduct, getConfig());
-    navigate("/playlist");
-  };
 
-  const getProductDetails = async (id) => {
-    const { data } = await axios(`${API}/songs/${id}/`);
+  // ! CREATE
 
-    dispatch({
-      type: ACTIONS.GET_PRODUCT_DETAILS,
-      payload: data,
-    });
-  };
+
+  //! EDIT
 
   const saveEditedProduct = async (newProduct, id) => {
     console.log(newProduct, "NEWPRODUCT");
@@ -135,71 +99,39 @@ const ProductContextProvider = ({ children }) => {
 
   // ! add playlist
 
-  async function postPlaylist(playlistForm) {
-    try {
-      const res = await axios.post(
-        `${API}/playlist/author/`,
-        playlistForm,
-        getConfig()
-      );
-      console.log(res);
-      navigate("/addPlaylist");
-    } catch (error) {
-      console.log("error :", error);
-    }
-  }
+
 
   // ! Rating
 
-  const sendRating = async (id) => {
-    const rating = {
-      value: selectedRating,
-      playlist: id,
-    };
 
+  async function getSongfilter(query) {
+    const url = `${API}/songs/?genre=${query}`;
     try {
-      let res = await axios.post(`${API}/rating/`, rating, getConfig());
-
-      if (res.ok) {
-        console.log("Запрос успешно отправлен.");
-      } else {
-        console.error("Произошла ошибка при отправке запроса.");
-      }
+      const res = await axios.get(url);
+      setFilter(res.data.results);
     } catch (error) {
-      console.error("Произошла ошибка при отправке запроса.", error);
+      console.log("error");
     }
-  };
-  // async function getSongfilter(query) {
-  //   const url = `${API}/songs/?genre=${query}`;
-  //   try {
-  //     const res = await axios.get(url);
-  //     setfilter(res.data.results);
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  }
 
   const values = {
-
+    artistList,
+    setArtistList,
     search,
     inputValue,
     setInputValue,
     setSearchParams,
     searchParams,
-    AddArtist,
-    AddAlbum,
     deleteProduct,
     saveEditedProduct,
-    getProductDetails,
-    addProduct,
     productDetails: state.productDetails,
-    // sendRating,
-
-    postPlaylist,
+    setSelectedRating,
     title,
     setTitle,
     description,
     setDescription,
+    filter,
+    getSongfilter,
   };
 
   return (
