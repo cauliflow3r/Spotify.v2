@@ -57,8 +57,6 @@ const AlbumPage = () => {
     };
   }, [isModalOpen, handleOutsideClick]);
 
-  const { sendRating, setSelectedRating } = useProducts();
-
   useEffect(() => {
     getFavorites();
   }, []);
@@ -71,10 +69,6 @@ const AlbumPage = () => {
   // todo -------------------
   const { id } = useParams();
   // console.log("Это будет айди ", id);
-
-  useEffect(() => {
-    sendRating(id);
-  }, []);
 
   useEffect(() => {
     const getAlbumAndSet = async () => {

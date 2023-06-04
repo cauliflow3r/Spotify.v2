@@ -75,7 +75,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  /* width: 150px; */
   height: 35px;
   border-radius: 25px;
   background-color: rgba(206, 194, 194, 0.464);
@@ -124,7 +124,20 @@
     height: 20vh;
   }
 }
-
+@media (max-width: 860px) {
+  .container_bottom_nav h3 {
+    display: none;
+  }
+  .playList_line {
+    width: 80%;
+  }
+  .playList_line_h3 {
+    font-size: 0.7em;
+  }
+  .playList_line_h4 {
+    font-size: 0.7em;
+  }
+}
 @media (max-width: 770px) {
   .container_bottom_nav h3 {
     display: none;
