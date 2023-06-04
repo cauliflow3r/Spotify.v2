@@ -39,10 +39,10 @@ const MainRoute = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/addart" element={<AddArtist />} />
-        <Route path="/addalbum" element={<AddAlbum />} />
-        <Route path="/addproduct" element={<AddSongs />} />
-        <Route path="/editproduct/:id" element={<EditSongs />} />
+        <Route path="/add-art" element={<AddArtist />} />
+        <Route path="/add-album" element={<AddAlbum />} />
+        <Route path="/add-song" element={<AddSongs />} />
+        <Route path="/edit-song/:id" element={<EditSongs />} />
       </Routes>
     </div>
   );

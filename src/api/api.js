@@ -25,6 +25,14 @@ export const api = {
       console.log("getAlbums: ", error);
     }
   },
+  getSongs: async function () {
+    try {
+      const response = await confAxios.get(`/songs/`);
+      return response.data.results;
+    } catch (error) {
+      console.log("getSongs: ", error);
+    }
+  },
   getArtist: async function (id) {
     try {
       let response = await confAxios.get(`/artists/${id}/`);
@@ -50,12 +58,23 @@ export const api = {
       console.log("postPlaylist :", error);
     }
   },
-  createArtist: async function (newProduct) {
+  addAlbum: async function (newAlbum) {
     try {
-      const response =await confAxios.post(`/albums/`, newProduct);
+      let response = await confAxios.post(`/albums/`, newAlbum);
+      return response.data;
     } catch (error) {
-      console.log(error);
+      console.log("PostAlbum", error);
     }
-  }
-
+  },
+  addArtist: async function (newArtist) {
+    try {
+      let res = await confAxios.post(`/artists/`, newArtist);
+    } catch (error) {
+      console.log("error");
+    }
+  },
+  addProduct: async function (newProduct) {
+    await confAxios.post(`/songs/upload/`, newProduct);
+  },
 };
+

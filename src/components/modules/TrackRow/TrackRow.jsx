@@ -7,6 +7,7 @@ import download from "../../../assets/Line=empty, Name=download.svg";
 import unlike_song from "../../../assets/unlike _song_icon.svg";
 import like_song from "../../../assets/like_song_icon.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
+import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 
 const TrackRow = ({
   trackIndex,
@@ -15,6 +16,8 @@ const TrackRow = ({
   handleOpenAddtoPlaylistModal,
 }) => {
   const { id: trackId, cover_photo, title, artist } = track;
+
+  const {} = useFeedDataLists();
 
   const { setCurrentTrackIndex } = usePlayer();
 
@@ -80,7 +83,7 @@ const TrackRow = ({
       </button>
       <button
         style={{ width: "30px" }}
-        onClick={() => navigate(`/editproduct/${trackId}`)}
+        onClick={() => navigate(`/edit-song/${trackId}`)}
       >
         edit
       </button>

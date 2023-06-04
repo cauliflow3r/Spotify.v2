@@ -1,4 +1,4 @@
 export const SET_ARTISTS = "SET_ARTISTS";
 export const SET_ALBUMS = "SET_ALBUMS";
 export const SET_PLAYLISTS = "SET_PLAYLISTS";
-export const UPDATE_INPUT_VALUES = "UPDATE_INPUT_VALUES"
+export const SET_SONGS = "SET_SONGS"

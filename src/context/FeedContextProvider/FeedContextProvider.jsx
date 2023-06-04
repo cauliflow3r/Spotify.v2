@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useContext, createContext } from "react";
-import { SET_ALBUMS, SET_ARTISTS, SET_PLAYLISTS } from "./actions";
+import { SET_ALBUMS, SET_ARTISTS, SET_PLAYLISTS, SET_SONGS } from "./actions";
 import { api } from "../../api/api";
 
 export const FeedContext = createContext();
@@ -9,6 +9,7 @@ const initialState = {
   artists: [],
   albums: [],
   playlists: [],
+  songs: [],
 };
 
 const feedReducer = (state, action) => {
@@ -28,6 +29,11 @@ const feedReducer = (state, action) => {
         ...state,
         playlists: [...action.payload],
       };
+    case SET_SONGS:
+      return {
+        ...state,
+        songs: [...action.payload],
+      };
     default:
       return state;
   }
@@ -36,7 +42,7 @@ const feedReducer = (state, action) => {
 const FeedContextProvider = ({ children }) => {
   const [feedState, dispatch] = useReducer(feedReducer, initialState);
 
-  const { artists, albums, playlists } = feedState;
+  const { artists, albums, playlists, songs } = feedState;
   // console.log("artists:", artists);
 
   useEffect(() => {
@@ -44,6 +50,7 @@ const FeedContextProvider = ({ children }) => {
       const artists = await api.getArtists();
       const albums = await api.getAlbums();
       const playlists = await api.getPlaylists();
+      const songs = await api.getSongs();
 
       dispatch({
         type: SET_ARTISTS,
@@ -57,6 +64,10 @@ const FeedContextProvider = ({ children }) => {
         type: SET_PLAYLISTS,
         payload: Array.isArray(playlists) ? playlists : [],
       });
+      dispatch({
+        type: SET_SONGS,
+        payload: Array.isArray(songs) ? songs : [],
+      });
     };
 
     getFeedDataListsAndSet();
@@ -66,6 +77,7 @@ const FeedContextProvider = ({ children }) => {
     artists,
     albums,
     playlists,
+    songs,
   };
 
   return <FeedContext.Provider value={values}>{children}</FeedContext.Provider>;
