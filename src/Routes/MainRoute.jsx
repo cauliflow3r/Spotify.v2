@@ -27,7 +27,7 @@ const MainRoute = () => {
     <div>
       <Routes>
         <Route path="/" element={currentUser ? <Feed /> : <Homepage />} />
-        <Route path="/playadd" element={<Playadd />} />
+        {/* <Route path="/playadd" element={<Playadd />} /> */}
         <Route path="/formpay" element={<FormPay />} />
         <Route path="/album-page/:id" element={<AlbumPage />} />
         <Route path="/artist-page/:id" element={<ArtistPage />} />
