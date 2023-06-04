@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
-import classes from "../style/EditSongs.module.css";
+import "../style/EditSongs.css";
 import { api } from "../api/api";
 
 const EditSongs = () => {

@@ -49,7 +49,14 @@ export const api = {
       console.log("getALbum: ", error);
     }
   },
-
+  getPlayList:async function (id) {
+    try {
+      let response = await confAxios.get(`/playlist/author/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.log("getPlayList: ", error);
+    }
+  },
   postPlaylist: async function (playlistForm) {
     try {
       let response = await confAxios.get(`playlist/author/`,playlistForm);

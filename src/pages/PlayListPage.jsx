@@ -5,10 +5,10 @@ import album from "../style/AlbumPage.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
-
 import TrackList from "../components/modules/TrackList";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
+import { api } from "../api/api";
 
 const PlayListPage = ({ trackList }) => {
   console.log("trackList", trackList);
@@ -19,8 +19,7 @@ const PlayListPage = ({ trackList }) => {
   const { getFavorites, getDownload } = useDownLoad();
 
   const { sendRating, setSelectedRating } = useProducts();
-  const { getFeedDataListsAndSet, playlists } = useFeedDataLists();
-  const { setTrackList } = usePlayer();
+  const { playlists } = useFeedDataLists();
   console.log(playlists);
 
   useEffect(() => {
@@ -35,9 +34,8 @@ const PlayListPage = ({ trackList }) => {
   console.log("Это будет айди ", id);
 
   useEffect(() => {
-    getFeedDataListsAndSet();
+    api.getPlayList(id);
     sendRating(id);
-    setTrackList(id);
   }, []);
 
   useEffect(() => {}, []);

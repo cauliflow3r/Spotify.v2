@@ -73,7 +73,7 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
             </div>
           </div>
 
-          {trackList.map((track, index) => {
+          {trackList?.map((track, index) => {
             return (
               <TrackRow
                 key={track.id}
