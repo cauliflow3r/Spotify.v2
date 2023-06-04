@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 import { api } from "../api/api";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 
 const AddAlbum = () => {
-  const { getArtist, artist, AddAlbum } = useProducts();
+  const { artists: artists2 } = useFeedDataLists();
   const [title, setTitile] = useState("");
   const [descr, setDescr] = useState("");
-  const [artists, setArtist] = useState(1);
+  const [artist, setArtist] = useState("");
 
   useEffect(() => {
     api.getArtist();
@@ -15,11 +16,13 @@ const AddAlbum = () => {
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
-    newAlbum.append("artist", artists);
+    newAlbum.append("artist", artist);
     newAlbum.append("description", descr);
     console.log(newAlbum);
-    AddAlbum(newAlbum);
+    // Call your API function here
+    // api.addAlbum(newAlbum);
   }
+
   return (
     <div>
       <input
@@ -36,19 +39,19 @@ const AddAlbum = () => {
           setArtist(e.target.value);
         }}
       >
-        {artist ? (
-          artist.map((elem) => (
+        {artists2 ? (
+          artists2.map((elem) => (
             <option key={elem.id} value={elem.id}>
               {elem.full_name}
             </option>
           ))
         ) : (
-          <option value="">artist </option>
+          <option value="">artist</option>
         )}
       </select>
       <input
         type="text"
-        placeholder="desctiption"
+        placeholder="description"
         onChange={(e) => {
           setDescr(e.target.value);
         }}
