@@ -9,10 +9,12 @@ import unlike_song from "../../../assets/unlike _song_icon.svg";
 import like_song from "../../../assets/like_song_icon.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
 import { useDownLoad } from "../../../context/DownloadContexProvider";
+import { api } from "../../../api/api";
 
 const TrackRow = ({
   trackIndex,
   track,
+
   // AddFavorites,
   handleOpenAddtoPlaylistModal,
 }) => {
@@ -34,6 +36,16 @@ const TrackRow = ({
         (track) => track.id == trackId
       )?.length;
       return isTrackFavorite;
+    }
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await api.deleteProduct(productId);
+      api.getAlbums();
+      // Выполните дополнительные действия после удаления, если это необходимо
+    } catch (error) {
+      console.log("Ошибка при удалении продукта: ", error);
     }
   };
 
@@ -80,12 +92,7 @@ const TrackRow = ({
           <img src={like_song} alt="" />
         )}
       </div>
-      <button
-        className={classes.add}
-        onClick={() => handleOpenAddtoPlaylistModal(trackId)}
-      >
-        Add to playlist
-      </button>
+
       {/* <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -114,10 +121,18 @@ const TrackRow = ({
         </div>
       </Modal> */}
       <button
-        style={{ width: "30px" }}
+        className={classes.add}
+        style={{ backgroundColor: "blue" }}
         onClick={() => navigate(`/editTrack/${trackId}`)}
       >
         edit
+      </button>
+      <button
+        style={{ backgroundColor: "red" }}
+        className={classes.add}
+        onClick={() => handleDeleteProduct(track.id)}
+      >
+        delete
       </button>
     </div>
   );
