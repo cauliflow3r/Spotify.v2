@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 import { api } from "../api/api";
+<<<<<<< HEAD
 import "../style/EditSongs.css";
+=======
+>>>>>>> ca42b506ddc6f780ef8572e8b017bbc4e2f297d1
 
 const EditSongs = () => {
   const {
