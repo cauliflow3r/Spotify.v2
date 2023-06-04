@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddSongs.css";
 import { api } from "../api/api";
+import { Link } from "react-router-dom";
 const AddSongs = () => {
   const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
 
@@ -126,9 +127,15 @@ const AddSongs = () => {
             )}
           </select>
           <div>
-            <button className="edit_btn" onClick={handleAdd} variant="outlined">
-              New song
-            </button>
+            <Link to={"/"}>
+              <button
+                className="edit_btn"
+                onClick={handleAdd}
+                variant="outlined"
+              >
+                New song
+              </button>
+            </Link>
           </div>
         </div>
       </div>

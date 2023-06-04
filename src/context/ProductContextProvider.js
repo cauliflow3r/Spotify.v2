@@ -14,7 +14,7 @@ const ProductContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const [artist, setArtist] = useState("");
+  const [artistList, setArtistList] = useState("");
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -163,6 +163,8 @@ const ProductContextProvider = ({ children }) => {
   };
 
   const values = {
+    artistList,
+    setArtistList,
     search,
     inputValue,
     setInputValue,

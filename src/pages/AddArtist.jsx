@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddArtist.css";
 
 const AddArtist = () => {
   const { AddArtist } = useProducts();
-  const [fullName, serFullName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
   console.log(bio);
 
@@ -35,7 +36,7 @@ const AddArtist = () => {
             type="text"
             placeholder="Name "
             onChange={(e) => {
-              serFullName(e.target.value);
+              setFullName(e.target.value);
             }}
           />
           <h2>Bio</h2>
@@ -48,9 +49,11 @@ const AddArtist = () => {
             }}
           />
         </div>
-        <button className="edit_btn" onClick={hadleAdd}>
-          Add artist
-        </button>
+        <Link to={"/addalbum"}>
+          <button className="edit_btn" onClick={hadleAdd}>
+            Add artist
+          </button>
+        </Link>
       </div>
     </>
   );

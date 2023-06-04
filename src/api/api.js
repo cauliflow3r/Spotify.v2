@@ -4,6 +4,7 @@ export const api = {
   getArtists: async function () {
     try {
       const response = await confAxios.get(`/artists/`);
+
       return response.data.results;
     } catch (error) {
       console.log("getArtists: ", error);
