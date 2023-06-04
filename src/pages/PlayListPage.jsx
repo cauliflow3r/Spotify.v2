@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { useAuth } from "../context/AuthContextProvider";
-import { useProducts } from "../context/ProductContextProvider";
+
 import TrackList from "../components/modules/TrackList";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import { api } from "../api/api";
@@ -21,14 +21,12 @@ const PlayListPage = ({ trackList }) => {
   const { getFavorites, getDownload } = useDownLoad();
 
   const { playlists } = useFeedDataLists();
-
   function addPlaylistComment(e) {
     e.preventDefault();
 
     const commentForm = new FormData();
     commentForm.append("body", text);
     commentForm.append("playlist", id);
-    api.postPlaylistComment(commentForm, setGetCommentFromUSer);
   }
 
   function addPlaylistRating(e) {
