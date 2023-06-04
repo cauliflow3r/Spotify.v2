@@ -15,7 +15,6 @@ const AddAlbum = () => {
     api.getArtists();
   }, []);
   const [form, setForm] = useState({});
-
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);

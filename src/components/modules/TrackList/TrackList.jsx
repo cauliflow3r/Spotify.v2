@@ -8,8 +8,9 @@ import TrackRow from "../TrackRow";
 import classes from "./TracList.module.css";
 import AddToPlaylistModal from "../AddToPlaylistModal";
 import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
+import { useDownLoad } from "../../../context/DownloadContexProvider";
 
-const TrackList = ({ albumInfo, trackList }) => {
+const TrackList = ({ albumInfo, trackList, AddDownload }) => {
   const { playlists } = useFeedDataLists();
   const [trackIdToAddToPlaylist, setTrackIdToAddToPlaylist] = useState(null);
   const [isAddToPlaylistModalOpen, setIsAddToPlaylistModalOpen] =
@@ -80,7 +81,7 @@ const TrackList = ({ albumInfo, trackList }) => {
                 trackIndex={index}
                 handleOpenAddtoPlaylistModal={handleOpenAddtoPlaylistModal}
                 albumInfo={albumInfo}
-                // AddDownload={AddDownload}
+                AddDownload={AddDownload}
                 // handleIconClick={handleIconClick}
               />
             );

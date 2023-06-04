@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import { songsContext, useSong } from "./SongsContextProvider";
+import { usePlayer } from "./PlayerContextProvider/PlayerContextProvider";
 export const downloadContext = createContext();
 export const useDownLoad = () => useContext(downloadContext);
 const DownloadContextProvider = ({ children }) => {
-  const { setTrackList, setTrackInfo } = useContext(songsContext);
+  const { setTrackInfo } = useContext(songsContext);
+  const { setTrackList } = usePlayer();
   const [downloads, setDownloads] = useState(
     JSON.parse(localStorage.getItem("downloads"))
   );
@@ -45,7 +47,7 @@ const DownloadContextProvider = ({ children }) => {
     if (!downloads) {
       downloads = { tracks: [] };
     }
-    // console.log(track);
+
     let newTrack = track;
 
     let productToFind = downloads.tracks.filter((elem) => elem.id === track.id);

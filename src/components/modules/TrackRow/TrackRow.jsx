@@ -8,11 +8,12 @@ import unlike_song from "../../../assets/unlike _song_icon.svg";
 import like_song from "../../../assets/like_song_icon.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
 import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
+import { useDownLoad } from "../../../context/DownloadContexProvider";
 
 const TrackRow = ({
   trackIndex,
   track,
-  AddFavorites,
+  // AddFavorites,
   handleOpenAddtoPlaylistModal,
 }) => {
   const { id: trackId, cover_photo, title, artist } = track;
@@ -24,6 +25,8 @@ const TrackRow = ({
   const navigate = useNavigate();
 
   const artistTitle = artist[1];
+  const { AddDownload, downloads, AddFavorites, checkTracksDown } =
+    useDownLoad();
 
   const isFavorite = (trackId) => {
     let favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -57,11 +60,15 @@ const TrackRow = ({
       {/* <div className={classes.dateAdd}>1 day ago</div> */}
       <div
         className={classes.time}
-        // onClick={() => {
-        //   AddDownload(track);
-        // }}
+        onClick={() => {
+          AddDownload(track);
+        }}
       >
-        {true ? <img src={undownload} alt="" /> : <img src={download} alt="" />}
+        {checkTracksDown(trackId) ? (
+          <img src={undownload} alt="" />
+        ) : (
+          <img src={download} alt="" />
+        )}
       </div>
       <div
         className={classes.favorites}

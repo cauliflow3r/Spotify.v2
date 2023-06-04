@@ -13,6 +13,7 @@ Modal.setAppElement("#root");
 
 const AlbumPage = () => {
   const [albumInfo, setAlbumInfo] = useState(null);
+  const { trackList, setTrackList } = usePlayer();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
@@ -65,7 +66,7 @@ const AlbumPage = () => {
     getDownload();
   }, []);
 
-  const { trackList, setTrackList } = usePlayer();
+  // const { trackList, setTrackList } = usePlayer();
 
   // todo -------------------
   const { id } = useParams();
