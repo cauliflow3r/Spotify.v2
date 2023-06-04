@@ -116,12 +116,13 @@ const Search = () => {
             {location.pathname === "/search" && (
               <div>
                 <input
+                  className={navbar.inpSearch}
                   type="text"
                   value={inputValue}
                   placeholder="Что хочешь послушать"
                   onChange={(e) => setInputValue(e.target.value)}
                 />
-                <button onClick={handleSearchClick}>Search</button>
+                {/* <button onClick={handleSearchClick}>Search</button> */}
               </div>
             )}
           </>
