@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
+import { api } from "../api/api";
 
 const AddAlbum = () => {
   const { getArtist, artist, AddAlbum } = useProducts();
@@ -8,7 +9,7 @@ const AddAlbum = () => {
   const [artists, setArtist] = useState(1);
 
   useEffect(() => {
-    getArtist();
+    api.getArtist();
   }, []);
 
   function handleAddAlbum() {

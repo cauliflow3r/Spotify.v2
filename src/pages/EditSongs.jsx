@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
+import { api } from "../api/api";
 
 const EditSongs = () => {
   const {
@@ -19,10 +20,10 @@ const EditSongs = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    getArtist();
+    api.getArtist();
   }, []);
   useEffect(() => {
-    getAlbums();
+    api.getAlbums();
   }, []);
   useEffect(() => {
     getProductDetails(id);
