@@ -115,7 +115,7 @@ const TrackRow = ({
       </Modal> */}
       <button
         style={{ width: "30px" }}
-        onClick={() => navigate(`/editproduct/${trackId}`)}
+        onClick={() => navigate(`/editTrack/${trackId}`)}
       >
         edit
       </button>

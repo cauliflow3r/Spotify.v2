@@ -1,7 +1,16 @@
 import React from "react";
+import playBtn from "../../../../assets/Play.svg";
+import pauseBtn from "../../../../assets/Pause.svg";
+import prevSong from "../../../../assets/prevSong.svg";
+import nextSong from "../../../../assets/nextSong.svg";
 import playerblock from "../../../../style/Player.module.css";
 
-const PlayerControllers = () => {
+const PlayerControllers = ({
+  isPlaying,
+  handlePlayPause,
+  playerNextTrack,
+  playerPrevTrack,
+}) => {
   return (
     <div>
       <button className={playerblock.playButton} onClick={playerPrevTrack}>
