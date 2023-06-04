@@ -1,58 +1,3 @@
-// import React, { useState } from "react";
-// import { useProducts } from "../context/ProductContextProvider";
-
-// const Playadd = () => {
-//   const { title, setTitle, description, setDescription, postPlaylist } =
-//     useProducts();
-
-//   const [coverPhoto, setCoverPhoto] = useState(null);
-
-//   function addPlayList(e) {
-//     e.preventDefault();
-//     const playlistForm = new FormData();
-//     playlistForm.append("title", title);
-//     playlistForm.append("description", description);
-//     if (coverPhoto) {
-//       playlistForm.append("cover_photo", e.target.files[0]);
-//     }
-//     postPlaylist(playlistForm);
-//   }
-
-//   return (
-//     <div>
-//       <form enctype="multipart/form-data">
-//         <input
-//           placeholder="title"
-//           value={title}
-//           type="text"
-//           onChange={(e) => {
-//             setTitle(e.target.value);
-//           }}
-//         />
-//         <input
-//           value={description}
-//           placeholder="description"
-//           type="text"
-//           onChange={(e) => {
-//             setDescription(e.target.value);
-//           }}
-//         />
-//         <input
-//           value={coverPhoto}
-//           placeholder="photo"
-//           type="file"
-//           onChange={(e) => {
-//             setCoverPhoto(e.target.value);
-//           }}
-//         />
-//         <button onClick={addPlayList}>add</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Playadd;
-
 import React, { useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 
@@ -99,7 +44,6 @@ const Playadd = () => {
             setCoverPhoto(e.target.files[0]);
           }}
         />
-
         <button onClick={addPlayList}>add</button>
       </form>
     </div>

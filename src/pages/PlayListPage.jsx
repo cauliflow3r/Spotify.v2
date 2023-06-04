@@ -2,19 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import play_btn from "../assets/Play.svg";
-import download from "../assets/Line=empty, Name=download.svg";
-import undownload from "../assets/UN_Line=empty, Name=download.svg";
-import search from "../assets/Line=bold, Name=search.svg";
-import drop from "../assets/fi-ss-caret-down.svg";
-import clock from "../assets/Line=Clock.svg";
-import like_song from "../assets/like_song_icon.svg";
-import unlike_song from "../assets/unlike _song_icon.svg";
+import classes from "../style/PalyListBlock.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
-import TrackRow from "../components/modules/TrackRow";
 import TrackList from "../components/modules/TrackList";
 
 const PlayListPage = () => {
@@ -24,7 +16,14 @@ const PlayListPage = () => {
   // const navigate = useNavigate();
   const { getFavorites, getDownload } = useDownLoad();
 
-  const { sendRating, setSelectedRating } = useProducts();
+  const {
+    sendRating,
+    setSelectedRating,
+    selectedRating,
+    postPlayListComment,
+    setTitle,
+  } = useProducts();
+  console.log(selectedRating);
 
   useEffect(() => {
     getFavorites();
@@ -35,18 +34,17 @@ const PlayListPage = () => {
 
   // !downloads
   // !----------------
-  const { getALbumTrack, trackList, AlbumInfo } = useContext(songsContext);
-  console.log("trackList", trackList);
-  console.log("AlbumInfo", AlbumInfo);
+  // const { getALbumTrack, trackList, AlbumInfo } = useContext(songsContext);
+  // console.log("trackList", trackList);
+  // console.log("AlbumInfo", AlbumInfo);
 
   // todo -------------------
   const { id } = useParams();
   console.log("Это будет айди ", id);
 
   useEffect(() => {
-    getALbumTrack(id);
     sendRating(id);
-  }, []);
+  }, [selectedRating]);
 
   useEffect(() => {}, []);
 
@@ -124,6 +122,37 @@ const PlayListPage = () => {
             <TrackList trackList={trackList} />
             <div></div>
           </div>
+          {/*  */}
+          <div className={classes.containerComments}>
+            <form className={classes.commentForm} action="#" method="post">
+              <div className={classes.leftForm}>
+                <textarea
+                  className={classes.inputcomment}
+                  name="comment"
+                  id="comment"
+                  rows="10"
+                  placeholder="Написать комментарий..."
+                ></textarea>
+              </div>
+              <div className={classes.rightForm}>
+                <button
+                  type="submit"
+                  className={classes.commentAdd}
+                  onClick={postPlayListComment}
+                >
+                  Отправить
+                </button>
+              </div>
+            </form>
+            <div className={classes.wrapperComments}>
+              <ul className={classes.commentList}>
+                <li className={classes.comment}>Комментарий 1</li>
+                <li className={classes.comment}>Комментарий 2</li>
+                <li className={classes.comment}>Комментарий 3</li>
+              </ul>
+            </div>
+          </div>
+          {/*  */}
         </div>
       </div>
     </MainLayout>

@@ -9,12 +9,12 @@ export const API = "http://34.125.87.211";
 
 const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [selectedRating, setSelectedRating] = useState("");
+  const [selectedRating, setSelectedRating] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [text, setText] = useState("");
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -135,7 +135,16 @@ const ProductContextProvider = ({ children }) => {
       console.log("error :", error);
     }
   }
+// ! commient 
 
+
+async function postPlayListComment (playlistId) {
+  try {
+    let response = await axios.post(`${API}/review/comments/`, {body: text,playlist:playlistId}, getConfig());
+  } catch (error) {
+    console.log("postPlayListComment :", postPlayListComment);
+  }
+}
   // ! Rating
 
   const sendRating = async (id) => {
@@ -177,6 +186,7 @@ const ProductContextProvider = ({ children }) => {
     setTitle,
     description,
     setDescription,
+    postPlayListComment
   };
 
   return (

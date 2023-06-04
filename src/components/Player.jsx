@@ -18,7 +18,6 @@ export default function Player() {
   const [playedSeconds, setPlayedSeconds] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
-
   const tracks = trackList;
 
   const handlePlayPause = () => {

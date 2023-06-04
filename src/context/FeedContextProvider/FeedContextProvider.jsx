@@ -37,7 +37,7 @@ const FeedContextProvider = ({ children }) => {
   const [feedState, dispatch] = useReducer(feedReducer, initialState);
 
   const { artists, albums, playlists } = feedState;
-  console.log("playlists", playlists);
+  console.log("artists:", artists);
 
   const values = {
     artists,
