@@ -37,13 +37,7 @@ const FeedContextProvider = ({ children }) => {
   const [feedState, dispatch] = useReducer(feedReducer, initialState);
 
   const { artists, albums, playlists } = feedState;
-  console.log("artists:", artists);
-
-  const values = {
-    artists,
-    albums,
-    playlists,
-  };
+  // console.log("artists:", artists);
 
   useEffect(() => {
     const getFeedDataListsAndSet = async () => {
@@ -67,6 +61,12 @@ const FeedContextProvider = ({ children }) => {
 
     getFeedDataListsAndSet();
   }, []);
+
+  const values = {
+    artists,
+    albums,
+    playlists,
+  };
 
   return <FeedContext.Provider value={values}>{children}</FeedContext.Provider>;
 };

@@ -2,28 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import classes from "../style/PalyListBlock.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
-import TrackList from "../components/modules/TrackList";
 
-const PlayListPage = () => {
+import TrackList from "../components/modules/TrackList";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+
+const PlayListPage = ({ trackList }) => {
+  console.log("trackList", trackList);
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   // const navigate = useNavigate();
   const { getFavorites, getDownload } = useDownLoad();
 
-  const {
-    sendRating,
-    setSelectedRating,
-    selectedRating,
-    postPlayListComment,
-    setTitle,
-  } = useProducts();
-  console.log(selectedRating);
+  const { sendRating, setSelectedRating } = useProducts();
+  const { getFeedDataListsAndSet, playlists } = useFeedDataLists();
+  console.log(playlists);
 
   useEffect(() => {
     getFavorites();
@@ -34,17 +31,17 @@ const PlayListPage = () => {
 
   // !downloads
   // !----------------
-  // const { getALbumTrack, trackList, AlbumInfo } = useContext(songsContext);
-  // console.log("trackList", trackList);
-  // console.log("AlbumInfo", AlbumInfo);
+  // const { getALbumTrack, trackList, AlbumInfo, setCurrentTrack } =
+  //   useContext(songsContext);
 
   // todo -------------------
   const { id } = useParams();
   console.log("Это будет айди ", id);
 
   useEffect(() => {
+    getFeedDataListsAndSet();
     sendRating(id);
-  }, [selectedRating]);
+  }, []);
 
   useEffect(() => {}, []);
 
@@ -57,14 +54,14 @@ const PlayListPage = () => {
           <div>
             <div className={album.TopInfo}>
               <div className={album.TopInfo_Left}>
-                <img src={AlbumInfo.cover_photo} width={250} alt="" />
+                <img src={playlists.cover_photo} width={250} alt="" />
               </div>
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
-                <h2>{AlbumInfo.title} </h2>
+                <h2>{playlists.title} </h2>
                 <h5>
                   User&nbsp; : &nbsp;{currentUser} : Quantity :
-                  {trackList.length}
+                  {playlists.length}
                 </h5>
                 <div>
                   <div>
@@ -122,37 +119,6 @@ const PlayListPage = () => {
             <TrackList trackList={trackList} />
             <div></div>
           </div>
-          {/*  */}
-          <div className={classes.containerComments}>
-            <form className={classes.commentForm} action="#" method="post">
-              <div className={classes.leftForm}>
-                <textarea
-                  className={classes.inputcomment}
-                  name="comment"
-                  id="comment"
-                  rows="10"
-                  placeholder="Написать комментарий..."
-                ></textarea>
-              </div>
-              <div className={classes.rightForm}>
-                <button
-                  type="submit"
-                  className={classes.commentAdd}
-                  onClick={postPlayListComment}
-                >
-                  Отправить
-                </button>
-              </div>
-            </form>
-            <div className={classes.wrapperComments}>
-              <ul className={classes.commentList}>
-                <li className={classes.comment}>Комментарий 1</li>
-                <li className={classes.comment}>Комментарий 2</li>
-                <li className={classes.comment}>Комментарий 3</li>
-              </ul>
-            </div>
-          </div>
-          {/*  */}
         </div>
       </div>
     </MainLayout>

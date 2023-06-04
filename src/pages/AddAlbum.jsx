@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 import { api } from "../api/api";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
-import "../style/AddAlbum.css";
+import "../style/AddSongs.module.css";
 
 const AddAlbum = () => {
   const { artists: artists2 } = useFeedDataLists();
@@ -16,16 +16,11 @@ const AddAlbum = () => {
 
   function handleAddAlbum() {
     let newAlbum = new FormData();
-    newAlbum.append("title", String.title);
-    newAlbum.append("artist", Number.artist);
+    newAlbum.append("title", title);
+    newAlbum.append("artist", artist);
     newAlbum.append("description", String.descr);
-    newAlbum;
-    // Call your API function here
     api.addAlbum(newAlbum);
   }
-  console.log("title", title);
-  console.log("descr", descr);
-  console.log("title", title);
 
   return (
     <>
