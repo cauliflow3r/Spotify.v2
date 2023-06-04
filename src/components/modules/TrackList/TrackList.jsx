@@ -27,7 +27,7 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
   const handleCloseAddtoPlaylistModal = () =>
     setIsAddToPlaylistModalOpen(false);
 
-  console.log("trackList", trackList);
+  // console.log("trackList", trackList);
 
   return (
     <>

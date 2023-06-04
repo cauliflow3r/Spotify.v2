@@ -9,7 +9,7 @@ export const API = "http://34.125.87.211";
 const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState("");
-  const [selectedRating, setSelectedRating] = useState(null);
+  // const [selectedRating, setSelectedRating] = useState(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -139,6 +139,7 @@ const ProductContextProvider = ({ children }) => {
 // ! commient 
 
 
+
 async function postPlayListComment (playlistId) {
   try {
     let response = await axios.post(`${API}/review/comments/`, {body: text,playlist:playlistId}, getConfig());
@@ -148,24 +149,24 @@ async function postPlayListComment (playlistId) {
 }
   // ! Rating
 
-  const sendRating = async (id) => {
-    const rating = {
-      value: selectedRating,
-      playlist: id,
-    };
+  // const sendRating = async (id) => {
+  //   const rating = {
+  //     value: selectedRating,
+  //     playlist: id,
+  //   };
 
-    try {
-      let res = await axios.post(`${API}/rating/`, rating, getConfig());
+  //   try {
+  //     let res = await axios.post(`${API}/review/rating/`, rating, getConfig());
 
-      if (res.ok) {
-        console.log("Запрос успешно отправлен.");
-      } else {
-        console.error("Произошла ошибка при отправке запроса.");
-      }
-    } catch (error) {
-      console.error("Произошла ошибка при отправке запроса.", error);
-    }
-  };
+  //     if (res.ok) {
+  //       console.log("Запрос успешно отправлен.");
+  //     } else {
+  //       console.error("Произошла ошибка при отправке запроса.");
+  //     }
+  //   } catch (error) {
+  //     console.error("Произошла ошибка при отправке запроса.", error);
+  //   }
+  // };
 
   const values = {
     search,
@@ -179,8 +180,8 @@ async function postPlayListComment (playlistId) {
     saveEditedProduct,
     getProductDetails,
     productDetails: state.productDetails,
-    sendRating,
-    setSelectedRating,
+    // sendRating,
+
     postPlaylist,
     title,
     setTitle,

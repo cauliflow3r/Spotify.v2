@@ -65,6 +65,24 @@ export const api = {
       console.log("postPlaylist :", error);
     }
   },
+  postPlaylistComment: async function (commentForm) {
+    try {
+      let response = await confAxios.post(`/review/comments/`,commentForm);
+        return response.data
+    } catch (error) {
+      console.log("postPlaylist :", error);
+    }
+  },
+
+
+   postRating: async function (ratingForm) {
+    try {
+      let response = await confAxios.post(`/review/rating/`,ratingForm);
+        return response.data
+    } catch (error) {
+      console.log("postRating :", error);
+    }
+  },
   addAlbum: async function (newAlbum) {
     try {
       let response = await confAxios.post(`/albums/`, newAlbum);
@@ -83,5 +101,15 @@ export const api = {
   addProduct: async function (newProduct) {
     await confAxios.post(`/songs/upload/`, newProduct);
   },
+  getUserCommentFromPlayList: async function (id, setGetCommentFromUSer) {
+    try {
+      let response = await confAxios.get(`/playlist/user/${id}`);
+      setGetCommentFromUSer(response.data.comments);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log("getUserCommentFromPlayList:", error);
+    }
+  }
 };
 

@@ -32,7 +32,7 @@ const PlayerContextProvider = ({ children }) => {
   const [playerState, dispatch] = useReducer(playerReducer, initialState);
 
   const { trackList, currentTrackIndex, currentTrack } = playerState;
-  console.log("trackList: player", trackList);
+  // console.log("trackList: player", trackList);
 
   const setTrackList = (trackList) => {
     dispatch({ type: SET_TRACKLIST, payload: trackList });
@@ -60,8 +60,6 @@ const PlayerContextProvider = ({ children }) => {
     playerNextTrack,
     playerPrevTrack,
   };
-
-  console.log("trackList", trackList);
 
   return (
     <PlayerContext.Provider value={providerValues}>
