@@ -80,7 +80,7 @@ const AddAlbum = () => {
               <option value="">artist </option>
             )}
           </select>
-          <Link to={"/addproduct"}>
+          <Link to={"/addsong"}>
             <button className="edit_btn" onClick={handleAddAlbum}>
               Add Album
             </button>

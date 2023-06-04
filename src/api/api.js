@@ -21,6 +21,7 @@ export const api = {
   getAlbums: async function () {
     try {
       const response = await confAxios.get(`/albums/`);
+      console.log(response.data.results);
       return response.data.results;
     } catch (error) {
       console.log("getAlbums: ", error);
@@ -56,5 +57,12 @@ export const api = {
     } catch (error) {
       console.log("error");
     }
+  },
+  addProduct: async function (newProduct) {
+    await confAxios.post(`/songs/upload/`, newProduct);
+  },
+  getProductDetails: async function (id) {
+    const data = await confAxios.get(`/songs/${id}`);
+    return data;
   },
 };

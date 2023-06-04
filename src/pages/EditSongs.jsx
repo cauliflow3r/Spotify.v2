@@ -1,34 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
-import { api } from "../api/api";
 import "../style/EditSongs.css";
+import { api } from "../api/api";
+import { Link, useParams } from "react-router-dom";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 
 const EditSongs = () => {
-  const {
-    saveEditedProduct,
-    getProductDetails,
-    productDetails,
-    getArtist,
-    getAlbums,
-    artist,
-    albums,
-    // getGenre,
-    // genre
-  } = useProducts();
-  console.log(productDetails);
+  const { saveEditedProduct, getProductDetails, productDetails, getProducts } =
+    useProducts();
+  const { albums: albums2 } = useFeedDataLists();
 
   const { id } = useParams();
 
   useEffect(() => {
-    api.getArtist();
-  }, []);
-  useEffect(() => {
-    api.getAlbums();
-  }, []);
-  useEffect(() => {
     getProductDetails(id);
-    // getGenre();
   }, []);
 
   useEffect(() => {
@@ -37,21 +22,45 @@ const EditSongs = () => {
 
   const [product, setProduct] = useState(productDetails);
 
+  const [album, setAlbum] = useState(0);
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState(null);
+  const [genre, setGenre] = useState("");
+
   const handleInp = (e) => {
-    if (e.target.name === "price") {
-      let obj = {
-        ...product,
+    if (e.target.name === "genre") {
+      setProduct((prevProduct) => ({
+        ...prevProduct,
         [e.target.name]: Number(e.target.value),
-      };
-      setProduct(obj);
+      }));
     } else {
-      let obj = {
-        ...product,
+      setProduct((prevProduct) => ({
+        ...prevProduct,
         [e.target.name]: e.target.value,
-      };
-      setProduct(obj);
+      }));
     }
   };
+
+  const handleAdd = () => {
+    const newSong = new FormData();
+    console.log(title, file, genre, album, "FORMDATA");
+
+    newSong.append("title", title);
+
+    if (file) {
+      newSong.append("audio_file", file);
+    }
+    newSong.append("album", album);
+    newSong.append("genre", genre);
+    console.log("FORMDATANEWSONG", newSong);
+    saveEditedProduct(newSong, id);
+  };
+
+  // useEffect(() => {
+  //   api.getArtist();
+  //   api.getAlbums();
+  // }, []);
+
   return (
     <>
       <div>
@@ -59,7 +68,7 @@ const EditSongs = () => {
           <img
             id="img1"
             width={300}
-            src="	http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
+            src="http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
             alt=""
           />
           <div>
@@ -67,62 +76,68 @@ const EditSongs = () => {
               Edit Song
             </h2>
           </div>
+
           <div className="div2">
+            <h2>Title</h2>
             <input
-              className="edit_kar1"
+              className="edit_kar"
               sx={{ marginBottom: "10px" }}
               id="outlined-basic"
-              label="title"
+              placeholder="title"
               variant="outlined"
               size="small"
-              name="image"
-              onChange={handleInp}
-              value={product.title || ""}
+              name="title"
+              // value={product.title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
             />
-
-            <select name="artist" id="" onChange={handleInp}>
-              {albums ? (
-                albums.map((elem) => (
-                  <option key={elem.id} value={elem.id}>
-                    {elem.title}
-                  </option>
-                ))
-              ) : (
-                <option value="">artist </option>
-              )}
-            </select>
-
+            <h2>Genre</h2>
             <input
-              className="edit_opi1"
+              className="edit_kar"
               sx={{ marginBottom: "10px" }}
               id="outlined-basic"
-              label="genre"
+              placeholder="genre"
               variant="outlined"
               size="small"
-              name="description"
-              onChange={handleInp}
-              // value={product.genre || ""}
+              name="genre"
+              // value={product.genre}
+              onChange={(e) => {
+                setGenre(e.target.value);
+              }}
             />
-            <input
-              type="file"
-              className="edit_opi1"
-              sx={{ marginBottom: "10px" }}
-              id="outlined-basic"
-              label="genre"
-              variant="outlined"
-              size="small"
-              name="description"
-              onChange={handleInp}
-              // value={product.audio_file || ""}
-            />
+          </div>
 
-            <button
-              className="edit_btn1"
-              onClick={() => saveEditedProduct(product, id)}
-              variant="outlined"
-            >
-              Save Changes
-            </button>
+          <h2>Album</h2>
+
+          <select
+            name="album"
+            id=""
+            onChange={(e) => {
+              setAlbum(e.target.value);
+            }}
+            value={album}
+          >
+            {albums2 ? (
+              albums2.map((elem) => (
+                <option key={elem.id} value={elem.id}>
+                  {elem.title}
+                </option>
+              ))
+            ) : (
+              <option value="">album </option>
+            )}
+          </select>
+          <div>
+            <Link to={"/"}>
+              <button
+                className="edit_btn"
+                onClick={handleAdd}
+                variant="outlined"
+              >
+                Save
+              </button>
+            </Link>
           </div>
         </div>
       </div>

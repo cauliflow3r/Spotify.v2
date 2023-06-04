@@ -3,8 +3,10 @@ import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddSongs.css";
 import { api } from "../api/api";
 import { Link } from "react-router-dom";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 const AddSongs = () => {
   const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
+  const { albums: albums2 } = useFeedDataLists();
 
   const [album, setAlbum] = useState(0);
   // const [artists, setArtists] = useState(0);
@@ -22,7 +24,6 @@ const AddSongs = () => {
     newSong.append("genre", genre);
     // newSong.append("artist", artists);
     console.log(newSong);
-
     addProduct(newSong);
   }
   useEffect(() => {
@@ -63,22 +64,6 @@ const AddSongs = () => {
                 setFile(e.target.files[0]);
               }}
             />
-            {/* <select
-            name="artist"
-            onChange={(e) => {
-              setArtists(e.target.value);
-            }}
-          >
-            {artist ? (
-              artist.map((elem) => (
-                <option key={elem.id} value={elem.id}>
-                  {elem.full_name}
-                </option>
-              ))
-            ) : (
-              <option value="">artist </option>
-            )}
-          </select> */}
             <h2>Genre</h2>
             <input
               className="edit_kar"
@@ -107,7 +92,7 @@ const AddSongs = () => {
             />
           </div>
 
-          <h2>Artist</h2>
+          <h2>Album</h2>
 
           <select
             name="album"
@@ -116,14 +101,14 @@ const AddSongs = () => {
               setAlbum(e.target.value);
             }}
           >
-            {albums ? (
-              albums.map((elem) => (
+            {albums2 ? (
+              albums2.map((elem) => (
                 <option key={elem.id} value={elem.id}>
                   {elem.title}
                 </option>
               ))
             ) : (
-              <option value="">artist </option>
+              <option value="">album </option>
             )}
           </select>
           <div>
