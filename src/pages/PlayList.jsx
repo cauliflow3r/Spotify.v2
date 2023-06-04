@@ -28,6 +28,7 @@ const PlayList = () => {
     checkTracksDown,
     deleteLikedTrack,
   } = useDownLoad();
+  console.log("Favorites ", favorites);
 
   console.log(favorites);
   useEffect(() => {
@@ -139,7 +140,7 @@ const PlayList = () => {
             })}
           </div>
         </div>
-        <div></div>
+        {/* <div></div> */}
       </div>
     </MainLayout>
   );
