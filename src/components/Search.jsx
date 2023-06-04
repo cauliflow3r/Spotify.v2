@@ -158,6 +158,12 @@ const Search = () => {
               >
                 Create playlists
               </button>
+              <button
+                onClick={() => navigate("/formpay")}
+                className={navbar.btn}
+              >
+                Subscripe
+              </button>
               <div className={navbar.line_arrow_left} onClick={handleIconClick}>
                 <img src={login_user} alt="" />
               </div>

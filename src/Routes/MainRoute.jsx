@@ -19,6 +19,7 @@ import AddSongs from "../pages/AddSongs";
 import EditSongs from "../pages/EditSongs";
 import Playadd from "../pages/Playadd";
 import PlayListPage from "../pages/PlayListPage";
+import FormPay from "../pages/FormPay";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();
@@ -28,6 +29,7 @@ const MainRoute = () => {
       <Routes>
         <Route path="/" element={currentUser ? <Feed /> : <Homepage />} />
         <Route path="/playadd" element={<Playadd />} />
+        <Route path="/formpay" element={<FormPay />} />
         <Route path="/album-page/:id" element={<AlbumPage />} />
         <Route path="/artist-page/:id" element={<ArtistPage />} />
         <Route path="/playlist-page/:id" element={<PlayListPage />} />
