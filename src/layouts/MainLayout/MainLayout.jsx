@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Player from "../../components/Player";
+import Player from "../../components/modules/Player";
 import Sidebar from "../../components/Sidebar";
 import Search from "../../components/Search";
 import classes from "../../style/PalyListBlock.module.css";

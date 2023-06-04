@@ -1,31 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import classes from "../../../style/Main.module.css";
+import classes from "./ArtistBlock.module.css";
+import ArtisCard from "./ArtistCard";
 
 const ArtistsBlock = ({ artists }) => {
-  const navigate = useNavigate();
-
-  const navigateToArtist = (artistId) => () =>
-    navigate(`/artist-page/${artistId}`);
-
   return (
-    <div className={classes.artistBox}>
+    <div className={classes.artistBlock}>
       {artists.map((artist) => (
-        <div
-          className={classes.preview}
-          key={artist.id}
-          onClick={navigateToArtist(artist.id)}
-        >
-          <div className={classes.cardPreview}>
-            <img src={artist.photo} alt="Artist Cover Img" />
-            <p>{artist.full_name}</p>
-            <div className={classes.icon_play}>
-              <div className={classes.circle_play}>
-                <div className={classes.triangle_play}></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ArtisCard key={artist.id} artist={artist} />
       ))}
     </div>
   );

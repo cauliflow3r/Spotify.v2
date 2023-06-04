@@ -1,5 +1,11 @@
 import React, { useEffect, useReducer, useContext, createContext } from "react";
-import { SET_ALBUMS, SET_ARTISTS, SET_PLAYLISTS } from "./actions";
+import {
+  ADD_PLAYLIST,
+  SET_ALBUMS,
+  SET_ARTISTS,
+  SET_GENRES,
+  SET_PLAYLISTS,
+} from "./actions";
 import { api } from "../../api/api";
 
 export const FeedContext = createContext();
@@ -9,6 +15,7 @@ const initialState = {
   artists: [],
   albums: [],
   playlists: [],
+  genres: [],
 };
 
 const feedReducer = (state, action) => {
@@ -28,6 +35,16 @@ const feedReducer = (state, action) => {
         ...state,
         playlists: [...action.payload],
       };
+    case SET_GENRES:
+      return {
+        ...state,
+        genres: [...action.payload],
+      };
+    case ADD_PLAYLIST:
+      return {
+        ...state,
+        playlists: [...state.playlists, action.payload],
+      };
     default:
       return state;
   }
@@ -36,12 +53,21 @@ const feedReducer = (state, action) => {
 const FeedContextProvider = ({ children }) => {
   const [feedState, dispatch] = useReducer(feedReducer, initialState);
 
-  const { artists, albums, playlists } = feedState;
+  const { artists, albums, playlists, genres } = feedState;
+
+  const addCreatedPlaylist = (playlist) => {
+    dispatch({
+      type: ADD_PLAYLIST,
+      payload: playlist,
+    });
+  };
 
   const values = {
     artists,
     albums,
     playlists,
+    genres,
+    addCreatedPlaylist,
   };
 
   useEffect(() => {
@@ -49,6 +75,7 @@ const FeedContextProvider = ({ children }) => {
       const artists = await api.getArtists();
       const albums = await api.getAlbums();
       const playlists = await api.getPlaylists();
+      const genres = await api.getGenres();
 
       dispatch({
         type: SET_ARTISTS,
@@ -61,6 +88,10 @@ const FeedContextProvider = ({ children }) => {
       dispatch({
         type: SET_PLAYLISTS,
         payload: Array.isArray(playlists) ? playlists : [],
+      });
+      dispatch({
+        type: SET_GENRES,
+        payload: Array.isArray(genres) ? genres : [],
       });
     };
 

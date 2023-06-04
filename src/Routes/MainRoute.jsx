@@ -16,14 +16,13 @@ import Feed from "../pages/Feed";
 import AddArtist from "../pages/AddArtist";
 import AddAlbum from "../pages/AddAlbum";
 import AddSongs from "../pages/AddSongs";
-import EditSongs from "../pages/EditSongs";
-import Playadd from "../pages/Playadd";
+import EditTrackPage from "../pages/EditTrackPage";
 import PlayListPage from "../pages/PlayListPage";
 import FormPay from "../pages/FormPay";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();
-  // console.log(currentUser);
+
   return (
     <div>
       <Routes>
@@ -44,7 +43,7 @@ const MainRoute = () => {
         <Route path="/addart" element={<AddArtist />} />
         <Route path="/addalbum" element={<AddAlbum />} />
         <Route path="/addsong" element={<AddSongs />} />
-        <Route path="/editproduct/:id" element={<EditSongs />} />
+        <Route path="/editTrack/:id" element={<EditTrackPage />} />
       </Routes>
     </div>
   );

@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from "react-router";
 import Modal from "react-modal";
 import { useAuth } from "../context/AuthContextProvider";
 import { useProducts } from "../context/ProductContextProvider";
+import CreatePalylistModal from "./modules/CreatePalylistModal";
 Modal.setAppElement("#root");
 
 const Search = () => {
@@ -17,13 +18,16 @@ const Search = () => {
   const navigate = useNavigate();
   const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
-  const {
-    setInputValue,
-    inputValue,
-    handleSearch,
-    setSearchParams,
-    searchParams,
-  } = useProducts();
+  const { setInputValue, inputValue } = useProducts();
+
+  const [isCreatePlaylistModalOpen, setIsCreatePlaylistModalOpen] =
+    useState(false);
+
+  const handleOpenCreatePlaylistModal = () =>
+    setIsCreatePlaylistModalOpen(true);
+
+  const handleCloseCreatePlaylistModal = () =>
+    setIsCreatePlaylistModalOpen(false);
 
   const location = useLocation();
 
@@ -93,15 +97,13 @@ const Search = () => {
     setCurrentUser(email);
   }, []);
 
-  const handleSearchClick = () => {
-    handleSearch(inputValue);
-    setSearchParams({ query: inputValue });
-  };
-
-  // !=================
-
   return (
     <>
+      <CreatePalylistModal
+        isOpen={isCreatePlaylistModalOpen}
+        handleClose={handleCloseCreatePlaylistModal}
+      />
+
       <div
         className={scrolled ? navbar.line_container_1 : navbar.line_container}
       >
@@ -116,12 +118,13 @@ const Search = () => {
             {location.pathname === "/search" && (
               <div>
                 <input
+                  className={navbar.inpSearch}
                   type="text"
                   value={inputValue}
                   placeholder="Что хочешь послушать"
                   onChange={(e) => setInputValue(e.target.value)}
                 />
-                <button onClick={handleSearchClick}>Search</button>
+                {/* <button onClick={handleSearchClick}>Search</button> */}
               </div>
             )}
           </>
@@ -153,7 +156,7 @@ const Search = () => {
           {currentUser ? (
             <>
               <button
-                onClick={() => navigate("/playadd")}
+                onClick={handleOpenCreatePlaylistModal}
                 className={navbar.btn}
               >
                 Create playlists

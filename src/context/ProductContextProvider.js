@@ -22,7 +22,7 @@ const ProductContextProvider = ({ children }) => {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
       const res = await axios.get(url);
-      setData(res.data.results);
+      // setData(res.data.results);
     } catch (error) {
       console.log(error);
     }
@@ -97,14 +97,6 @@ const ProductContextProvider = ({ children }) => {
     navigate("/");
   };
 
-  const getProductDetails = async (id) => {
-    const { data } = await axios(`${API}/songs/${id}/`);
-    dispatch({
-      type: ACTIONS.GET_PRODUCT_DETAILS,
-      payload: data,
-    });
-  };
-
   //! EDIT
 
   const saveEditedProduct = async (newProduct, id) => {
@@ -145,7 +137,7 @@ const ProductContextProvider = ({ children }) => {
         getConfig()
       );
       console.log(res);
-      navigate("/playadd");
+      navigate("/addPlaylist");
     } catch (error) {
       console.log("error :", error);
     }
@@ -171,6 +163,15 @@ const ProductContextProvider = ({ children }) => {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
   };
+  // async function getSongfilter(query) {
+  //   const url = `${API}/songs/?genre=${query}`;
+  //   try {
+  //     const res = await axios.get(url);
+  //     setfilter(res.data.results);
+  //   } catch (error) {
+  //     console.log("error");
+  //   }
+  // }
 
   const values = {
     artistList,
@@ -184,7 +185,6 @@ const ProductContextProvider = ({ children }) => {
     AddAlbum,
     deleteProduct,
     saveEditedProduct,
-    getProductDetails,
     addProduct,
     productDetails: state.productDetails,
     sendRating,
