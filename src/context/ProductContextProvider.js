@@ -9,6 +9,7 @@ export const API = "http://34.125.87.211";
 
 const ProductContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const [filter, setFilter] = useState([]);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [selectedRating, setSelectedRating] = useState("");
@@ -163,15 +164,15 @@ const ProductContextProvider = ({ children }) => {
       console.error("Произошла ошибка при отправке запроса.", error);
     }
   };
-  // async function getSongfilter(query) {
-  //   const url = `${API}/songs/?genre=${query}`;
-  //   try {
-  //     const res = await axios.get(url);
-  //     setfilter(res.data.results);
-  //   } catch (error) {
-  //     console.log("error");
-  //   }
-  // }
+  async function getSongfilter(query) {
+    const url = `${API}/songs/?genre=${query}`;
+    try {
+      const res = await axios.get(url);
+      setFilter(res.data.results);
+    } catch (error) {
+      console.log("error");
+    }
+  }
 
   const values = {
     artistList,
@@ -194,6 +195,8 @@ const ProductContextProvider = ({ children }) => {
     setTitle,
     description,
     setDescription,
+    filter,
+    getSongfilter,
   };
 
   return (
