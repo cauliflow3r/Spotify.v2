@@ -79,7 +79,7 @@ export const api = {
       console.log("postPlaylist :", error);
     }
   },
-  postPlaylistComment: async function (commentForm,setGetCommentFromUSer,) {
+  postPlaylistComment: async function (commentForm,setGetCommentFromUSer) {
     try {
       let response = await confAxios.post(`/review/comments/`,commentForm);
       setGetCommentFromUSer((prevState) => [...prevState, commentForm]);

@@ -107,3 +107,11 @@ button,
 button:active {
   outline: none;
 }
+@media (max-width: 1150px) {
+  .wrapperComments_ {
+    width: 70%;
+  }
+  .commentForm_ {
+    flex-direction: column-reverse;
+  }
+}

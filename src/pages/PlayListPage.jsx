@@ -4,7 +4,6 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { useAuth } from "../context/AuthContextProvider";
-
 import TrackList from "../components/modules/TrackList";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import { api } from "../api/api";
@@ -27,6 +26,9 @@ const PlayListPage = ({ trackList }) => {
     const commentForm = new FormData();
     commentForm.append("body", text);
     commentForm.append("playlist", id);
+    api.postPlaylistComment(commentForm, (newComment) => {
+      setGetCommentFromUSer((prevState) => [...prevState, newComment]);
+    });
   }
 
   function addPlaylistRating(e) {
@@ -35,7 +37,6 @@ const PlayListPage = ({ trackList }) => {
     ratingForm.append("value", selectedRating);
     ratingForm.append("playlist", id);
     api.postRating(ratingForm);
-    setGetCommentFromUSer((prevState) => [...prevState, selectedRating]);
   }
 
   const handleTextAreaChange = (e) => {
