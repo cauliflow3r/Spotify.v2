@@ -71,7 +71,7 @@ const SearchPage = () => {
                 {filter.length
                   ? filter.map((elem) => {
                       return (
-                        <div>
+                        <div key={elem.id}>
                           <div className={classes.track_line}>
                             {/* <div>
                               {" "}
