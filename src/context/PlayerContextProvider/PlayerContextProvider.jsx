@@ -60,8 +60,8 @@ const PlayerContextProvider = ({ children }) => {
     playerPrevTrack,
   };
 
-  console.log("playerState: ", playerState);
-  console.log("providerValues: ", providerValues);
+  // console.log("playerState: ", playerState);
+  // console.log("providerValues: ", providerValues);
 
   return (
     <PlayerContext.Provider value={providerValues}>

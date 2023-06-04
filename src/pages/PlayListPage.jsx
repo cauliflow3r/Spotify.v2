@@ -22,13 +22,7 @@ const PlayListPage = () => {
   const navigate = useNavigate();
 
   // const navigate = useNavigate();
-  const {
-    getFavorites,
-    AddFavorites,
-    AddDownload,
-    getDownload,
-    checkTracksDown,
-  } = useDownLoad();
+  const { getFavorites, getDownload } = useDownLoad();
 
   const { sendRating, setSelectedRating } = useProducts();
 
@@ -41,8 +35,9 @@ const PlayListPage = () => {
 
   // !downloads
   // !----------------
-  const { getALbumTrack, trackList, AlbumInfo, setCurrentTrack } =
-    useContext(songsContext);
+  const { getALbumTrack, trackList, AlbumInfo } = useContext(songsContext);
+  console.log("trackList", trackList);
+  console.log("AlbumInfo", AlbumInfo);
 
   // todo -------------------
   const { id } = useParams();

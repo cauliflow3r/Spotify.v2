@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 import classes from "./TrackRow.module.css";
 import play_btn from "../../../assets/Play.svg";
 import undownload from "../../../assets/UN_Line=empty, Name=download.svg";
@@ -79,33 +78,6 @@ const TrackRow = ({
       >
         Add to playlist
       </button>
-      {/* <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        overlayClassName="custom-overlay"
-        className="custom-modal"
-      >
-        <div className={classes.modal_window}>
-          <div className={classes.textBlock}>
-            <button
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              Account
-            </button>
-          </div>
-          <div className={classes.textBlock}>
-            <select>
-              {Object.values(playlistAdd).map((playlist) => (
-                <option key={playlist.id} value={playlist.title}>
-                  {playlist.title}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </Modal> */}
       <button
         style={{ width: "30px" }}
         onClick={() => navigate(`/editproduct/${trackId}`)}

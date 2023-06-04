@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import albumClasses from "../style/AlbumPage.module.css";
@@ -12,7 +6,6 @@ import albumClasses from "../style/AlbumPage.module.css";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import { useProducts } from "../context/ProductContextProvider";
 import Modal from "react-modal";
-import TrackRow from "../components/modules/TrackRow";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 import { api } from "../api/api";
 import TrackList from "../components/modules/TrackList";
@@ -23,14 +16,7 @@ const AlbumPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
-  const {
-    getFavorites,
-    AddFavorites,
-    AddDownload,
-    getDownload,
-    checkTracks,
-    checkTracksDown,
-  } = useDownLoad();
+  const { getFavorites, getDownload } = useDownLoad();
 
   //! For modaalwindow
   const openModal = () => {
@@ -118,57 +104,6 @@ const AlbumPage = () => {
                   <h5>Плейлист</h5>
                   <h2>{albumInfo.title} </h2>
                   <h5>Quantity :{trackList.length}</h5>
-                  {/* <div>
-                  <div>
-                    <div>
-                      <input
-                        type="radio"
-                        id="r-01"
-                        name="r"
-                        value="1"
-                        onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
-                      />
-                      <label htmlFor="r-01">★</label>
-                      <input
-                        type="radio"
-                        id="r-02"
-                        name="r"
-                        value="2"
-                        onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
-                      />
-                      <label htmlFor="r-02">★</label>
-                      <input
-                        type="radio"
-                        id="r-03"
-                        name="r"
-                        value="3"
-                        onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
-                      />
-                      <label htmlFor="r-03">★</label>
-                      <input
-                        type="radio"
-                        id="r-04"
-                        name="r"
-                        value="4"
-                        onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
-                      />
-                      <label htmlFor="r-04">★</label>
-                      <input
-                        type="radio"
-                        id="r-05"
-                        name="r"
-                        value="5"
-                        onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
-                      />
-                      <label htmlFor="r-05">★</label>
-                    </div>
-                  </div>
-                </div> */}
                 </div>
               </div>
               {/* tracklist */}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
+import { useFeedDataLists } from "../context/FeedContextProvider";
 
 const EditSongs = () => {
   const {
@@ -9,25 +10,23 @@ const EditSongs = () => {
     productDetails,
     getArtist,
     getAlbums,
-    artist,
-    albums,
-    // getGenre,
-    // genre
   } = useProducts();
   console.log(productDetails);
 
+  const { artists, albums, playlists } = useFeedDataLists();
+
   const { id } = useParams();
 
-  useEffect(() => {
-    getArtist();
-  }, []);
-  useEffect(() => {
-    getAlbums();
-  }, []);
-  useEffect(() => {
-    getProductDetails(id);
-    // getGenre();
-  }, []);
+  // useEffect(() => {
+  //   getArtist();
+  // }, []);
+  // useEffect(() => {
+  //   getAlbums();
+  // }, []);
+  // useEffect(() => {
+  //   getProductDetails(id);
+  //   // getGenre();
+  // }, []);
 
   useEffect(() => {
     setProduct(productDetails);

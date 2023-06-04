@@ -10,7 +10,7 @@ const PlaylistsBlock = ({ playlists }) => {
 
   return (
     <div className={classes.playlistBox}>
-      {playlists.map((playlist) => (
+      {playlists?.map((playlist) => (
         <div
           className={classes.playlist}
           key={playlist.id}
