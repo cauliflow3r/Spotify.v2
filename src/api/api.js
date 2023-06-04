@@ -41,4 +41,12 @@ export const api = {
       console.log("getALbum: ", error);
     }
   },
+  addAlbum: async function (newAlbum) {
+    try {
+      let response = await confAxios.post(`/albums/`, newAlbum);
+      return response.data;
+    } catch (error) {
+      console.log("PostAlbum", error);
+    }
+  },
 };

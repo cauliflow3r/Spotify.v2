@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ACTIONS } from "../helpers/const";
-
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
 export const API = "http://34.125.87.211";
@@ -15,6 +14,7 @@ const ProductContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [artist, setArtist] = useState("");
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -85,6 +85,7 @@ const ProductContextProvider = ({ children }) => {
         return state;
     }
   };
+
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   // *------use redicer--------
   // * -------------------------------------
@@ -103,7 +104,11 @@ const ProductContextProvider = ({ children }) => {
   };
 
   const saveEditedProduct = async (newProduct, id) => {
-    await axios.patch(`${API}/songs/${id}/`, newProduct);
+    const payload = {
+      ...newProduct,
+      genre: newProduct.genre.slug,
+    };
+    await axios.patch(`${API}/songs/${id}/`, payload);
     getProducts();
     navigate("/products");
   };
