@@ -101,4 +101,11 @@ export const api = {
     const data = await confAxios.get(`/songs/${id}`);
     return data;
   },
+  deleteProduct: async function (id) {
+    try {
+      await confAxios.delete(`/songs/${id}/`);
+    } catch (error) {
+      console.log("deleteProduct: ", error);
+    }
+  },
 };

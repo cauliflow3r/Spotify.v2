@@ -122,10 +122,10 @@ const ProductContextProvider = ({ children }) => {
   };
 
   //! DELETE
-  const deleteProduct = async (id) => {
-    await axios.delete(`${API}/songs/${id}/`);
-    getProducts();
-  };
+  // const deleteProduct = async (id) => {
+  //   await axios.delete(`${API}/songs/${id}/`);
+  //   getProducts();
+  // };
 
   // * -------------------------------------
 
@@ -185,7 +185,7 @@ const ProductContextProvider = ({ children }) => {
     searchParams,
     AddArtist,
     AddAlbum,
-    deleteProduct,
+    // deleteProduct,
     saveEditedProduct,
     addProduct,
     productDetails: state.productDetails,
