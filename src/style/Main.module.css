@@ -506,7 +506,7 @@ footer {
   box-sizing: border-box;
   font-size: 1.125rem;
   font-weight: 700;
-  background-color: #1ac455;
+  background-color: rgba(29, 185, 84, 1);
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;

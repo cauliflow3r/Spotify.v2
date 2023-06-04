@@ -12,41 +12,37 @@ const FilterBlock = () => {
     <div className={classFilter.filterCont}>
       <button
         className={classFilter.filterBtn}
-        value={"rock"}
         onClick={(e) => {
-          getSongfilter(e.target.value);
-          setBlock((e) => {
-            setBlock(e.target.value);
-          });
+          getSongfilter("rock");
         }}
       >
-        rock
+        Rock
       </button>
       <button
         className={classFilter.filterBtn}
         onClick={(e) => {
-          getSongfilter(e.target.value);
+          getSongfilter("city_pop");
         }}
       >
-        city pop
+        City pop
       </button>
       <button
         className={classFilter.filterBtn}
         onClick={(e) => {
-          getSongfilter(e.target.value);
+          getSongfilter("pop");
         }}
       >
         {" "}
-        pop
+        Pop
       </button>
       <button
         className={classFilter.filterBtn}
         onClick={(e) => {
-          getSongfilter(e.target.value);
+          getSongfilter("rap");
         }}
       >
         {" "}
-        rap
+        Rap
       </button>
     </div>
   );
