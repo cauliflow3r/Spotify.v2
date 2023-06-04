@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import confAxios from "../config/confAxios";
 import { ACTIONS } from "../helpers/const";
 export const productContext = createContext();
 export const useProducts = () => useContext(productContext);
@@ -14,9 +15,7 @@ const ProductContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const [artist, setArtist] = useState("");
-  const [filter, setfilter] = useState({});
-  console.log(filter);
+  const [artistList, setArtistList] = useState("");
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -91,28 +90,36 @@ const ProductContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
   // *------use redicer--------
   // * -------------------------------------
+
+  // ! CREATE
   const addProduct = async (newProduct) => {
     await axios.post(`${API}/songs/upload/`, newProduct, getConfig());
-    navigate("/playlist");
+    navigate("/");
   };
 
   const getProductDetails = async (id) => {
     const { data } = await axios(`${API}/songs/${id}/`);
-
     dispatch({
       type: ACTIONS.GET_PRODUCT_DETAILS,
       payload: data,
     });
   };
 
+  //! EDIT
+
   const saveEditedProduct = async (newProduct, id) => {
+    console.log(newProduct, "NEWPRODUCT");
     const payload = {
       ...newProduct,
-      genre: newProduct.genre.slug,
+      genre: newProduct.genre ? newProduct.genre.slug : null,
+
+      title: newProduct.title,
+      album: newProduct.album,
     };
-    await axios.patch(`${API}/songs/${id}/`, payload);
+    console.log("SAVETOEDITID", id);
+    await confAxios.patch(`/songs/${id}/`, payload);
     getProducts();
-    navigate("/products");
+    navigate("/playlist");
   };
 
   const getProducts = async () => {
@@ -120,6 +127,7 @@ const ProductContextProvider = ({ children }) => {
     dispatch({ type: API, payload: data });
   };
 
+  //! DELETE
   const deleteProduct = async (id) => {
     await axios.delete(`${API}/songs/${id}/`);
     getProducts();
@@ -174,6 +182,8 @@ const ProductContextProvider = ({ children }) => {
   }
 
   const values = {
+    artistList,
+    setArtistList,
     search,
     inputValue,
     setInputValue,

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useProducts } from "../context/ProductContextProvider";
 import { api } from "../api/api";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import "../style/AddAlbum.css";
+import { Link } from "react-router-dom";
 
 const AddAlbum = () => {
   const { artists: artists2 } = useFeedDataLists();
@@ -11,10 +12,10 @@ const AddAlbum = () => {
   const [artist, setArtist] = useState("");
 
   useEffect(() => {
-    api.getArtist();
+    api.getArtists();
   }, []);
   const [form, setForm] = useState({});
-  console.log("pidr", form);
+
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
@@ -37,6 +38,11 @@ const AddAlbum = () => {
           src="	http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
           alt=""
         />
+        <div>
+          <h2 className="edit_h4" variant="h4">
+            New Album
+          </h2>
+        </div>
         <div className="div2">
           <h2>Title</h2>
           <input
@@ -74,10 +80,11 @@ const AddAlbum = () => {
               <option value="">artist </option>
             )}
           </select>
-
-          <button className="edit_btn" onClick={handleAddAlbum}>
-            Add Album
-          </button>
+          <Link to={"/addsong"}>
+            <button className="edit_btn" onClick={handleAddAlbum}>
+              Add Album
+            </button>
+          </Link>
         </div>
       </div>
     </>

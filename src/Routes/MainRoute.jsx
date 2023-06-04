@@ -41,7 +41,7 @@ const MainRoute = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/addart" element={<AddArtist />} />
         <Route path="/addalbum" element={<AddAlbum />} />
-        <Route path="/addproduct" element={<AddSongs />} />
+        <Route path="/addsong" element={<AddSongs />} />
         <Route path="/editproduct/:id" element={<EditSongs />} />
       </Routes>
     </div>

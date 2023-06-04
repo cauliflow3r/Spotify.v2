@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddArtist.css";
+import { api } from "../api/api";
 
 const AddArtist = () => {
   const { AddArtist } = useProducts();
-  const [fullName, serFullName] = useState("");
+  const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
   console.log(bio);
 
@@ -12,7 +14,7 @@ const AddArtist = () => {
     const newArtist = new FormData();
     newArtist.append("full_name", fullName);
     newArtist.append("bio", bio);
-    AddArtist(newArtist);
+    api.addArtist(newArtist);
   }
   return (
     <>
@@ -35,7 +37,7 @@ const AddArtist = () => {
             type="text"
             placeholder="Name "
             onChange={(e) => {
-              serFullName(e.target.value);
+              setFullName(e.target.value);
             }}
           />
           <h2>Bio</h2>
@@ -48,9 +50,11 @@ const AddArtist = () => {
             }}
           />
         </div>
-        <button className="edit_btn" onClick={hadleAdd}>
-          Add artist
-        </button>
+        <Link to={"/addalbum"}>
+          <button className="edit_btn" onClick={hadleAdd}>
+            Add artist
+          </button>
+        </Link>
       </div>
     </>
   );
