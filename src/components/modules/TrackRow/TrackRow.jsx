@@ -90,7 +90,7 @@ const TrackRow = ({
       </button>
       <button
         style={{ width: "30px" }}
-        onClick={() => navigate(`/edit-song/${trackId}`)}
+        onClick={() => navigate(`/editTrack/${trackId}`)}
       >
         edit
       </button>

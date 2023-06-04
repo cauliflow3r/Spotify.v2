@@ -50,7 +50,7 @@ const AddArtist = () => {
             }}
           />
         </div>
-        <Link to={"/add-album"}>
+        <Link to={"/addalbum"}>
           <button className="edit_btn" onClick={hadleAdd}>
             Add artist
           </button>

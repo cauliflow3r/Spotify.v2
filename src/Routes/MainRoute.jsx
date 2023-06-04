@@ -16,18 +16,16 @@ import Feed from "../pages/Feed";
 import AddArtist from "../pages/AddArtist";
 import AddAlbum from "../pages/AddAlbum";
 import AddSongs from "../pages/AddSongs";
-import EditSongs from "../pages/EditSongs";
-import Playadd from "../pages/Playadd";
+import EditTrackPage from "../pages/EditTrackPage";
 import PlayListPage from "../pages/PlayListPage";
 
 const MainRoute = () => {
   const { currentUser } = useAuth();
-  // console.log(currentUser);
+
   return (
     <div>
       <Routes>
         <Route path="/" element={currentUser ? <Feed /> : <Homepage />} />
-        <Route path="/playadd" element={<Playadd />} />
         <Route path="/album-page/:id" element={<AlbumPage />} />
         <Route path="/artist-page/:id" element={<ArtistPage />} />
         <Route path="/playlist-page/:id" element={<PlayListPage />} />
@@ -39,10 +37,10 @@ const MainRoute = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/add-art" element={<AddArtist />} />
-        <Route path="/add-album" element={<AddAlbum />} />
-        <Route path="/add-song" element={<AddSongs />} />
-        <Route path="/edit-song/:id" element={<EditSongs />} />
+        <Route path="/addart" element={<AddArtist />} />
+        <Route path="/addalbum" element={<AddAlbum />} />
+        <Route path="/addsong" element={<AddSongs />} />
+        <Route path="/editTrack/:id" element={<EditTrackPage />} />
       </Routes>
     </div>
   );

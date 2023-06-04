@@ -1,9 +1,12 @@
+import axios from "axios";
 import confAxios from "../config/confAxios";
+import { API } from "../constants";
 
 export const api = {
   getArtists: async function () {
     try {
       const response = await confAxios.get(`/artists/`);
+
       return response.data.results;
     } catch (error) {
       console.log("getArtists: ", error);
@@ -20,6 +23,7 @@ export const api = {
   getAlbums: async function () {
     try {
       const response = await confAxios.get(`/albums/`);
+      console.log(response.data.results);
       return response.data.results;
     } catch (error) {
       console.log("getAlbums: ", error);
@@ -31,6 +35,16 @@ export const api = {
       return response.data.results;
     } catch (error) {
       console.log("getSongs: ", error);
+    }
+  },
+
+  getGenres: async function () {
+    try {
+      const response = await confAxios.get(`/genre/`);
+      console.log(response.data.results);
+      return response.data.results;
+    } catch (error) {
+      console.log("getGenres: ", error);
     }
   },
   getArtist: async function (id) {
@@ -73,14 +87,36 @@ export const api = {
       console.log("postPlaylist :", error);
     }
   },
-
-
    postRating: async function (ratingForm) {
     try {
       let response = await confAxios.post(`/review/rating/`,ratingForm);
         return response.data
     } catch (error) {
       console.log("postRating :", error);
+    }
+  },
+  getTrack: async function (id) {
+    try {
+      const response = await confAxios.get(`/songs/${id}/`);
+      return response.data;
+    } catch (error) {
+      console.log("getTrack: ", error);
+    }
+  },
+  editTrack: async function (id, editedTrack) {
+    try {
+      const response = await confAxios.patch(`/songs/${id}/`, editedTrack);
+      return response.data;
+    } catch (error) {
+      console.log("editTrack: ", error);
+    }
+  },
+  addPlaylist: async function (playlistToAdd) {
+    try {
+      const response = await confAxios.post(`/playlist/author/`, playlistToAdd);
+      return response.data;
+    } catch (error) {
+      console.log("editTrack: ", error);
     }
   },
   addAlbum: async function (newAlbum) {
@@ -110,6 +146,10 @@ export const api = {
     } catch (error) {
       console.log("getUserCommentFromPlayList:", error);
     }
-  }
+  },
+  getProductDetails: async function (id) {
+    const data = await confAxios.get(`/songs/${id}`);
+    return data;
+  },
 };
 

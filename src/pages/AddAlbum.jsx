@@ -15,6 +15,7 @@ const AddAlbum = () => {
     api.getArtists();
   }, []);
   const [form, setForm] = useState({});
+  console.log("pidr", form);
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
@@ -79,11 +80,10 @@ const AddAlbum = () => {
               <option value="">artist </option>
             )}
           </select>
-          <Link to={"/add-song"}>
-            <button className="edit_btn" onClick={handleAddAlbum}>
-              Add Album
-            </button>
-          </Link>
+
+          <button className="edit_btn" onClick={handleAddAlbum}>
+            Add Album
+          </button>
         </div>
       </div>
     </>

@@ -22,7 +22,6 @@ const PlayListPage = ({ trackList }) => {
 
   const { playlists } = useFeedDataLists();
 
-  console.log("getCommentFromUser:", getCommentFromUser);
   function addPlaylistComment(e) {
     e.preventDefault();
 
@@ -56,7 +55,7 @@ const PlayListPage = ({ trackList }) => {
 
   // todo -------------------
   const { id } = useParams();
-  console.log("Это будет айди ", id);
+  // console.log("Это будет айди ", id);
 
   useEffect(() => {
     api.getPlayList(id);
@@ -66,6 +65,7 @@ const PlayListPage = ({ trackList }) => {
   useEffect(() => {}, []);
 
   // todo -------------------
+  console.log(getCommentFromUser);
 
   return (
     <MainLayout>
