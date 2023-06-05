@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import play_btn from "../../../assets/Play.svg";
 import download from "../../../assets/Line=empty, Name=download.svg";
 import search from "../../../assets/Line=bold, Name=search.svg";
@@ -23,6 +23,8 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
     },
     [trackIdToAddToPlaylist]
   );
+
+  // useEffect(()=>{},[trackList])
 
   const handleCloseAddtoPlaylistModal = () =>
     setIsAddToPlaylistModalOpen(false);

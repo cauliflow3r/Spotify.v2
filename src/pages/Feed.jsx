@@ -40,7 +40,7 @@ const Feed = () => {
     <MainLayout>
       <div className={playlist.rightPart}>
         <div className={classes.contentWrapper}>
-          <FreshBlood />
+          {/* <FreshBlood /> */}
           <h2>{greeting}</h2>
           <ArtistsBlock artists={artists} />
           <div className={classes.ablumsSection}>
