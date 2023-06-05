@@ -16,7 +16,11 @@ const ProductContextProvider = ({ children }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const [songs, setSongs] = useState("");
+  const [artists, setArtists] = useState("");
+  const [albums, setAlbums] = useState("");
   const [artistList, setArtistList] = useState("");
+  console.log(filter);
 
   // ! Search
   async function search(query, endpoint, setData) {
@@ -30,11 +34,11 @@ const ProductContextProvider = ({ children }) => {
   }
   // -------------------
 
-  // const handleSearch = () => {
-  //   search(query, "songs", setSongs);
-  //   search(query, "artists", setArtists);
-  //   search(query, "albums", setAlbums);
-  // };
+  const handleSearch = () => {
+    search(query, "songs", setSongs);
+    search(query, "artists", setArtists);
+    search(query, "albums", setAlbums);
+  };
 
   // getAlbums();
 
@@ -90,10 +94,10 @@ const ProductContextProvider = ({ children }) => {
   };
 
   //! DELETE
-  const deleteProduct = async (id) => {
-    await axios.delete(`${API}/songs/${id}/`);
-    getProducts();
-  };
+  // const deleteProduct = async (id) => {
+  //   await axios.delete(`${API}/songs/${id}/`);
+  //   getProducts();
+  // };
 
   // * -------------------------------------
 
@@ -115,14 +119,11 @@ const ProductContextProvider = ({ children }) => {
   }
 
   const values = {
-    artistList,
-    setArtistList,
     search,
     inputValue,
     setInputValue,
     setSearchParams,
     searchParams,
-    deleteProduct,
     saveEditedProduct,
     productDetails: state.productDetails,
     setSelectedRating,

@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import playerblock from "../../../style/Player.module.css";
-
 import ReactPlayer from "react-player";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
 import SongInfo from "./components/SongInfo";

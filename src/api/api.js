@@ -79,9 +79,10 @@ export const api = {
       console.log("postPlaylist :", error);
     }
   },
-  postPlaylistComment: async function (commentForm) {
+  postPlaylistComment: async function (commentForm,setGetCommentFromUSer) {
     try {
       let response = await confAxios.post(`/review/comments/`,commentForm);
+      setGetCommentFromUSer((prevState) => [...prevState, commentForm]);
         return response.data
     } catch (error) {
       console.log("postPlaylist :", error);
@@ -150,6 +151,13 @@ export const api = {
   getProductDetails: async function (id) {
     const data = await confAxios.get(`/songs/${id}`);
     return data;
+  },
+  deleteProduct: async function (id) {
+    try {
+      await confAxios.delete(`/songs/${id}/`);
+    } catch (error) {
+      console.log("deleteProduct: ", error);
+    }
   },
 };
 

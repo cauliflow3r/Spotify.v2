@@ -96,6 +96,7 @@ textarea {
   font-size: 16px;
   padding: 20px;
   background-color: transparent;
+  color: white;
 }
 
 textarea,
@@ -105,4 +106,12 @@ input:active,
 button,
 button:active {
   outline: none;
+}
+@media (max-width: 1150px) {
+  .wrapperComments_ {
+    width: 70%;
+  }
+  .commentForm_ {
+    flex-direction: column-reverse;
+  }
 }
