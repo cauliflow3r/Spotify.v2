@@ -20,7 +20,7 @@ const SongContextProvider = ({ children }) => {
   async function getALbumTrack(id) {
     try {
       let res = await axios.get(`${API_ALBUMS}/albums/${id}/`);
-      console.log(res.data);
+      // console.log(res.data);
       setTrackList(res.data.songs);
       setAlbumInfo(res.data);
       setTrackInfo(res.data);
@@ -42,13 +42,13 @@ const SongContextProvider = ({ children }) => {
     artistInfo,
   };
 
-  console.log("trackInfo: ", trackInfo);
-  console.log("trackList: ", trackList);
-  console.log("Counter: ", Counter);
+  // console.log("trackInfo: ", trackInfo);
+  // console.log("trackList: ", trackList);
+  // console.log("Counter: ", Counter);
 
-  console.log("AlbumInfo: ", AlbumInfo);
-  console.log("artistSongs: ", artistSongs);
-  console.log("artistInfo:", artistInfo);
+  // console.log("AlbumInfo: ", AlbumInfo);
+  // console.log("artistSongs: ", artistSongs);
+  // console.log("artistInfo:", artistInfo);
 
   return (
     <songsContext.Provider value={values}>{children}</songsContext.Provider>

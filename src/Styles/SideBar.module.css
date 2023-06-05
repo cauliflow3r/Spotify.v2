@@ -124,6 +124,15 @@
     height: 20vh;
   }
 }
+@media (max-width: 700px) {
+  .container_bottom {
+    height: 30%;
+  }
+  .playList_line {
+    margin: 0 auto;
+    width: 95%;
+  }
+}
 
 @media (max-width: 770px) {
   .container_bottom_nav h3 {

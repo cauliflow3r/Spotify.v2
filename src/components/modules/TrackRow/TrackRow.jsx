@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 import classes from "./TrackRow.module.css";
 import play_btn from "../../../assets/Play.svg";
 import undownload from "../../../assets/UN_Line=empty, Name=download.svg";
@@ -8,6 +7,7 @@ import download from "../../../assets/Line=empty, Name=download.svg";
 import unlike_song from "../../../assets/unlike _song_icon.svg";
 import like_song from "../../../assets/like_song_icon.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
+import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 import { useDownLoad } from "../../../context/DownloadContexProvider";
 import { api } from "../../../api/api";
 
@@ -19,6 +19,8 @@ const TrackRow = ({
   handleOpenAddtoPlaylistModal,
 }) => {
   const { id: trackId, cover_photo, title, artist } = track;
+
+  const {} = useFeedDataLists();
 
   const { setCurrentTrackIndex } = usePlayer();
 
@@ -91,34 +93,6 @@ const TrackRow = ({
           <img src={like_song} alt="" />
         )}
       </div>
-
-      {/* <Modal
-        isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        overlayClassName="custom-overlay"
-        className="custom-modal"
-      >
-        <div className={classes.modal_window}>
-          <div className={classes.textBlock}>
-            <button
-              onClick={() => {
-                navigate("/account");
-              }}
-            >
-              Account
-            </button>
-          </div>
-          <div className={classes.textBlock}>
-            <select>
-              {Object.values(playlistAdd).map((playlist) => (
-                <option key={playlist.id} value={playlist.title}>
-                  {playlist.title}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </Modal> */}
       <button
         className={classes.add}
         style={{ backgroundColor: "blue" }}

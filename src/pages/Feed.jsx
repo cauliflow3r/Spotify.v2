@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
-import { useAuth } from "../context/AuthContextProvider";
-import { useDownLoad } from "../context/DownloadContexProvider";
 import FreshBlood from "../components/FreshBlood";
 import playlist from "../style/PalyListBlock.module.css";
-import PlaylistComponent from "./PlaylistComponent";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import AlbumsBlock from "../components/modules/AlbumsBlock";
 import ArtistsBlock from "../components/modules/ArtistsBlock";
@@ -31,10 +28,6 @@ const Feed = () => {
     }
     setGreeting(newGreeting);
   }, []);
-
-  // console.log(artist);
-
-  // console.log(artist);
 
   return (
     <MainLayout>
