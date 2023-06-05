@@ -123,7 +123,7 @@ const EditTrackPage = () => {
       </div>
 
       <div>
-        <button className="edit_btn" variant="outlined">
+        <button className="edit_btn" variant="outlined" onClick={navigate(`/`)}>
           Save
         </button>
       </div>
