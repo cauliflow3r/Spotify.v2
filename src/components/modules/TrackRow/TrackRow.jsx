@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./TrackRow.module.css";
 import play_btn from "../../../assets/Play.svg";
@@ -44,7 +44,6 @@ const TrackRow = ({
   const handleDeleteProduct = async (productId) => {
     try {
       await api.deleteProduct(productId);
-      api.getAlbums();
       // Выполните дополнительные действия после удаления, если это необходимо
     } catch (error) {
       console.log("Ошибка при удалении продукта: ", error);

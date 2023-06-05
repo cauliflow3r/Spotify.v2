@@ -19,6 +19,8 @@ const ProductContextProvider = ({ children }) => {
   const [songs, setSongs] = useState("");
   const [artists, setArtists] = useState("");
   const [albums, setAlbums] = useState("");
+  const [artistList, setArtistList] = useState("");
+  console.log(filter);
 
   // ! Search
   async function search(query, endpoint, setData) {

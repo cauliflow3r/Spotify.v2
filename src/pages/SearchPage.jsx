@@ -4,7 +4,9 @@ import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import deleteBtn from "../assets/Delete_icon.svg";
 import FilterBlock from "./FilterBlock";
+import play_btn from "../assets/Play.svg";
 
 const SearchPage = () => {
   const {
@@ -69,23 +71,44 @@ const SearchPage = () => {
               <div>
                 <FilterBlock />
                 {filter.length
-                  ? filter.map((elem) => {
+                  ? filter.map((elem, index) => {
                       return (
-                        <div>
-                          <div className={classes.track_line}>
-                            {/* <div>
-                              {" "}
-                              <img
-                                src={play_btn}
-                                alt=""
-                                onClick={() => {
-                                  setCurrentTrackIndex(index);
-                                }}
-                              />
-                            </div> */}
-                            <div className={classes.track_line_section}>
+                        <div key={elem.id}>
+                          <div
+                            className={classes.track_line}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              width: "80%",
+                              margin: "5vh auto",
+                              border: "white 1px solid",
+                              borderRadius: "15px",
+                            }}
+                          >
+                            <div
+                              className={classes.track_line_section}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                margin: "5vh ",
+                              }}
+                            >
+                              <div className={classes.favorites}>
+                                <img
+                                  src={play_btn}
+                                  alt=""
+                                  style={{
+                                    margin: "5vh ",
+                                  }}
+                                />
+                              </div>
                               <img src={elem.cover_photo} width={48} alt="" />
-                              <div className={classes.track_line_section_name}>
+                              <div
+                                className={classes.track_line_section_name}
+                                style={{
+                                  margin: "5vh ",
+                                }}
+                              >
                                 <h4> {elem.title} </h4>
                                 <h5> {elem.artist[1]} </h5>
                               </div>
@@ -93,14 +116,9 @@ const SearchPage = () => {
                             <div className={classes.album}>{elem.album[0]}</div>
                             <div className={classes.dateAdd}>1 day ago</div>
                             <div className={classes.time}>3:22</div>
-                            {/* <div
-                              className={classes.favorites}
-                              onClick={() => {
-                                deleteLikedTrack(elem.id);
-                              }}
-                            >
+                            <div className={classes.favorites}>
                               <img src={deleteBtn} alt="" />
-                            </div> */}
+                            </div>
                           </div>
                         </div>
                       );
@@ -116,6 +134,7 @@ const SearchPage = () => {
                     )
                     .map((artist) => (
                       <div
+                        style={{ margin: "5vh" }}
                         className={classes.preview}
                         key={artist.id}
                         onClick={() => navigate(`/artist-page/${artist.id}`)}
@@ -148,6 +167,7 @@ const SearchPage = () => {
                     )
                     .map((album) => (
                       <div
+                        style={{ margin: "5vh" }}
                         className={classes.playlist}
                         key={album.id}
                         onClick={() => navigate(`/album-page/${album.id}`)}
