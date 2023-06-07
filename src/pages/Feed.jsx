@@ -25,6 +25,8 @@ const Feed = () => {
     setGreeting(newGreeting);
   }, []);
 
+  // console.log(artist);
+
   return (
     <MainLayout>
       <div className={playlist.rightPart}>
