@@ -7,6 +7,8 @@ import undownload from "../../../assets/UN_Line=empty, Name=download.svg";
 import download from "../../../assets/Line=empty, Name=download.svg";
 import unlike_song from "../../../assets/unlike _song_icon.svg";
 import like_song from "../../../assets/like_song_icon.svg";
+import delete_icon from "../../../assets/Delete_icon.svg";
+import edit from "../../../assets/union-1.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
 import { useDownLoad } from "../../../context/DownloadContexProvider";
 import { api } from "../../../api/api";
@@ -120,18 +122,20 @@ const TrackRow = ({
         </div>
       </Modal> */}
       <button
-        className={classes.add}
-        style={{ backgroundColor: "blue" }}
+        // className={classes.add}
+        style={{ backgroundColor: "rgba(29, 185, 84, 0)", border: "none" }}
+        // className={classes.add}
+        // style={{ backgroundColor: "blue" }}
         onClick={() => navigate(`/editTrack/${trackId}`)}
       >
-        edit
+        <img src={edit} alt="" />
       </button>
       <button
-        style={{ backgroundColor: "red" }}
-        className={classes.add}
+        style={{ backgroundColor: "rgba(29, 185, 84, 0)", border: "none" }}
+        // className={classes.add}
         onClick={() => handleDeleteProduct(track.id)}
       >
-        delete
+        <img src={delete_icon} alt="" />
       </button>
     </div>
   );

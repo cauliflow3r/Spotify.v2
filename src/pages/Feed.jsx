@@ -34,8 +34,6 @@ const Feed = () => {
 
   // console.log(artist);
 
-  // console.log(artist);
-
   return (
     <MainLayout>
       <div className={playlist.rightPart}>
