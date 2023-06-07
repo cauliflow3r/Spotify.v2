@@ -4,7 +4,7 @@ import { useProducts } from "../context/ProductContextProvider";
 import { useNavigate } from "react-router-dom";
 
 const PlaylistComponent = () => {
-  const { setPlaylistAdd, playlistAdd } = useProducts();
+  const { playlistAdd } = useProducts();
   const navigate = useNavigate();
   console.log(playlistAdd);
 

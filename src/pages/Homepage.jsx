@@ -14,7 +14,7 @@ const Homepage = () => {
   //   getFavorites();
   // }, []);
 
-  const { artists, albums, playlists } = useFeedDataLists();
+  const { artists, albums } = useFeedDataLists();
 
   const [greeting, setGreeting] = useState("");
 
