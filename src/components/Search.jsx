@@ -16,7 +16,23 @@ const Search = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
-  const { setInputValue, inputValue, handleSearch } = useProducts();
+
+  const {
+    inputValue,
+    searchParams,
+    search,
+    setSongs,
+    setArtists,
+    setAlbumsSearch,
+    setInputValue,
+  } = useProducts();
+
+  useEffect(() => {
+    const query = searchParams.get("query");
+    search(query, "songs", setSongs);
+    search(query, "artists", setArtists);
+    search(query, "albums", setAlbumsSearch);
+  }, [searchParams]);
 
   const [isCreatePlaylistModalOpen, setIsCreatePlaylistModalOpen] =
     useState(false);

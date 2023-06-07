@@ -15,13 +15,14 @@ const ProductContextProvider = ({ children }) => {
   const [selectedRating, setSelectedRating] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
   const [songs, setSongs] = useState("");
   const [artists, setArtists] = useState("");
   const [albums, setAlbums] = useState("");
   console.log(filter);
 
   // ! Search
+  const [searchParams, setSearchParams] = useSearchParams();
+
   async function search(query, endpoint, setData) {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
@@ -37,8 +38,6 @@ const ProductContextProvider = ({ children }) => {
     search(query, "artists", setArtists);
     search(query, "albums", setAlbums);
   };
-
-  // ! Rating
 
 
   async function getSongfilter(query) {
