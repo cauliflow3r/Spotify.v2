@@ -6,7 +6,9 @@ export const authContext = createContext();
 export const useAuth = () => useContext(authContext);
 export const API = "http://34.125.87.211";
 
+
 const AuthContextProvider = ({ children }) => {
+
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -103,7 +105,6 @@ const AuthContextProvider = ({ children }) => {
           refresh: tokens.refresh,
         })
       );
-      // console.log("Обновленный токен:", refreshResponse.data.access);
       return refreshResponse.data.access;
     } catch (error) {
       console.log(error);
@@ -130,8 +131,7 @@ const AuthContextProvider = ({ children }) => {
           },
         }
       );
-
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.log(error);
     } finally {

@@ -1,61 +1,62 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import album from "../style/AlbumPage.module.css";
-import play_btn from "../assets/Play.svg";
-import download from "../assets/Line=empty, Name=download.svg";
-import undownload from "../assets/UN_Line=empty, Name=download.svg";
-import search from "../assets/Line=bold, Name=search.svg";
-import drop from "../assets/fi-ss-caret-down.svg";
-import clock from "../assets/Line=Clock.svg";
-import like_song from "../assets/like_song_icon.svg";
-import unlike_song from "../assets/unlike _song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
-import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
-import { useProducts } from "../context/ProductContextProvider";
-import TrackRow from "../components/modules/TrackRow";
 import TrackList from "../components/modules/TrackList";
+import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
+import { api } from "../api/api";
+import classes from "../style/Comment.module.css";
 
-const PlayListPage = () => {
+const PlayListPage = ({ trackList }) => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
+  const [text, setText] = useState("");
+  const [textArea, setTextArea] = useState("");
+  const [getCommentFromUser, setGetCommentFromUSer] = useState([]);
+  const [selectedRating, setSelectedRating] = useState(1);
 
-  // const navigate = useNavigate();
-  const {
-    getFavorites,
-    AddFavorites,
-    AddDownload,
-    getDownload,
-    checkTracksDown,
-  } = useDownLoad();
+  const { getFavorites, getDownload } = useDownLoad();
 
-  const { sendRating, setSelectedRating } = useProducts();
+  const { playlists } = useFeedDataLists();
+  function addPlaylistComment(e) {
+    e.preventDefault();
+    const commentForm = new FormData();
+    commentForm.append("body", text);
+    commentForm.append("playlist", id);
+    api.postPlaylistComment(commentForm, (newComment) => {
+      setGetCommentFromUSer((prevState) => [...prevState, newComment]);
+    });
+  }
 
-  useEffect(() => {
-    getFavorites();
-  }, []);
-  useEffect(() => {
-    getDownload();
-  }, []);
+  function addPlaylistRating(e) {
+    e.preventDefault();
+    const ratingForm = new FormData();
+    ratingForm.append("value", selectedRating);
+    ratingForm.append("playlist", id);
+    api.postRating(ratingForm);
+  }
 
-  // !downloads
-  // !----------------
-  const { getALbumTrack, trackList, AlbumInfo, setCurrentTrack } =
-    useContext(songsContext);
+  const handleTextAreaChange = (e) => {
+    const value = e.target.value;
+    setTextArea(value);
+    setText(value);
+  };
 
   // todo -------------------
   const { id } = useParams();
   // console.log("Это будет айди ", id);
 
   useEffect(() => {
-    getALbumTrack(id);
-    sendRating(id);
+    getFavorites();
+    getDownload();
+    api.getPlayList(id);
+    api.getUserCommentFromPlayList(id, setGetCommentFromUSer);
   }, []);
 
-  useEffect(() => {}, []);
-
   // todo -------------------
+  console.log(getCommentFromUser);
 
   return (
     <MainLayout>
@@ -64,14 +65,14 @@ const PlayListPage = () => {
           <div>
             <div className={album.TopInfo}>
               <div className={album.TopInfo_Left}>
-                <img src={AlbumInfo.cover_photo} width={250} alt="" />
+                <img src={playlists.cover_photo} width={250} alt="" />
               </div>
               <div className={album.TopInfo_Right}>
                 <h5>Плейлист</h5>
-                <h2>{AlbumInfo.title} </h2>
+                <h2>{playlists.title} </h2>
                 <h5>
                   User&nbsp; : &nbsp;{currentUser} : Quantity :
-                  {trackList.length}
+                  {playlists.length}
                 </h5>
                 <div>
                   <div>
@@ -82,7 +83,8 @@ const PlayListPage = () => {
                         name="r"
                         value="1"
                         onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
+                        onClick={addPlaylistRating}
+                        checked={selectedRating === "1"}
                       />
                       <label htmlFor="r-01">★</label>
                       <input
@@ -91,7 +93,8 @@ const PlayListPage = () => {
                         name="r"
                         value="2"
                         onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
+                        onClick={addPlaylistRating}
+                        checked={selectedRating === "2"}
                       />
                       <label htmlFor="r-02">★</label>
                       <input
@@ -100,7 +103,8 @@ const PlayListPage = () => {
                         name="r"
                         value="3"
                         onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
+                        onClick={addPlaylistRating}
+                        checked={selectedRating === "3"}
                       />
                       <label htmlFor="r-03">★</label>
                       <input
@@ -109,7 +113,8 @@ const PlayListPage = () => {
                         name="r"
                         value="4"
                         onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
+                        onClick={addPlaylistRating}
+                        checked={selectedRating === "4"}
                       />
                       <label htmlFor="r-04">★</label>
                       <input
@@ -118,7 +123,8 @@ const PlayListPage = () => {
                         name="r"
                         value="5"
                         onChange={(e) => setSelectedRating(e.target.value)}
-                        onBlur={() => sendRating(id)}
+                        onClick={addPlaylistRating}
+                        checked={selectedRating === "5"}
                       />
                       <label htmlFor="r-05">★</label>
                     </div>
@@ -127,7 +133,40 @@ const PlayListPage = () => {
               </div>
             </div>
             <TrackList trackList={trackList} />
-            <div></div>
+          </div>
+          <div className={classes.wrapperform}>
+            <h2 className={classes.commentTitle}>Оставить комментарий</h2>
+            <form className={classes.commentForm}>
+              <div className={classes.leftForm}>
+                <button
+                  type="submit"
+                  className={classes.commentAdd}
+                  onClick={addPlaylistComment}
+                >
+                  Отправить
+                </button>
+              </div>
+              <div className={classes.rightForm}>
+                <textarea
+                  className={classes.inputComment}
+                  name="comment"
+                  id="comment"
+                  rows="10"
+                  placeholder="Написать комментарий..."
+                  value={textArea}
+                  onChange={handleTextAreaChange}
+                ></textarea>
+              </div>
+            </form>
+            <div class={classes.wrapperComments}>
+              <ul class={classes.commentList}>
+                {getCommentFromUser.map((comment) => (
+                  <li key={comment.id} class={classes.comment}>
+                    {comment.body}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

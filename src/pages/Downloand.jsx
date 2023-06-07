@@ -1,20 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import classes from "../style/Download.module.css";
 import play from "../assets/Play.svg";
 import download from "../assets/Line=empty, Name=download.svg";
 import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
-import song from "../assets/Rectangle 236.svg";
 import delete_icon from "../assets/Delete_icon.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useDownLoad } from "../context/DownloadContexProvider";
-import { songsContext } from "../context/SongsContextProvider";
 import { useAuth } from "../context/AuthContextProvider";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 
 const Download = () => {
   const { currentUser } = useAuth();
-  const { setCurrentTrack } = useContext(songsContext);
   const { setCurrentTrackIndex } = usePlayer();
   // ! downloads
   const { getDownload, downloads, deleteTrack } = useDownLoad();

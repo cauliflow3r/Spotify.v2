@@ -39,7 +39,7 @@ const ResetPassword = () => {
             placeholder="Enter Email address adress.."
             onChange={(e) => setInpReset(e.target.value)}
           />
-          {loading ? (
+          {!loading ? (
             <button onClick={handleSave}>Send</button>
           ) : (
             <button className={classes.btnLoad} onClick={handleSave}>

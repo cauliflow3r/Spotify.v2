@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import play_btn from "../../../assets/Play.svg";
 import download from "../../../assets/Line=empty, Name=download.svg";
 import search from "../../../assets/Line=bold, Name=search.svg";
@@ -10,7 +10,6 @@ import delete_icon from "../../../assets/Delete_icon.svg";
 import edit from "../../../assets/union-1.svg";
 import AddToPlaylistModal from "../AddToPlaylistModal";
 import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
-import { useDownLoad } from "../../../context/DownloadContexProvider";
 
 const TrackList = ({ albumInfo, trackList, AddDownload }) => {
   const { playlists } = useFeedDataLists();
@@ -26,10 +25,10 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
     [trackIdToAddToPlaylist]
   );
 
-  // useEffect(()=>{},[trackList])
-
   const handleCloseAddtoPlaylistModal = () =>
     setIsAddToPlaylistModalOpen(false);
+
+  // console.log("trackList", trackList);
 
   return (
     <>
@@ -78,7 +77,7 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
             </div>
           </div>
 
-          {trackList.map((track, index) => {
+          {trackList?.map((track, index) => {
             return (
               <TrackRow
                 key={track.id}

@@ -5,7 +5,6 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import AuthContextProvider from "./context/AuthContextProvider";
 import ProductContextProvider from "./context/ProductContextProvider";
-import SongContextProvider from "./context/SongsContextProvider";
 import DownloadContextProvider from "./context/DownloadContexProvider";
 import PlayerContextProvider from "./context/PlayerContextProvider";
 import PlaylistsContextProvider from "./context/PlaylistsContextProvider";
@@ -18,7 +17,6 @@ root.render(
   <BrowserRouter>
     <FeedContextProvider>
       <PlayerContextProvider>
-        <SongContextProvider>
           <PlaylistsContextProvider>
             <DownloadContextProvider>
               <ProductContextProvider>
@@ -29,7 +27,6 @@ root.render(
               </ProductContextProvider>
             </DownloadContextProvider>
           </PlaylistsContextProvider>
-        </SongContextProvider>
       </PlayerContextProvider>
     </FeedContextProvider>
   </BrowserRouter>

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "react-modal";
 import classes from "./TrackRow.module.css";
 import play_btn from "../../../assets/Play.svg";
 import undownload from "../../../assets/UN_Line=empty, Name=download.svg";
@@ -12,23 +11,18 @@ import edit from "../../../assets/union-1.svg";
 import { usePlayer } from "../../../context/PlayerContextProvider/PlayerContextProvider";
 import { useDownLoad } from "../../../context/DownloadContexProvider";
 import { api } from "../../../api/api";
+import { useAuth } from "../../../context/AuthContextProvider";
 
-const TrackRow = ({
-  trackIndex,
-  track,
-
-  // AddFavorites,
-  handleOpenAddtoPlaylistModal,
-}) => {
+const TrackRow = ({ trackIndex, track }) => {
   const { id: trackId, cover_photo, title, artist } = track;
+  const { currentUser } = useAuth();
 
   const { setCurrentTrackIndex } = usePlayer();
 
   const navigate = useNavigate();
 
   const artistTitle = artist[1];
-  const { AddDownload, downloads, AddFavorites, checkTracksDown } =
-    useDownLoad();
+  const { AddDownload, AddFavorites, checkTracksDown } = useDownLoad();
 
   const isFavorite = (trackId) => {
     let favorites = JSON.parse(localStorage.getItem("favorites"));
@@ -44,7 +38,6 @@ const TrackRow = ({
   const handleDeleteProduct = async (productId) => {
     try {
       await api.deleteProduct(productId);
-      // Выполните дополнительные действия после удаления, если это необходимо
     } catch (error) {
       console.log("Ошибка при удалении продукта: ", error);
     }
@@ -68,7 +61,6 @@ const TrackRow = ({
         </div>
       </div>
       <div className={classes.classes}>{"Album Title"}</div>
-      {/* <div className={classes.dateAdd}>1 day ago</div> */}
       <div
         className={classes.time}
         onClick={() => {

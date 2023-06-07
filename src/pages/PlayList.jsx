@@ -7,12 +7,13 @@ import search from "../assets/Line=bold, Name=search.svg";
 import drop from "../assets/fi-ss-caret-down.svg";
 import clock from "../assets/Line=Clock.svg";
 import MainLayout from "../layouts/MainLayout/MainLayout";
-import { useContext, useEffect } from "react";
 import like_song from "../assets/like_song_icon.svg";
 import { useDownLoad } from "../context/DownloadContexProvider";
 import deleteBtn from "../assets/Delete_icon.svg";
 import { useAuth } from "../context/AuthContextProvider";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
+import { useEffect } from "react";
+// import download from "../assets/like_song_icon.svg";
 
 const PlayList = () => {
   const { currentUser } = useAuth();
@@ -20,7 +21,6 @@ const PlayList = () => {
   const { setCurrentTrackIndex } = usePlayer();
   // ! downloads
   const {
-    getDownload,
     AddDownload,
     getFavorites,
     favorites,

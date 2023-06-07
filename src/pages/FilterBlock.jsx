@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import MainLayout from "../layouts/MainLayout/MainLayout";
 import { useProducts } from "../context/ProductContextProvider";
 import classFilter from "../style/FilterBlock.module.css";
 

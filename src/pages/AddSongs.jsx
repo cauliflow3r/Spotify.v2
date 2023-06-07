@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddSongs.css";
 import { api } from "../api/api";
 import { Link } from "react-router-dom";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 const AddSongs = () => {
-  const { addProduct, artist, getArtist, getAlbums, albums } = useProducts();
   const { albums: albums2 } = useFeedDataLists();
 
   const [album, setAlbum] = useState(0);
-  // const [artists, setArtists] = useState(0);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");
@@ -22,14 +19,11 @@ const AddSongs = () => {
     }
     newSong.append("album", album);
     newSong.append("genre", genre);
-    // newSong.append("artist", artists);
     console.log(newSong);
-    addProduct(newSong);
+    api.addProduct(newSong);
   }
   useEffect(() => {
     api.getArtist();
-  }, []);
-  useEffect(() => {
     api.getAlbums();
   }, []);
 
@@ -40,7 +34,7 @@ const AddSongs = () => {
           <img
             id="img1"
             width={300}
-            src="	http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
+            src=" http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
             alt=""
           />
           <div>

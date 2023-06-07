@@ -8,7 +8,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 
 export default function AddToPlaylistModal({ isOpen, handleClose, playlists }) {
   return (

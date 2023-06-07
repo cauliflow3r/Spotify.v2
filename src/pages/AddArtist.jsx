@@ -22,7 +22,7 @@ const AddArtist = () => {
         <img
           id="img1"
           width={300}
-          src="	http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
+          src=" http://localhost:3000/static/media/Spotify_Logo_CMYK_Black.e219951301ddf739fe9e.png"
           alt=""
         />
         <div>

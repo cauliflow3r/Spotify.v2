@@ -7,9 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { api } from "../../../api/api";
 import { successToaster } from "../../../helpers/toasters";
-import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
-
 import classes from "./CreatePalylistModal.module.css";
+import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 
 export default function CreatePalylistModal({ isOpen, handleClose }) {
   const [formState, setFormState] = useState({
@@ -42,9 +41,7 @@ export default function CreatePalylistModal({ isOpen, handleClose }) {
       formData.append("title", title);
       formData.append("description", description);
       formData.append("cover_photo", cover);
-
       const playlist = await api.addPlaylist(formData);
-
       addCreatedPlaylist(playlist);
       successToaster("Playlist successfully added!");
       handleClose();

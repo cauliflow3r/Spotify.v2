@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useProducts } from "../context/ProductContextProvider";
+import React, { useEffect, useState } from "react";
 import { api } from "../api/api";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import "../style/AddAlbum.css";
@@ -14,15 +13,12 @@ const AddAlbum = () => {
   useEffect(() => {
     api.getArtists();
   }, []);
-  const [form, setForm] = useState({});
 
   function handleAddAlbum() {
     let newAlbum = new FormData();
     newAlbum.append("title", title);
     newAlbum.append("artist", artist);
     newAlbum.append("description", descr);
-    setForm(newAlbum);
-    // Call your API function here
     api.addAlbum(newAlbum);
   }
   console.log("title", title);
