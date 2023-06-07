@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { api } from "../api/api";
 import { useFeedDataLists } from "../context/FeedContextProvider/FeedContextProvider";
 import "../style/AddAlbum.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddAlbum = () => {
   const { artists: artists2 } = useFeedDataLists();
   const [title, setTitile] = useState("");
   const [descr, setDescr] = useState("");
   const [artist, setArtist] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.getArtists();
@@ -76,11 +77,15 @@ const AddAlbum = () => {
               <option value="">artist </option>
             )}
           </select>
-          <Link to={"/addsong"}>
-            <button className="edit_btn" onClick={handleAddAlbum}>
-              Add Album
-            </button>
-          </Link>
+          <button
+            className="edit_btn"
+            onClick={() => {
+              handleAddAlbum();
+              navigate(`/addsong`);
+            }}
+          >
+            Add Album
+          </button>
         </div>
       </div>
     </>
