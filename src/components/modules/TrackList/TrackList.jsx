@@ -6,6 +6,8 @@ import drop from "../../../assets/fi-ss-caret-down.svg";
 import like_song from "../../../assets/like_song_icon.svg";
 import TrackRow from "../TrackRow";
 import classes from "./TracList.module.css";
+import delete_icon from "../../../assets/Delete_icon.svg";
+import edit from "../../../assets/union-1.svg";
 import AddToPlaylistModal from "../AddToPlaylistModal";
 import { useFeedDataLists } from "../../../context/FeedContextProvider/FeedContextProvider";
 import { useDownLoad } from "../../../context/DownloadContexProvider";
@@ -68,8 +70,11 @@ const TrackList = ({ albumInfo, trackList, AddDownload }) => {
             <div className={classes.number}>
               <img src={like_song} alt="" />
             </div>
-            <div>
-              <img src="" alt="" />
+            <div className={classes.number}>
+              <img src={edit} alt="" />
+            </div>
+            <div className={classes.number}>
+              <img src={delete_icon} alt="" />
             </div>
           </div>
 
