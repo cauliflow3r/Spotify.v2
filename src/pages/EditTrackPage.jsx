@@ -29,16 +29,13 @@ const EditTrackPage = () => {
   useEffect(() => {
     const getTrackAndSet = async () => {
       const track = await api.getTrack(trackId);
-
       console.log("track:", track);
-
       setFormState({
         album: track.album.id,
         title: track.title,
         genre: track.genre.slug,
       });
     };
-
     getTrackAndSet();
   }, []);
 
