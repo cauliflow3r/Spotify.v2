@@ -19,7 +19,6 @@ const ProductContextProvider = ({ children }) => {
   const [songs, setSongs] = useState("");
   const [artists, setArtists] = useState("");
   const [albums, setAlbums] = useState("");
-  const [artistList, setArtistList] = useState("");
   console.log(filter);
 
   // ! Search
@@ -27,83 +26,17 @@ const ProductContextProvider = ({ children }) => {
     const url = `${API}/${endpoint}/?search=${query}`;
     try {
       const res = await axios.get(url);
-      // setData(res.data.results);
+      setData(res.data.results);
     } catch (error) {
       console.log(error);
     }
   }
-  // -------------------
 
   const handleSearch = () => {
     search(query, "songs", setSongs);
     search(query, "artists", setArtists);
     search(query, "albums", setAlbums);
   };
-
-  // getAlbums();
-
-
-  // ! added album --------------------
-
-  // *------use redicer--------
-  const INIT_STATE = {
-    products: [],
-    productDetails: {},
-  };
-
-  const reducer = (state = INIT_STATE, action) => {
-    switch (action.type) {
-      case ACTIONS.GET_PRODUCTS:
-        return { ...state, products: action.payload };
-
-      case ACTIONS.GET_PRODUCT_DETAILS:
-        return { ...state, productDetails: action.payload };
-
-      default:
-        return state;
-    }
-  };
-
-  const [state, dispatch] = useReducer(reducer, INIT_STATE);
-  // *------use redicer--------
-  // * -------------------------------------
-
-  // ! CREATE
-
-
-  //! EDIT
-
-  const saveEditedProduct = async (newProduct, id) => {
-    console.log(newProduct, "NEWPRODUCT");
-    const payload = {
-      ...newProduct,
-      genre: newProduct.genre ? newProduct.genre.slug : null,
-
-      title: newProduct.title,
-      album: newProduct.album,
-    };
-    console.log("SAVETOEDITID", id);
-    await confAxios.patch(`/songs/${id}/`, payload);
-    getProducts();
-    navigate("/playlist");
-  };
-
-  const getProducts = async () => {
-    const { data } = await axios(`${API}${window.location.search}`);
-    dispatch({ type: API, payload: data });
-  };
-
-  //! DELETE
-  // const deleteProduct = async (id) => {
-  //   await axios.delete(`${API}/songs/${id}/`);
-  //   getProducts();
-  // };
-
-  // * -------------------------------------
-
-  // ! add playlist
-
-
 
   // ! Rating
 
@@ -124,8 +57,6 @@ const ProductContextProvider = ({ children }) => {
     setInputValue,
     setSearchParams,
     searchParams,
-    saveEditedProduct,
-    productDetails: state.productDetails,
     setSelectedRating,
     title,
     setTitle,

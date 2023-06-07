@@ -8,7 +8,6 @@ import Registration from "../pages/Registration";
 import PlayList from "../pages/PlayList";
 import Download from "../pages/Downloand";
 import ResetPassword from "../pages/ResetPassword";
-import Profile from "../pages/Profile";
 import Account from "../pages/Account";
 import SearchPage from "../pages/SearchPage";
 import { useAuth } from "../context/AuthContextProvider";
@@ -37,7 +36,6 @@ const MainRoute = () => {
         <Route path="/download" element={<Download />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/reset" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/account" element={<Account />} />
         <Route path="/login" element={<Login />} />
         <Route path="/addart" element={<AddArtist />} />

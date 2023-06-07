@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { createContext } from "react";
-import { songsContext, useSong } from "./SongsContextProvider";
 import { usePlayer } from "./PlayerContextProvider/PlayerContextProvider";
 export const downloadContext = createContext();
 export const useDownLoad = () => useContext(downloadContext);
 const DownloadContextProvider = ({ children }) => {
-  const { setTrackInfo } = useContext(songsContext);
+
   const { setTrackList } = usePlayer();
   const [downloads, setDownloads] = useState(
     JSON.parse(localStorage.getItem("downloads"))
@@ -28,12 +27,10 @@ const DownloadContextProvider = ({ children }) => {
       };
     }
     setDownloads(downloads);
-
     setTrackList(downloads.tracks);
   }
   const checkTracksDown = (id) => {
     let downloads = JSON.parse(localStorage.getItem("downloads"));
-    // console.log(downloads);
 
     if (downloads) {
       let down = downloads.tracks.filter((elem) => elem.id == id);
@@ -85,9 +82,7 @@ const DownloadContextProvider = ({ children }) => {
     }
     setFavorites(favorites);
     setTrackList(favorites.tracks);
-    // setTrackInfo(favorites);
   }
-  // console.log(favorites);
 
   function AddFavorites(track) {
     let favorites = JSON.parse(localStorage.getItem("favorites"));

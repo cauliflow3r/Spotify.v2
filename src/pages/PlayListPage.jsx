@@ -22,7 +22,6 @@ const PlayListPage = ({ trackList }) => {
   const { playlists } = useFeedDataLists();
   function addPlaylistComment(e) {
     e.preventDefault();
-
     const commentForm = new FormData();
     commentForm.append("body", text);
     commentForm.append("playlist", id);
@@ -45,21 +44,16 @@ const PlayListPage = ({ trackList }) => {
     setText(value);
   };
 
-  useEffect(() => {
-    getFavorites();
-  }, []);
-  useEffect(() => {
-    getDownload();
-  }, []);
-
   // todo -------------------
   const { id } = useParams();
   // console.log("Это будет айди ", id);
 
   useEffect(() => {
+    getFavorites();
+    getDownload();
     api.getPlayList(id);
     api.getUserCommentFromPlayList(id, setGetCommentFromUSer);
-  }, [getCommentFromUser]);
+  }, []);
 
   // todo -------------------
   console.log(getCommentFromUser);
@@ -160,7 +154,7 @@ const PlayListPage = ({ trackList }) => {
                   rows="10"
                   placeholder="Написать комментарий..."
                   value={textArea}
-                  onChange={handleTextAreaChange} // Update the event handler
+                  onChange={handleTextAreaChange}
                 ></textarea>
               </div>
             </form>

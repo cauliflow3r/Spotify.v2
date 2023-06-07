@@ -2,9 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../style/FormPay.css";
 
-// const CardForm = () => {
-//TODO: Add components prop-types, add cvv animation
-
 const CURRENT_YEAR = new Date().getFullYear();
 const CURRENT_MONTH = new Date().getMonth();
 let MONTHS = {},

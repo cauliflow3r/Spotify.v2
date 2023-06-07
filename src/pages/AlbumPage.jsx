@@ -2,9 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import albumClasses from "../style/AlbumPage.module.css";
-
 import { useDownLoad } from "../context/DownloadContexProvider";
-import { useProducts } from "../context/ProductContextProvider";
 import Modal from "react-modal";
 import { usePlayer } from "../context/PlayerContextProvider/PlayerContextProvider";
 import { api } from "../api/api";
@@ -14,57 +12,12 @@ Modal.setAppElement("#root");
 const AlbumPage = () => {
   const [albumInfo, setAlbumInfo] = useState(null);
   const { trackList, setTrackList } = usePlayer();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const modalRef = useRef(null);
   const { getFavorites, getDownload } = useDownLoad();
-
-  //! For modaalwindow
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleIconClick = () => {
-    if (isModalOpen) {
-      closeModal();
-    } else {
-      openModal();
-    }
-  };
-
-  const handleOutsideClick = useCallback(
-    (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
-      }
-    },
-    [modalRef, closeModal]
-  );
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener("click", handleOutsideClick);
-    } else {
-      document.removeEventListener("click", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [isModalOpen, handleOutsideClick]);
 
   useEffect(() => {
     getFavorites();
-  }, []);
-  useEffect(() => {
     getDownload();
   }, []);
-
-  // const { trackList, setTrackList } = usePlayer();
 
   // todo -------------------
   const { id } = useParams();

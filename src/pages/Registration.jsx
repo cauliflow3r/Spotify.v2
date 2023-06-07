@@ -57,8 +57,6 @@ const Registration = () => {
             </button>
           </Link>
           <span className={classes.span}>or</span>
-
-          {/* form */}
           <form action="" className={classes.form}>
             <h2>Sign up with your email address</h2>
             <div className={classes.formGroup}>

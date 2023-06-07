@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useProducts } from "../context/ProductContextProvider";
 import "../style/AddSongs.css";
 import { api } from "../api/api";
 import { Link } from "react-router-dom";
@@ -8,7 +7,6 @@ const AddSongs = () => {
   const { albums: albums2 } = useFeedDataLists();
 
   const [album, setAlbum] = useState(0);
-  // const [artists, setArtists] = useState(0);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
   const [genre, setGenre] = useState("");
@@ -21,14 +19,11 @@ const AddSongs = () => {
     }
     newSong.append("album", album);
     newSong.append("genre", genre);
-    // newSong.append("artist", artists);
     console.log(newSong);
     api.addProduct(newSong);
   }
   useEffect(() => {
     api.getArtist();
-  }, []);
-  useEffect(() => {
     api.getAlbums();
   }, []);
 

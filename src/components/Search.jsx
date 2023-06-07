@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import navbar from "../style/Navbar.module.css";
 import right from "../assets/chevron_big_right.svg";
 import left from "../assets/chevron_big_left.svg";
-import users from "../assets/Line=empty, Name=friends.svg";
 import login_user from "../assets/Line=empty, Name=UserCircle.svg";
 import { useNavigate, useLocation } from "react-router";
 import Modal from "react-modal";
@@ -16,9 +15,8 @@ const Search = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
-  const modalRef = useRef(null);
   const { currentUser, setCurrentUser, handleLogout } = useAuth();
-  const { setInputValue, inputValue } = useProducts();
+  const { setInputValue, inputValue, handleSearch } = useProducts();
 
   const [isCreatePlaylistModalOpen, setIsCreatePlaylistModalOpen] =
     useState(false);
@@ -55,27 +53,6 @@ const Search = () => {
       openModal();
     }
   };
-
-  const handleOutsideClick = useCallback(
-    (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        closeModal();
-      }
-    },
-    [modalRef, closeModal]
-  );
-
-  useEffect(() => {
-    if (isModalOpen) {
-      document.addEventListener("click", handleOutsideClick);
-    } else {
-      document.removeEventListener("click", handleOutsideClick);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, [isModalOpen, handleOutsideClick]);
 
   // !
 
@@ -124,7 +101,6 @@ const Search = () => {
                   placeholder="Что хочешь послушать"
                   onChange={(e) => setInputValue(e.target.value)}
                 />
-                {/* <button onClick={handleSearchClick}>Search</button> */}
               </div>
             )}
           </>

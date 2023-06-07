@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout/MainLayout";
 import classes from "../style/Main.module.css";
 import { useProducts } from "../context/ProductContextProvider";
@@ -12,10 +12,8 @@ const SearchPage = () => {
   const {
     inputValue,
     searchParams,
-    setSearchParams,
     search,
     songs,
-    albumsSearch,
     setSongs,
     setArtists,
     setAlbumsSearch,
@@ -25,18 +23,22 @@ const SearchPage = () => {
 
   const { artists, albums } = useFeedDataLists();
 
-  console.log(
-    "artist.albums :",
-    artists.map((a) => a.albums.map((item) => item))
-  );
-  console.log("artist.:", artists);
-
   useEffect(() => {
     const query = searchParams.get("query");
-    search(query, "songs", setSongs);
-    search(query, "artists", setArtists);
-    search(query, "albums", setAlbumsSearch);
+    if (query) {
+      search(query, "songs", setSongs);
+      search(query, "artists", setArtists);
+      search(query, "albums", setAlbumsSearch);
+    }
   }, [searchParams]);
+
+  const handleSearch = () => {
+    search(inputValue, "songs", setSongs);
+    search(inputValue, "artists", setArtists);
+    search(inputValue, "albums", setAlbumsSearch);
+
+    navigate(`?query=${encodeURIComponent(inputValue)}`);
+  };
 
   return (
     <MainLayout>
@@ -47,7 +49,6 @@ const SearchPage = () => {
           </div>
 
           <div>
-            {/* Отображение результатов поиска */}
             {songs?.length > 0 && (
               <div>
                 <h2>Songs</h2>
@@ -66,7 +67,6 @@ const SearchPage = () => {
                 </ul>
               </div>
             )}
-
             {artists.length > 0 && (
               <div>
                 <FilterBlock />
